@@ -379,7 +379,16 @@ img { max-width: 100%; display: block; }
     transform: translateY(110%);
     -webkit-transform: translateY(110%);
     opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        -webkit-transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Quand .hero-loaded est ajouté par JS : les mots apparaissent */
+.hero-loaded .hero-word:nth-child(1) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.1s; -webkit-transition-delay: 0.1s; }
+.hero-loaded .hero-word:nth-child(2) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.25s; -webkit-transition-delay: 0.25s; }
+.hero-loaded .hero-word:nth-child(3) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.4s; -webkit-transition-delay: 0.4s; }
 
 .hero-word--red { color: var(--red); }
 

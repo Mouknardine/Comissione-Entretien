@@ -75,66 +75,43 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 80);
     });
 
-    if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
-        // Hero words — animation mot par mot
-        var heroWords = document.querySelectorAll('.hero-word');
-        if (heroWords.length > 0) {
-            gsap.fromTo(heroWords,
-                { y: '110%', opacity: 0 },
-                {
-                    y: '0%',
-                    opacity: 1,
-                    duration: 1.1,
-                    stagger: 0.15,
-                    ease: 'power4.out',
-                    delay: 0.15,
-                    clearProps: 'transform,opacity',
-                }
-            );
-        }
+    // Hero words : gérés par CSS transitions via .hero-loaded
+    // Pas de dépendance GSAP — toujours visible même si CDN échoue
+
+    // GSAP optionnel : uniquement pour effets de scroll décoratifs
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
+        gsap.registerPlugin(ScrollTrigger);
 
         // Scroll hint — disparaît au scroll
-        if (typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
+        var scrollHint = document.querySelector('.hero-scroll-hint');
+        if (scrollHint) {
+            gsap.to(scrollHint, {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: '.hero-wrapper',
+                    start: 'top top',
+                    end: '25% top',
+                    scrub: true,
+                },
+            });
+        }
 
-            var scrollHint = document.querySelector('.hero-scroll-hint');
-            if (scrollHint) {
-                gsap.to(scrollHint, {
-                    opacity: 0,
+        // Footer watermark parallax
+        var footerWatermark = document.querySelector('.footer-watermark');
+        if (footerWatermark) {
+            gsap.fromTo(footerWatermark,
+                { yPercent: 30 },
+                {
+                    yPercent: -10,
+                    ease: 'none',
                     scrollTrigger: {
-                        trigger: '.hero-wrapper',
-                        start: 'top top',
-                        end: '25% top',
+                        trigger: '.footer',
+                        start: 'top bottom',
+                        end: 'bottom bottom',
                         scrub: true,
                     },
-                });
-            }
-
-            // Footer watermark parallax
-            var footerWatermark = document.querySelector('.footer-watermark');
-            if (footerWatermark) {
-                gsap.fromTo(footerWatermark,
-                    { yPercent: 30 },
-                    {
-                        yPercent: -10,
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: '.footer',
-                            start: 'top bottom',
-                            end: 'bottom bottom',
-                            scrub: true,
-                        },
-                    }
-                );
-            }
-        }
-    } else {
-        // GSAP absent : hero-word visibles immédiatement
-        var words = document.querySelectorAll('.hero-word');
-        for (var w = 0; w < words.length; w++) {
-            words[w].style.opacity = '1';
-            words[w].style.transform = 'none';
-            words[w].style.webkitTransform = 'none';
+                }
+            );
         }
     }
 
