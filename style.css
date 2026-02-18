@@ -150,9 +150,12 @@ img { max-width: 100%; display: block; }
     white-space: nowrap;
     touch-action: manipulation;
     min-height: 44px;
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    -webkit-transition: background 0.25s var(--ease), -webkit-transform 0.25s var(--ease);
 }
 
-.header-phone:active { opacity: 0.85; }
+.header-phone:hover { background: var(--red-dark); transform: translateY(-1px); -webkit-transform: translateY(-1px); }
+.header-phone:active { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
 
 .header-menu-btn {
     z-index: 110;
@@ -430,9 +433,18 @@ img { max-width: 100%; display: block; }
     white-space: nowrap;
     touch-action: manipulation;
     min-height: 44px;
+    transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    -webkit-transition: background 0.25s var(--ease), border-color 0.25s var(--ease), -webkit-transform 0.25s var(--ease);
 }
 
-.hero-cta-secondary:active { opacity: 0.75; }
+.hero-cta-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.75);
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+}
+
+.hero-cta-secondary:active { opacity: 0.75; transform: translateY(0); -webkit-transform: translateY(0); }
 
 .hero-location {
     display: flex;
@@ -689,12 +701,18 @@ img { max-width: 100%; display: block; }
     text-decoration: none;
     min-height: 44px;
     touch-action: manipulation;
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    -webkit-transition: background 0.25s var(--ease), -webkit-transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
 .service-cta--red  { background: var(--red);   color: #fff; }
 .service-cta--dark { background: var(--black); color: #fff; }
-.service-cta--red:active  { opacity: 0.85; }
-.service-cta--dark:active { opacity: 0.85; }
+
+.service-cta--red:hover  { background: var(--red-dark); transform: translateY(-2px); -webkit-transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,16,46,0.35); }
+.service-cta--dark:hover { background: #222; transform: translateY(-2px); -webkit-transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+
+.service-cta--red:active  { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
+.service-cta--dark:active { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
 
 .service-details {
     padding: clamp(32px, 6vw, 80px);
@@ -880,9 +898,18 @@ img { max-width: 100%; display: block; }
     box-shadow: 0 8px 32px rgba(200,16,46,0.25);
     min-height: 56px;
     touch-action: manipulation;
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    -webkit-transition: background 0.25s var(--ease), -webkit-transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
-.contact-phone-btn:active { opacity: 0.85; }
+.contact-phone-btn:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(200,16,46,0.38);
+}
+
+.contact-phone-btn:active { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
 
 .contact-card {
     border: 1px solid rgba(0,0,0,0.07);
@@ -1126,7 +1153,14 @@ img { max-width: 100%; display: block; }
     pointer-events: auto;
 }
 
-.floating-cta:active { opacity: 0.85; }
+.floating-cta:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    box-shadow: 0 10px 36px rgba(200,16,46,0.55);
+}
+
+.floating-cta:active { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
 
 /* ============================================
    REVEAL — Animé par IntersectionObserver via JS
@@ -1256,11 +1290,29 @@ body.reveal-done .reveal {
     .values-grid { grid-template-columns: 1fr; }
 }
 
-/* ── Pas de survol (écran tactile) ── */
+/* ── Pas de survol (écran tactile) — désactive tous les hovers ── */
 @media (hover: none) {
-    .nav-link:hover           { color: var(--black); }
-    .hero-cta-secondary:hover { border-color: rgba(255,255,255,0.4); }
-    .contact-phone-btn:hover  { transform: none; -webkit-transform: none; }
+    .nav-link:hover,
+    .header-phone:hover,
+    .hero-cta-secondary:hover,
+    .service-cta--red:hover,
+    .service-cta--dark:hover,
+    .contact-phone-btn:hover,
+    .floating-cta:hover,
+    .about-footer-phone:hover {
+        transform: none;
+        -webkit-transform: none;
+        box-shadow: none;
+        background: inherit;
+        border-color: inherit;
+        opacity: 1;
+    }
+    .header-phone:hover  { background: var(--red); }
+    .service-cta--red:hover  { background: var(--red); }
+    .service-cta--dark:hover { background: var(--black); }
+    .contact-phone-btn:hover { background: var(--red); box-shadow: 0 8px 32px rgba(200,16,46,0.25); }
+    .floating-cta:hover { background: var(--red); box-shadow: 0 6px 28px rgba(200,16,46,0.42); }
+    .hero-cta-secondary:hover { background: transparent; border-color: rgba(255,255,255,0.4); }
 }
 
 /* ── Animations réduites (accessibilité) ── */
