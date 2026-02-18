@@ -16,10 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     setVhVariable();
 
-    // Update on resize AND orientation change
     window.addEventListener('resize', setVhVariable, { passive: true });
     window.addEventListener('orientationchange', function() {
-        // Delay needed on iOS to get accurate innerHeight after rotation
         setTimeout(setVhVariable, 100);
         setTimeout(setVhVariable, 300);
     }, { passive: true });
@@ -29,13 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
         console.warn('Commissione: GSAP not loaded. Showing content without animations.');
-        // Fallback: show all hidden elements immediately
-        var hiddenEls = document.querySelectorAll('.reveal, .hero-word, .hero-eyebrow, .hero-sub, .hero-ctas, .hero-location');
-        for (var i = 0; i < hiddenEls.length; i++) {
-            hiddenEls[i].style.opacity = '1';
-            hiddenEls[i].style.transform = 'none';
-            hiddenEls[i].style.webkitTransform = 'none';
-        }
         var hero = document.querySelector('.hero');
         if (hero) hero.classList.add('hero-loaded');
         return;
@@ -43,19 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Detect reduced motion preference
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-        // Skip animations for accessibility
-        var allAnimated = document.querySelectorAll('.reveal, .hero-word, .hero-eyebrow, .hero-sub, .hero-ctas, .hero-location');
-        for (var j = 0; j < allAnimated.length; j++) {
-            allAnimated[j].style.opacity = '1';
-            allAnimated[j].style.transform = 'none';
-            allAnimated[j].style.webkitTransform = 'none';
-        }
+        // Accessibilité : on montre tout immédiatement
         var heroEl = document.querySelector('.hero');
         if (heroEl) heroEl.classList.add('hero-loaded');
+        // Les .reveal n'ont plus d'opacity:0 en CSS, donc rien à forcer
+        return;
     }
 
     // ========================
@@ -63,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================
     var hero = document.querySelector('.hero');
 
-    // Trigger CSS transitions for eyebrow / sub / ctas / location
+    // Déclenche les transitions CSS du hero (eyebrow, sub, ctas, location)
     requestAnimationFrame(function() {
         setTimeout(function() {
             if (hero) hero.classList.add('hero-loaded');
@@ -72,21 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hero words — GSAP word-by-word reveal
     var heroWords = document.querySelectorAll('.hero-word');
-    if (heroWords.length > 0 && !prefersReducedMotion) {
-        gsap.to(heroWords, {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            stagger: 0.15,
-            ease: 'power4.out',
-            delay: 0.15,
-            clearProps: 'transform,opacity', // clean up after animation
-        });
+    if (heroWords.length > 0) {
+        gsap.fromTo(heroWords,
+            { y: '110%', opacity: 0 },
+            {
+                y: '0%',
+                opacity: 1,
+                duration: 1.1,
+                stagger: 0.15,
+                ease: 'power4.out',
+                delay: 0.15,
+                clearProps: 'transform,opacity',
+            }
+        );
     }
 
     // Scroll hint fade
     var scrollHint = document.querySelector('.hero-scroll-hint');
-    if (scrollHint && !prefersReducedMotion) {
+    if (scrollHint) {
         gsap.to(scrollHint, {
             opacity: 0,
             scrollTrigger: {
@@ -100,84 +89,89 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========================
     // 3. SCROLL REVEAL ANIMATIONS
+    // fromTo() : GSAP définit lui-même l'état de départ opacity:0
+    // once:true : se joue même si l'élément est déjà dans le viewport
     // ========================
-    if (!prefersReducedMotion) {
-        var revealEls = document.querySelectorAll('.reveal');
-        revealEls.forEach(function(el) {
-            gsap.to(el, {
+    var revealEls = document.querySelectorAll('.reveal');
+    revealEls.forEach(function(el) {
+        gsap.fromTo(el,
+            { y: 28, opacity: 0 },
+            {
                 y: 0,
                 opacity: 1,
-                duration: 0.9,
+                duration: 0.85,
                 ease: 'power3.out',
                 clearProps: 'transform,opacity',
                 scrollTrigger: {
                     trigger: el,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none',
+                    start: 'top 95%',
+                    once: true,
                 },
-            });
-        });
+            }
+        );
+    });
 
-        // ========================
-        // 4. SERVICE CARDS STAGGER
-        // ========================
-        var serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(function(card) {
-            gsap.fromTo(card,
-                { y: 30, opacity: 0 },
-                {
-                    y: 0, opacity: 1,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    clearProps: 'transform,opacity',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none',
-                    },
-                }
-            );
-        });
+    // ========================
+    // 4. SERVICE CARDS
+    // ========================
+    var serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(function(card) {
+        gsap.fromTo(card,
+            { y: 24, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.75,
+                ease: 'power3.out',
+                clearProps: 'transform,opacity',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 95%',
+                    once: true,
+                },
+            }
+        );
+    });
 
-        // Value cards stagger
-        var valueCards = document.querySelectorAll('.value-card');
-        if (valueCards.length > 0) {
-            gsap.fromTo(valueCards,
-                { y: 20, opacity: 0 },
-                {
-                    y: 0, opacity: 1,
-                    duration: 0.7,
-                    stagger: 0.1,
-                    ease: 'power3.out',
-                    clearProps: 'transform,opacity',
-                    scrollTrigger: {
-                        trigger: '.values-grid',
-                        start: 'top 82%',
-                        toggleActions: 'play none none none',
-                    },
-                }
-            );
-        }
+    // Value cards stagger
+    var valueCards = document.querySelectorAll('.value-card');
+    if (valueCards.length > 0) {
+        gsap.fromTo(valueCards,
+            { y: 20, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.65,
+                stagger: 0.08,
+                ease: 'power3.out',
+                clearProps: 'transform,opacity',
+                scrollTrigger: {
+                    trigger: '.values-grid',
+                    start: 'top 95%',
+                    once: true,
+                },
+            }
+        );
+    }
 
-        // ========================
-        // 5. FOOTER WATERMARK PARALLAX
-        // ========================
-        var footerWatermark = document.querySelector('.footer-watermark');
-        if (footerWatermark) {
-            gsap.fromTo(footerWatermark,
-                { yPercent: 30 },
-                {
-                    yPercent: -10,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.footer',
-                        start: 'top bottom',
-                        end: 'bottom bottom',
-                        scrub: true,
-                    },
-                }
-            );
-        }
+    // ========================
+    // 5. FOOTER WATERMARK PARALLAX
+    // ========================
+    var footerWatermark = document.querySelector('.footer-watermark');
+    if (footerWatermark) {
+        gsap.fromTo(footerWatermark,
+            { yPercent: 30 },
+            {
+                yPercent: -10,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.footer',
+                    start: 'top bottom',
+                    end: 'bottom bottom',
+                    scrub: true,
+                },
+            }
+        );
     }
 
     // ========================
@@ -194,21 +188,18 @@ document.addEventListener('DOMContentLoaded', function() {
         menuToggle.setAttribute('aria-expanded', 'true');
         navOverlay.classList.add('open');
         navOverlay.setAttribute('aria-hidden', 'false');
-        // Prevent background scroll (works on iOS too)
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
 
-        if (!prefersReducedMotion) {
-            gsap.fromTo('.nav-link',
-                { y: 60, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.05 }
-            );
-            gsap.fromTo('.nav-contact-info',
-                { y: 20, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.38 }
-            );
-        }
+        gsap.fromTo('.nav-link',
+            { y: 60, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.05 }
+        );
+        gsap.fromTo('.nav-contact-info',
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.38 }
+        );
     }
 
     function closeMenu() {
@@ -217,45 +208,32 @@ document.addEventListener('DOMContentLoaded', function() {
         menuToggle.setAttribute('aria-expanded', 'false');
         navOverlay.classList.remove('open');
         navOverlay.setAttribute('aria-hidden', 'true');
-        // Restore scroll
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.width = '';
     }
 
     function toggleMenu() {
-        if (menuOpen) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
+        if (menuOpen) { closeMenu(); } else { openMenu(); }
     }
 
     if (menuToggle) {
         menuToggle.addEventListener('click', toggleMenu);
     }
 
-    // Close menu on nav link click + smooth scroll
     navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             var targetId = link.getAttribute('href');
             var targetEl = targetId ? document.querySelector(targetId) : null;
-
-            if (menuOpen) {
-                closeMenu();
-            }
-
-            // Wait for menu close animation before scrolling
+            var wasOpen = menuOpen;
+            if (menuOpen) { closeMenu(); }
             setTimeout(function() {
-                if (targetEl) {
-                    smoothScrollTo(targetEl);
-                }
-            }, menuOpen ? 350 : 0);
+                if (targetEl) { smoothScrollTo(targetEl); }
+            }, wasOpen ? 350 : 0);
         });
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
         if ((e.key === 'Escape' || e.keyCode === 27) && menuOpen) {
             closeMenu();
@@ -267,16 +245,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================
     function smoothScrollTo(target) {
         if (!target) return;
-
         var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
         var headerHeight = 68;
         var finalY = targetTop - headerHeight;
 
-        // Use native smooth scroll if supported, fallback to manual
         if ('scrollBehavior' in document.documentElement.style) {
             window.scrollTo({ top: finalY, behavior: 'smooth' });
         } else {
-            // Manual smooth scroll for older browsers (IE, old Safari)
             var startY = window.pageYOffset;
             var distance = finalY - startY;
             var duration = 600;
@@ -299,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================
-    // 8. SCROLL-TO BUTTONS (data-scroll-to)
+    // 8. SCROLL-TO BUTTONS
     // ========================
     var scrollToButtons = document.querySelectorAll('[data-scroll-to]');
     scrollToButtons.forEach(function(btn) {
@@ -310,7 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Logo button — scroll to top
     var logoBtn = document.getElementById('logoBtn');
     if (logoBtn) {
         logoBtn.addEventListener('click', function() {
@@ -335,25 +309,20 @@ document.addEventListener('DOMContentLoaded', function() {
         var scroll = window.pageYOffset || document.documentElement.scrollTop;
         var heroHeight = window.innerHeight;
 
-        // Scrolled class (background + logo color change)
         if (scroll > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
 
-        // Hide fixed hero when content is fully over it (performance)
         if (hero) {
             if (scroll > heroHeight * 1.5) {
                 hero.style.visibility = 'hidden';
-                hero.style.webkitVisibility = 'hidden';
             } else {
                 hero.style.visibility = 'visible';
-                hero.style.webkitVisibility = 'visible';
             }
         }
 
-        // Hide/show header on scroll direction (only after passing hero)
         if (scroll > 120) {
             if (scroll > lastScrollY + 5 && !headerHidden) {
                 header.classList.add('hide-up');
@@ -369,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Floating CTA visibility (desktop only)
         if (floatingCta) {
             if (scroll > 500) {
                 floatingCta.classList.add('visible');
@@ -390,33 +358,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    // iOS: also listen to touchmove for scroll behavior
     window.addEventListener('touchmove', onScroll, { passive: true });
-
-    // Initialize on load
     updateHeader();
 
     // ========================
     // 10. REFRESH SCROLLTRIGGER ON RESIZE
-    // Needed for correct positions after layout changes
     // ========================
     var resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            if (typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.refresh();
-            }
+            ScrollTrigger.refresh();
         }, 250);
     }, { passive: true });
 
-    // Also refresh on orientation change
     window.addEventListener('orientationchange', function() {
         setTimeout(function() {
-            if (typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.refresh();
-            }
+            ScrollTrigger.refresh();
         }, 400);
     }, { passive: true });
 

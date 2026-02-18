@@ -1120,12 +1120,13 @@ img { max-width: 100%; display: block; }
 .floating-cta:active { opacity: 0.85; }
 
 /* ============================================
-   REVEAL — invisible par défaut, animé par GSAP
+   REVEAL — GSAP gère l'état initial via fromTo()
+   Le CSS ne cache PAS les éléments (évite le bug
+   où les éléments restent invisibles si GSAP échoue
+   ou si l'élément est déjà dans le viewport)
    ============================================ */
 .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    -webkit-transform: translateY(32px);
+    /* Pas d'opacity:0 ici — GSAP fromTo() part de 0 */
 }
 
 /* ============================================
