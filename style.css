@@ -1120,13 +1120,35 @@ img { max-width: 100%; display: block; }
 .floating-cta:active { opacity: 0.85; }
 
 /* ============================================
-   REVEAL — GSAP gère l'état initial via fromTo()
-   Le CSS ne cache PAS les éléments (évite le bug
-   où les éléments restent invisibles si GSAP échoue
-   ou si l'élément est déjà dans le viewport)
+   REVEAL — Animé par IntersectionObserver via JS
+   L'état de départ est défini ici en CSS.
+   La classe .revealed est ajoutée par JS quand
+   l'élément entre dans le viewport.
+   Si JS échoue, .reveal-done est ajouté sur <body>
+   et tout reste visible.
    ============================================ */
 .reveal {
-    /* Pas d'opacity:0 ici — GSAP fromTo() part de 0 */
+    opacity: 0;
+    transform: translateY(28px);
+    -webkit-transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                        -webkit-transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+}
+
+/* Sécurité : si JS plante ou que .reveal-done est sur body */
+body.reveal-done .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    transition: none !important;
 }
 
 /* ============================================
