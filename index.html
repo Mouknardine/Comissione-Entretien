@@ -61,6 +61,10 @@
          NAV OVERLAY
          ============================================ -->
     <nav class="nav-overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Navigation principale">
+        <button class="nav-close-btn" id="navClose" aria-label="Fermer le menu">
+            <span class="nav-close-line"></span>
+            <span class="nav-close-line"></span>
+        </button>
         <div class="nav-content">
             <div class="nav-links">
                 <a href="#home" class="nav-link" data-nav-link>ACCUEIL</a>
@@ -147,12 +151,11 @@
                     <article class="service-card" id="service-01">
                         <div class="service-card-inner">
                             <div class="service-info">
-                                <div class="service-badge service-badge--urgent">24h/24 — 7j/7</div>
                                 <div class="service-header">
                                     <span class="service-number" aria-hidden="true">01</span>
-                                    <svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>
+                                    <div class="service-badge service-badge--urgent">24h/24 — 7j/7</div>
                                 </div>
-                                <h3 class="service-title">Debouchage &amp; Curage</h3>
+                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>Debouchage &amp; Curage</h3>
                                 <p class="service-desc">Intervention rapide pour eliminer les bouchons ponctuels et nettoyer en profondeur vos canalisations par hydrocurage haute pression.</p>
                                 <a href="tel:+41775217328" class="service-cta service-cta--red">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
@@ -176,12 +179,11 @@
                     <article class="service-card service-card--reverse" id="service-02">
                         <div class="service-card-inner">
                             <div class="service-info">
-                                <div class="service-badge">Diagnostic precis</div>
                                 <div class="service-header">
                                     <span class="service-number" aria-hidden="true">02</span>
-                                    <svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                    <div class="service-badge">Diagnostic precis</div>
                                 </div>
-                                <h3 class="service-title">Inspection par Camera</h3>
+                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Inspection par Camera</h3>
                                 <p class="service-desc">Examen non-destructif de vos tuyaux d'evacuation avec rapport detaille pour des reparations ciblees et economiques.</p>
                                 <button class="service-cta service-cta--dark" data-scroll-to="contact">
                                     Demander un devis
@@ -205,12 +207,11 @@
                     <article class="service-card" id="service-03">
                         <div class="service-card-inner">
                             <div class="service-info">
-                                <div class="service-badge">Ecologique</div>
                                 <div class="service-header">
                                     <span class="service-number" aria-hidden="true">03</span>
-                                    <svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                                    <div class="service-badge">Ecologique</div>
                                 </div>
-                                <h3 class="service-title">Nettoyage Panneaux Solaires</h3>
+                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>Nettoyage Panneaux Solaires</h3>
                                 <p class="service-desc">Nettoyage de vos panneaux photovoltaiques a la perche telescopique, sans produits chimiques ni acces au toit. Une installation propre produit jusqu'a 30 % d'energie en plus.</p>
                                 <button class="service-cta service-cta--dark" data-scroll-to="contact">
                                     Demander un devis
@@ -235,12 +236,11 @@
                     <article class="service-card service-card--reverse" id="service-04">
                         <div class="service-card-inner">
                             <div class="service-info">
-                                <div class="service-badge">Particuliers</div>
                                 <div class="service-header">
                                     <span class="service-number" aria-hidden="true">04</span>
-                                    <svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    <div class="service-badge">Particuliers</div>
                                 </div>
-                                <h3 class="service-title">Nettoyage Interieur-Exterieur</h3>
+                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Nettoyage Interieur-Exterieur</h3>
                                 <p class="service-desc">Un service de nettoyage complet pour votre domicile — des pieces de vie aux espaces exterieurs — avec rigueur et discretion.</p>
                                 <button class="service-cta service-cta--dark" data-scroll-to="contact">
                                     Demander un devis
@@ -264,12 +264,11 @@
                     <article class="service-card" id="service-05">
                         <div class="service-card-inner">
                             <div class="service-info">
-                                <div class="service-badge">Immeubles</div>
                                 <div class="service-header">
                                     <span class="service-number" aria-hidden="true">05</span>
-                                    <svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                                    <div class="service-badge">Immeubles</div>
                                 </div>
-                                <h3 class="service-title">Service de Conciergerie</h3>
+                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Service de Conciergerie</h3>
                                 <p class="service-desc">Entretien regulier et fiable des espaces communs de votre immeuble — proprete garantie pour les residents.</p>
                                 <button class="service-cta service-cta--dark" data-scroll-to="contact">
                                     Demander un devis

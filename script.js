@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menuToggle.setAttribute('aria-expanded', 'true');
         navOverlay.classList.add('open');
         navOverlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('menu-open');
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
         document.body.style.width = '100%';
@@ -151,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menuToggle.setAttribute('aria-expanded', 'false');
         navOverlay.classList.remove('open');
         navOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.width = '';
@@ -162,15 +164,67 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    var navClose = document.getElementById('navClose');
+    if (navClose) {
+        navClose.addEventListener('click', function () { closeMenu(); });
+    }
+
+    // Handler et timers globaux pour éviter les doublons entre clics successifs
+    var navScrollHandler = null;
+    var navScrollStopTimer = null;
+    var navScrollFailsafe = null;
+
+    function releaseNavSnap() {
+        if (navScrollHandler) {
+            window.removeEventListener('scroll', navScrollHandler);
+            navScrollHandler = null;
+        }
+        clearTimeout(navScrollStopTimer);
+        clearTimeout(navScrollFailsafe);
+        snapAnimating = false;
+        lastScrollY = window.pageYOffset;
+    }
+
+    function watchNavScrollEnd() {
+        // Nettoie un éventuel watcher précédent
+        if (navScrollHandler) {
+            window.removeEventListener('scroll', navScrollHandler);
+        }
+        clearTimeout(navScrollStopTimer);
+        clearTimeout(navScrollFailsafe);
+
+        navScrollHandler = function () {
+            clearTimeout(navScrollStopTimer);
+            navScrollStopTimer = setTimeout(function () {
+                releaseNavSnap();
+            }, 200);
+        };
+        window.addEventListener('scroll', navScrollHandler, { passive: true });
+
+        // Failsafe : libère après 3s même si pas de scroll
+        navScrollFailsafe = setTimeout(function () {
+            releaseNavSnap();
+        }, 3000);
+    }
+
     navLinks.forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             var targetId = link.getAttribute('href');
             var targetEl = targetId ? document.querySelector(targetId) : null;
             var wasOpen = menuOpen;
+
+            // Verrouille le header immédiatement (avant closeMenu)
+            snapAnimating = true;
+            header.classList.remove('hide-up');
+            headerHidden = false;
+
             if (menuOpen) { closeMenu(); }
             setTimeout(function () {
-                if (targetEl) { smoothScrollTo(targetEl); }
+                if (targetEl) {
+                    smoothScrollTo(targetEl);
+                    watchNavScrollEnd();
+                }
             }, wasOpen ? 350 : 0);
         });
     });
@@ -219,7 +273,13 @@ document.addEventListener('DOMContentLoaded', function () {
     scrollToButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
             var target = document.getElementById(btn.getAttribute('data-scroll-to'));
-            if (target) smoothScrollTo(target);
+            if (target) {
+                snapAnimating = true;
+                header.classList.remove('hide-up');
+                headerHidden = false;
+                smoothScrollTo(target);
+                watchNavScrollEnd();
+            }
         });
     });
 
@@ -242,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var lastScrollY = 0;
     var headerHidden = false;
     var ticking = false;
+    var snapAnimating = false;
 
     function updateHeader() {
         var scroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -259,7 +320,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Cache/montre le header selon direction du scroll
-        if (scroll > 120) {
+        // Désactivé pendant le snap pour garder le header visible
+        if (!snapAnimating && scroll > 120) {
             if (scroll > lastScrollY + 5 && !headerHidden) {
                 header.classList.add('hide-up');
                 headerHidden = true;
@@ -267,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 header.classList.remove('hide-up');
                 headerHidden = false;
             }
-        } else {
+        } else if (snapAnimating || scroll <= 120) {
             header.classList.remove('hide-up');
             headerHidden = false;
         }
@@ -297,7 +359,63 @@ document.addEventListener('DOMContentLoaded', function () {
     updateHeader();
 
     // ========================
-    // 7. REFRESH SCROLLTRIGGER ON RESIZE
+    // 7. HERO SNAP SCROLL
+    // Un scroll depuis le hero amène directement au contenu
+    // ========================
+    var heroWrap = document.querySelector('.hero-wrapper');
+
+    if (heroWrap) {
+
+        function heroSnapTo(dest) {
+            if (snapAnimating) return;
+            snapAnimating = true;
+            header.classList.remove('hide-up');
+            headerHidden = false;
+            window.scrollTo({ top: dest, behavior: 'smooth' });
+            setTimeout(function () {
+                snapAnimating = false;
+                lastScrollY = window.pageYOffset;
+            }, 1000);
+        }
+
+        // Desktop : bloque le scroll natif dans la zone hero, snap direct
+        window.addEventListener('wheel', function (e) {
+            if (snapAnimating) return;
+            var scroll = window.pageYOffset;
+            var target = heroWrap.offsetHeight - 68;
+
+            if (scroll < target) {
+                e.preventDefault();
+                if (e.deltaY > 0) heroSnapTo(target);
+                else if (e.deltaY < 0 && scroll > 0) heroSnapTo(0);
+            }
+        }, { passive: false });
+
+        // Mobile : détecte le swipe et snap
+        var touchStartY = 0;
+        var inHeroZone = false;
+
+        window.addEventListener('touchstart', function (e) {
+            touchStartY = e.touches[0].clientY;
+            inHeroZone = window.pageYOffset < heroWrap.offsetHeight - 68;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function (e) {
+            if (inHeroZone && !snapAnimating) e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchend', function (e) {
+            if (!inHeroZone || snapAnimating) return;
+            var diff = touchStartY - e.changedTouches[0].clientY;
+            var target = heroWrap.offsetHeight - 68;
+            if (diff > 20) heroSnapTo(target);
+            else if (diff < -20 && window.pageYOffset > 0) heroSnapTo(0);
+            inHeroZone = false;
+        }, { passive: true });
+    }
+
+    // ========================
+    // 8. REFRESH SCROLLTRIGGER ON RESIZE
     // ========================
     if (typeof ScrollTrigger !== 'undefined') {
         var resizeTimer;

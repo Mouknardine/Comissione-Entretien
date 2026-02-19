@@ -192,6 +192,26 @@ img { max-width: 100%; display: block; }
     -webkit-transform: translateY(-4px) rotate(-45deg);
 }
 
+/* Menu ouvert : le header laisse passer les clics (sinon il bloque la croix de fermeture) */
+body.menu-open .header {
+    pointer-events: none;
+}
+
+/* Menu ouvert : cache le hamburger (croix blanche) — seule la croix noire reste visible */
+body.menu-open .header-menu-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Menu ouvert sur desktop : cache le bouton "Urgence 24/7" */
+@media (min-width: 769px) {
+    body.menu-open .header-phone {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+}
+
 /* ============================================
    NAV OVERLAY
    ============================================ */
@@ -214,6 +234,46 @@ img { max-width: 100%; display: block; }
 .nav-overlay.open {
     opacity: 1;
     pointer-events: auto;
+}
+
+.nav-close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    z-index: 10;
+}
+
+.nav-close-line {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 1px;
+    position: absolute;
+    transition: background 0.2s;
+}
+
+.nav-close-line:first-child {
+    transform: rotate(45deg);
+}
+
+.nav-close-line:last-child {
+    transform: rotate(-45deg);
+}
+
+.nav-close-btn:hover .nav-close-line {
+    background: var(--red);
 }
 
 .nav-content {
@@ -549,7 +609,7 @@ img { max-width: 100%; display: block; }
 /* ============================================
    SERVICES SECTION
    ============================================ */
-.services-section { padding-bottom: 0; }
+.services-section { padding-top: 20px; padding-bottom: 0; }
 
 .section-label {
     display: flex;
@@ -611,16 +671,14 @@ img { max-width: 100%; display: block; }
 
 .service-badge {
     display: inline-block;
-    border: 1px solid rgba(0,0,0,0.2);
-    color: #666;
-    padding: 3px 10px;
-    border-radius: 3px;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    border: 1px solid rgba(0,0,0,0.15);
+    color: #888;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin-bottom: 20px;
-    align-self: flex-start;
 }
 
 .service-badge--urgent {
@@ -632,21 +690,24 @@ img { max-width: 100%; display: block; }
 .service-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 8px;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .service-number {
-    font-size: 56px;
+    font-size: 48px;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
     color: rgba(0,0,0,0.08);
 }
 
-.service-icon { color: var(--black); flex-shrink: 0; }
+.service-icon { color: var(--red); flex-shrink: 0; width: 20px; height: 20px; }
 
 .service-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: clamp(1.3rem, 3vw, 1.9rem);
     font-weight: 700;
     line-height: 1.15;
@@ -732,7 +793,7 @@ img { max-width: 100%; display: block; }
 /* ============================================
    ABOUT
    ============================================ */
-.about-section { background: var(--black); }
+.about-section { background: var(--black); padding-top: 20px; }
 .about-section .label-text { color: var(--red); }
 .about-section .label-line { background: rgba(255,255,255,0.1); }
 
@@ -840,7 +901,7 @@ img { max-width: 100%; display: block; }
 /* ============================================
    CONTACT
    ============================================ */
-.contact-section { background: var(--white); }
+.contact-section { background: var(--white); padding-top: 20px; }
 
 .contact-grid {
     display: grid;
@@ -1213,6 +1274,7 @@ body.reveal-done .reveal {
     .header-phone { display: none; }
 
     /* Hero */
+    .hero-inner { justify-content: center; }
     .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); }
     .hero-sub   { font-size: 0.95rem; }
     .hero-scroll-hint { display: none; }
@@ -1232,6 +1294,8 @@ body.reveal-done .reveal {
         border-top: 1px solid rgba(0,0,0,0.05);
     }
     .service-number { font-size: 28px; }
+    .service-icon { width: 16px; height: 16px; }
+    .service-title { gap: 8px; }
 
     /* Footer */
     .footer-top { flex-direction: column; gap: 24px; }
@@ -1246,7 +1310,7 @@ body.reveal-done .reveal {
     .mobile-bar { display: flex; }
 
     /* Padding bas pour la barre mobile */
-    body { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+    .footer { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
 
     /* CTA flottant caché sur mobile */
     .floating-cta { display: none !important; }
