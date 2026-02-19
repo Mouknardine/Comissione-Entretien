@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var logoBtn     = document.getElementById('logoBtn');
     var floatingCta = document.getElementById('floatingCta');
     var hero        = document.querySelector('.hero');
-    var heroWrap    = document.querySelector('.hero-wrapper');
 
     // État du header
     var lastScrollY  = 0;
@@ -196,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         navScrollHandler = function () {
             clearTimeout(navScrollEndTimer);
-            navScrollEndTimer = setTimeout(releaseNavSnap, SNAP_RELEASE_DELAY);
+            navScrollEndTimer = setTimeout(releaseNavSnap, 200);
         };
         window.addEventListener('scroll', navScrollHandler, { passive: true });
 
@@ -321,10 +320,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var scroll = window.pageYOffset || document.documentElement.scrollTop;
 
         header.classList.toggle('scrolled', scroll > SCROLL_THRESHOLD);
-
-        if (hero) {
-            hero.style.visibility = scroll > window.innerHeight * 1.5 ? 'hidden' : 'visible';
-        }
 
         if (!snapAnimating && scroll > SCROLL_HIDE_MIN) {
             if (scroll > lastScrollY + SCROLL_DELTA && !headerHidden) {
