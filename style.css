@@ -1198,8 +1198,8 @@ img { max-width: 100%; display: block; }
 
 .reveal.revealed {
     opacity: 1;
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
+    transform: none;
+    -webkit-transform: none;
 }
 
 /* Sécurité : si JS plante ou que .reveal-done est sur body */
