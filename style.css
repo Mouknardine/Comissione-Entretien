@@ -1144,8 +1144,8 @@ img { max-width: 100%; display: block; }
     font-family: var(--font);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s;
-    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s, background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    -webkit-transition: opacity 0.3s, background 0.25s var(--ease), -webkit-transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
 .floating-cta.visible {
