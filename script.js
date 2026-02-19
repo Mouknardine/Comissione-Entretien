@@ -98,9 +98,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ─────────────────────────────────────────────────────────────
 
     requestAnimationFrame(function () {
-        setTimeout(function () {
+        requestAnimationFrame(function () {
             if (hero) hero.classList.add('hero-loaded');
-        }, HERO_ENTER_DELAY);
+        });
     });
 
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
