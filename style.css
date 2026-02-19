@@ -593,19 +593,39 @@ img { max-width: 100%; display: block; }
 
 .service-card-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.service-image {
+    overflow: hidden;
+    background: #111;
+    min-height: 320px;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.04);
+}
+
 .service-info {
-    padding: clamp(32px, 6vw, 80px);
+    padding: clamp(32px, 4vw, 60px);
     background: var(--bg-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.service-card--reverse .service-image  { order: 3; }
 .service-card--reverse .service-info   { order: 2; }
 .service-card--reverse .service-details { order: 1; }
 
@@ -1198,6 +1218,11 @@ body.reveal-done .reveal {
    ============================================ */
 @media (max-width: 900px) {
     .service-number { font-size: 36px; }
+    .service-card-inner { grid-template-columns: 1fr 1fr; }
+    .service-image { min-height: 260px; }
+    .service-card--reverse .service-image  { order: 2; }
+    .service-card--reverse .service-info   { order: 1; }
+    .service-card--reverse .service-details { order: 3; }
     .about-grid { grid-template-columns: 1fr; gap: 24px; }
     .contact-grid { grid-template-columns: 1fr; gap: 32px; }
     .contact-phone-btn { width: 100%; justify-content: center; }
@@ -1219,6 +1244,8 @@ body.reveal-done .reveal {
 
     /* Service cards : empilées */
     .service-card-inner { grid-template-columns: 1fr; }
+    .service-image { min-height: 220px; order: 0 !important; }
+    .service-card--reverse .service-image   { order: 0 !important; }
     .service-card--reverse .service-info    { order: 1; }
     .service-card--reverse .service-details { order: 2; }
     .service-info    {
