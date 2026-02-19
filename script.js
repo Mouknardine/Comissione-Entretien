@@ -21,10 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var floatingCta = document.getElementById('floatingCta');
     var hero        = document.querySelector('.hero');
 
-    var lastScrollY  = 0;
-    var headerHidden = false;
-    var ticking      = false;
-    var menuOpen     = false;
+    var lastScrollY      = 0;
+    var headerHidden     = false;
+    var ticking          = false;
+    var menuOpen         = false;
+    var scrollStopTimer  = null;
 
 
     // ─────────────────────────────────────────────────────────────
@@ -215,6 +216,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', function () {
+        // Scroll stop detection — show header when scroll stops
+        clearTimeout(scrollStopTimer);
+        scrollStopTimer = setTimeout(function () {
+            if (header && headerHidden) {
+                header.classList.remove('hide-up');
+                headerHidden = false;
+            }
+        }, 150);
+
         if (!ticking) {
             requestAnimationFrame(updateHeader);
             ticking = true;

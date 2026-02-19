@@ -28,7 +28,6 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    overflow-x: hidden;
 }
 
 body {
@@ -473,7 +472,6 @@ body.menu-open .header-menu-btn {
     opacity: 0;
     transform: translateY(16px);
     -webkit-transform: translateY(16px);
-    will-change: opacity, transform;
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
     -webkit-transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s, -webkit-transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
 }
@@ -483,7 +481,6 @@ body.menu-open .header-menu-btn {
     opacity: 0;
     transform: translateY(16px);
     -webkit-transform: translateY(16px);
-    will-change: opacity, transform;
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
     -webkit-transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s, -webkit-transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
 }
@@ -523,7 +520,6 @@ body.menu-open .header-menu-btn {
     opacity: 0;
     transform: translateY(16px);
     -webkit-transform: translateY(16px);
-    will-change: opacity, transform;
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s;
     -webkit-transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s, -webkit-transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s;
 }
@@ -1076,12 +1072,18 @@ body.menu-open .header-menu-btn {
 
 .footer-content { position: relative; z-index: 1; }
 
-.footer-top {
+.footer-top,
+.footer-bottom {
     display: flex;
     justify-content: space-between;
     gap: 48px;
-    margin-bottom: clamp(32px, 5vw, 56px);
     flex-wrap: wrap;
+}
+
+.footer-bottom {
+    padding-top: clamp(24px, 3vw, 36px);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: clamp(20px, 3vw, 32px);
 }
 
 .footer-status {
@@ -1126,20 +1128,45 @@ body.menu-open .header-menu-btn {
 .footer-link:active { color: #fff; }
 
 .footer-tagline {
-    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-    color: rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: clamp(24px, 3vw, 36px);
+}
+
+.footer-tagline-main {
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.footer-tagline-sub {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: rgba(255,255,255,0.45);
     font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.footer-tagline-sub--delay {
+    transition-delay: 0.15s;
+    -webkit-transition-delay: 0.15s;
 }
 
 .footer-credit {
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
-    margin-top: 20px;
-    font-weight: 500;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    margin-top: clamp(20px, 3vw, 32px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .footer-credit-link {
-    color: rgba(255,255,255,0.55);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.6);
     text-decoration: none;
     transition: color 0.2s ease;
 }
@@ -1319,7 +1346,7 @@ body.reveal-done .reveal {
     .service-title { gap: 8px; }
 
     /* Footer */
-    .footer-top { flex-direction: column; gap: 24px; }
+    .footer-top, .footer-bottom { flex-direction: column; gap: 24px; }
     .footer-links {
         align-items: flex-start;
         flex-direction: row;
