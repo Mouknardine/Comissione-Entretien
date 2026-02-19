@@ -80,15 +80,23 @@ img { max-width: 100%; display: block; }
     align-items: center;
     padding: 0 clamp(20px, 4vw, 60px);
     height: 68px;
-    transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.5s var(--ease);
-    -webkit-transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), -webkit-transform 0.5s var(--ease);
+    will-change: transform;
+    transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.4s var(--ease);
+    -webkit-transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), -webkit-transform 0.4s var(--ease);
 }
 
 .header.scrolled {
-    background: rgba(255,255,255,0.97);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.98);
     box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+}
+
+/* backdrop-filter uniquement sur les appareils qui le gèrent bien */
+@supports (backdrop-filter: blur(1px)) {
+    .header.scrolled {
+        background: rgba(255,255,255,0.92);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+    }
 }
 
 .header.hide-up {
@@ -1072,7 +1080,6 @@ body.menu-open .header-menu-btn {
 
 .footer-content { position: relative; z-index: 1; }
 
-.footer-top,
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -1150,8 +1157,10 @@ body.menu-open .header-menu-btn {
 }
 
 .footer-tagline-sub--delay {
-    transition-delay: 0.15s;
-    -webkit-transition-delay: 0.15s;
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    -webkit-transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                        -webkit-transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
 .footer-credit {
@@ -1346,7 +1355,7 @@ body.reveal-done .reveal {
     .service-title { gap: 8px; }
 
     /* Footer */
-    .footer-top, .footer-bottom { flex-direction: column; gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 24px; }
     .footer-links {
         align-items: flex-start;
         flex-direction: row;

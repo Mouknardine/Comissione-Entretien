@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var SCROLL_HIDE_MIN  = 120;
     var SCROLL_DELTA     = 5;
     var FLOATING_CTA_MIN = 500;
-    var MENU_CLOSE_DELAY = 350;
+    var MENU_CLOSE_DELAY = 400;   // aligné sur la transition CSS du nav-overlay (0.4s)
 
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var ticking          = false;
     var menuOpen         = false;
     var scrollStopTimer  = null;
+    var savedScrollY     = 0;     // sauvegarde la position avant de fixer le body
 
 
     // ─────────────────────────────────────────────────────────────
@@ -99,7 +100,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ─────────────────────────────────────────────────────────────
 
     function openMenu() {
-        menuOpen = true;
+        menuOpen    = true;
+        savedScrollY = window.pageYOffset;  // sauvegarde avant position: fixed
+
         if (menuToggle) {
             menuToggle.classList.add('active');
             menuToggle.setAttribute('aria-expanded', 'true');
@@ -108,9 +111,12 @@ document.addEventListener('DOMContentLoaded', function () {
             navOverlay.classList.add('open');
             navOverlay.setAttribute('aria-hidden', 'false');
         }
+
+        // Fige le body sans faire sauter la page
         document.body.classList.add('menu-open');
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
+        document.body.style.top      = '-' + savedScrollY + 'px';
         document.body.style.width    = '100%';
 
         if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
@@ -127,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function closeMenu() {
         menuOpen = false;
+
         if (menuToggle) {
             menuToggle.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
@@ -135,10 +142,14 @@ document.addEventListener('DOMContentLoaded', function () {
             navOverlay.classList.remove('open');
             navOverlay.setAttribute('aria-hidden', 'true');
         }
+
+        // Restaure le scroll exactement où on était
         document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
         document.body.style.position = '';
+        document.body.style.top      = '';
         document.body.style.width    = '';
+        window.scrollTo(0, savedScrollY);
     }
 
     if (menuToggle) {
@@ -157,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var target  = document.querySelector(link.getAttribute('href'));
             var wasOpen = menuOpen;
             if (menuOpen) { closeMenu(); }
+            // Attend que le menu ait fini de disparaître avant de scroller
             setTimeout(function () { smoothScrollTo(target); }, wasOpen ? MENU_CLOSE_DELAY : 0);
         });
     });
@@ -216,14 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', function () {
-        // Scroll stop detection — show header when scroll stops
+        // Navbar réapparaît 300ms après l'arrêt du scroll (momentum inclus)
         clearTimeout(scrollStopTimer);
         scrollStopTimer = setTimeout(function () {
             if (header && headerHidden) {
                 header.classList.remove('hide-up');
                 headerHidden = false;
             }
-        }, 150);
+        }, 300);
 
         if (!ticking) {
             requestAnimationFrame(updateHeader);
