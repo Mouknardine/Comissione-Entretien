@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var menuOpen         = false;
     var scrollStopTimer  = null;
     var savedScrollY     = 0;
+    var restoringScroll  = false;  // bloque le scroll listener pendant la restauration du scroll
 
 
     // ─────────────────────────────────────────────────────────────
@@ -183,7 +184,9 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.position = '';
             document.body.style.top      = '';
             document.body.style.width    = '';
+            restoringScroll = true;
             window.scrollTo(0, savedScrollY);
+            setTimeout(function () { restoringScroll = false; }, 100);
         }, 410);
     }
 
@@ -200,11 +203,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-nav-link]').forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
-            var target  = document.querySelector(link.getAttribute('href'));
+            var href    = link.getAttribute('href');
+            var target  = (href === '#home') ? null : document.querySelector(href);
             var wasOpen = menuOpen;
             if (menuOpen) { closeMenu(); }
             // Attend que le body soit restauré (closeMenu attend 410ms) + marge
-            setTimeout(function () { smoothScrollTo(target); }, wasOpen ? MENU_CLOSE_DELAY + 50 : 0);
+            setTimeout(function () {
+                if (!target) { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+                else { smoothScrollTo(target); }
+            }, wasOpen ? MENU_CLOSE_DELAY + 50 : 0);
         });
     });
 
@@ -265,8 +272,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', function () {
-        // Guard : ignorer les scroll events quand le menu est ouvert
-        if (menuOpen) return;
+        // Guard : ignorer les scroll events quand le menu est ouvert ou pendant la restauration du scroll
+        if (menuOpen || restoringScroll) return;
 
         clearTimeout(scrollStopTimer);
         scrollStopTimer = setTimeout(function () {
