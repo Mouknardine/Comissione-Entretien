@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // 1. VIEWPORT HEIGHT — iOS Safari
     // ─────────────────────────────────────────────────────────────
 
+    // Fixe la hauteur du hero-wrapper une seule fois au chargement (évite les rollbacks de scroll sur iOS Safari)
+    var heroWrapper = document.querySelector('.hero-wrapper');
+    if (heroWrapper) {
+        heroWrapper.style.height = window.innerHeight + 'px';
+    }
+
     function setVh() {
         document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
     }
@@ -186,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.width    = '';
             restoringScroll = true;
             window.scrollTo(0, savedScrollY);
-            setTimeout(function () { restoringScroll = false; }, 100);
+            setTimeout(function () { restoringScroll = false; }, 200);
         }, 410);
     }
 
@@ -281,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 header.classList.remove('hide-up');
                 headerHidden = false;
             }
-        }, 300);
+        }, 500);
 
         if (!ticking) {
             requestAnimationFrame(updateHeader);
