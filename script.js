@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var SCROLL_HIDE_MIN    = 120;  // seuil minimum avant hide/show header
     var SCROLL_DELTA       = 5;    // delta de mouvement pour déclencher hide/show
     var FLOATING_CTA_MIN   = 500;  // seuil d'apparition du CTA flottant
-    var SWIPE_MIN          = 20;   // distance minimale d'un swipe (px)
-    var SNAP_RELEASE_DELAY = 200;  // debounce fin de scroll (ms)
     var SNAP_FAILSAFE      = 3000; // libération forcée de snapAnimating (ms)
     var MENU_CLOSE_DELAY   = 350;  // délai après fermeture menu avant scroll (ms)
 
@@ -362,55 +360,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // ─────────────────────────────────────────────────────────────
-    // 9. HERO SNAP SCROLL
+    // 9. HERO SNAP SCROLL — désactivé, scroll libre
     // ─────────────────────────────────────────────────────────────
-
-    if (heroWrap) {
-        function heroSnapTo(dest) {
-            if (snapAnimating) return;
-            lockHeader();
-            window.scrollTo({ top: dest, behavior: 'smooth' });
-            watchNavScrollEnd();
-        }
-
-        function getHeroSnapTarget() {
-            return heroWrap.offsetHeight - HEADER_HEIGHT;
-        }
-
-        // Desktop : snap via molette dans la zone hero
-        window.addEventListener('wheel', function (e) {
-            if (snapAnimating) return;
-            var scroll     = window.pageYOffset;
-            var snapTarget = getHeroSnapTarget();
-            if (scroll < snapTarget) {
-                e.preventDefault();
-                if (e.deltaY > 0)                    { heroSnapTo(snapTarget); }
-                else if (e.deltaY < 0 && scroll > 0) { heroSnapTo(0); }
-            }
-        }, { passive: false });
-
-        // Mobile : snap via swipe
-        var touchStartY = 0;
-        var inHeroZone  = false;
-
-        window.addEventListener('touchstart', function (e) {
-            touchStartY = e.touches[0].clientY;
-            inHeroZone  = window.pageYOffset < getHeroSnapTarget();
-        }, { passive: true });
-
-        window.addEventListener('touchmove', function (e) {
-            if (inHeroZone && !snapAnimating) e.preventDefault();
-        }, { passive: false });
-
-        window.addEventListener('touchend', function (e) {
-            if (!inHeroZone || snapAnimating) return;
-            var diff       = touchStartY - e.changedTouches[0].clientY;
-            var snapTarget = getHeroSnapTarget();
-            if (diff > SWIPE_MIN)                              { heroSnapTo(snapTarget); }
-            else if (diff < -SWIPE_MIN && window.pageYOffset > 0) { heroSnapTo(0); }
-            inHeroZone = false;
-        }, { passive: true });
-    }
 
 
     // ─────────────────────────────────────────────────────────────
