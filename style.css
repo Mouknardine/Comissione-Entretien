@@ -655,16 +655,23 @@ body.menu-open .header-menu-btn {
 .service-card-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .service-info {
-    padding: clamp(32px, 6vw, 80px);
+    padding: clamp(32px, 5vw, 72px) clamp(32px, 6vw, 80px);
     background: var(--bg-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 640px;
+    justify-self: end;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.service-card--reverse .service-info {
+    justify-self: start;
 }
 
 .service-card--reverse .service-info   { order: 2; }
@@ -751,17 +758,22 @@ body.menu-open .header-menu-btn {
 .service-cta--dark:active { opacity: 0.85; transform: translateY(0); -webkit-transform: translateY(0); }
 
 .service-details {
-    padding: clamp(32px, 6vw, 80px);
+    padding: clamp(32px, 5vw, 72px) clamp(32px, 6vw, 80px);
     background: var(--white);
     border-left: 1px solid rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 640px;
+    justify-self: start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .service-card--reverse .service-details {
     border-left: none;
     border-right: 1px solid rgba(0,0,0,0.05);
+    justify-self: end;
 }
 
 .service-details-label {
