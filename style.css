@@ -1054,20 +1054,20 @@ img { max-width: 100%; display: block; }
 }
 
 .footer-credit {
-    font-size: 11px;
-    color: rgba(255,255,255,0.2);
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
     margin-top: 20px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .footer-credit-link {
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.55);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .footer-credit-link:hover {
-    color: rgba(255,255,255,0.65);
+    color: #fff;
 }
 
 /* ============================================
