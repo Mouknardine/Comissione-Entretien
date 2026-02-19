@@ -348,11 +348,12 @@ body.menu-open .header-menu-btn {
     z-index: 1;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
+    pointer-events: none;
 }
 
 .hero {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; left: 0;
     width: 100%;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
@@ -361,9 +362,7 @@ body.menu-open .header-menu-btn {
     justify-content: flex-start;
     overflow: hidden;
     z-index: 1;
-    will-change: transform;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    pointer-events: none;
 }
 
 .hero-bg-img {
@@ -403,6 +402,7 @@ body.menu-open .header-menu-btn {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    pointer-events: auto;
     height: 100%;
 }
 
