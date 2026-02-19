@@ -545,40 +545,6 @@ img { max-width: 100%; display: block; }
     min-height: 100vh;
 }
 
-/* ============================================
-   SERVICES STRIP
-   ============================================ */
-.services-strip {
-    background: var(--black);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.strip-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-
-.strip-item {
-    padding: 20px 16px;
-    text-align: left;
-    border-right: 1px solid rgba(255,255,255,0.07);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-height: 44px;
-    touch-action: manipulation;
-}
-
-.strip-item:last-child { border-right: none; }
-.strip-item:active { background: rgba(255,255,255,0.06); }
-
-.strip-num   { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: 0.08em; }
-.strip-title { font-size: 12px; color: #fff; font-weight: 600; line-height: 1.35; }
-.strip-badge { font-size: 9px; color: var(--red); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 
 /* ============================================
    SERVICES SECTION
@@ -1234,13 +1200,6 @@ body.reveal-done .reveal {
     .hero-sub   { font-size: 0.95rem; }
     .hero-scroll-hint { display: none; }
 
-    /* Strip services : 3 colonnes sur mobile moyen */
-    .strip-inner {
-        grid-template-columns: repeat(3, 1fr);
-        min-width: 0;
-    }
-    .strip-item { padding: 14px 10px; }
-
     /* Service cards : empilées */
     .service-card-inner { grid-template-columns: 1fr; }
     .service-card--reverse .service-info    { order: 1; }
@@ -1281,14 +1240,6 @@ body.reveal-done .reveal {
 
 /* ── Petit mobile ≤ 480px ── */
 @media (max-width: 480px) {
-
-    /* Strip : 2 colonnes + 5e sur toute la largeur */
-    .strip-inner { grid-template-columns: repeat(2, 1fr); }
-    .strip-item:nth-child(5) {
-        grid-column: span 2;
-        border-right: none;
-        border-top: 1px solid rgba(255,255,255,0.07);
-    }
 
     .hero-title { font-size: clamp(1.8rem, 9vw, 2.2rem); }
 
