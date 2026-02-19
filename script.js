@@ -1,45 +1,80 @@
 /**
- * Commissione Entretien
- * Animations & Interactions
- * Cross-browser & Mobile Optimized
+ * Commissione Entretien — script.js
  */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ========================
-    // 0. MOBILE VIEWPORT HEIGHT FIX
-    // Corrige iOS Safari qui change la hauteur du viewport
-    // ========================
-    function setVhVariable() {
-        var vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', vh + 'px');
+    // ─────────────────────────────────────────────────────────────
+    // CONSTANTES & ÉTAT GLOBAL
+    // ─────────────────────────────────────────────────────────────
+
+    var HEADER_HEIGHT      = 68;   // hauteur fixe du header (px)
+    var SCROLL_THRESHOLD   = 50;   // seuil pour .scrolled
+    var SCROLL_HIDE_MIN    = 120;  // seuil minimum avant hide/show header
+    var SCROLL_DELTA       = 5;    // delta de mouvement pour déclencher hide/show
+    var FLOATING_CTA_MIN   = 500;  // seuil d'apparition du CTA flottant
+    var SWIPE_MIN          = 20;   // distance minimale d'un swipe (px)
+    var SNAP_RELEASE_DELAY = 200;  // debounce fin de scroll (ms)
+    var SNAP_FAILSAFE      = 3000; // libération forcée de snapAnimating (ms)
+    var MENU_CLOSE_DELAY   = 350;  // délai après fermeture menu avant scroll (ms)
+    var HERO_ENTER_DELAY   = 80;   // délai animation entrée hero (ms)
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Éléments DOM
+    var header      = document.getElementById('header');
+    var menuToggle  = document.getElementById('menuToggle');
+    var navOverlay  = document.getElementById('navOverlay');
+    var navClose    = document.getElementById('navClose');
+    var logoBtn     = document.getElementById('logoBtn');
+    var floatingCta = document.getElementById('floatingCta');
+    var hero        = document.querySelector('.hero');
+    var heroWrap    = document.querySelector('.hero-wrapper');
+
+    // État du header
+    var lastScrollY  = 0;
+    var headerHidden = false;
+    var ticking      = false;
+    var snapAnimating = false;
+
+    // État du menu
+    var menuOpen = false;
+
+    // Watcher de fin de scroll (unique — évite les doublons)
+    var navScrollHandler  = null;
+    var navScrollEndTimer = null;
+    var navScrollFailsafe = null;
+
+
+    // ─────────────────────────────────────────────────────────────
+    // 1. VIEWPORT HEIGHT — iOS Safari
+    // ─────────────────────────────────────────────────────────────
+
+    function setVh() {
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
     }
-    setVhVariable();
-    window.addEventListener('resize', setVhVariable, { passive: true });
+
+    setVh();
+    window.addEventListener('resize', setVh, { passive: true });
     window.addEventListener('orientationchange', function () {
-        setTimeout(setVhVariable, 100);
-        setTimeout(setVhVariable, 300);
+        // Double timeout : couvre les navigateurs qui retardent le redimensionnement
+        setTimeout(setVh, 100);
+        setTimeout(setVh, 300);
     }, { passive: true });
 
-    // ========================
-    // 1. REVEAL PAR INTERSECTIONOBSERVER
-    // Pas de dépendance GSAP — fiable sur tous navigateurs.
-    // Ajoute .revealed quand l'élément entre dans le viewport.
-    // Si IntersectionObserver n'existe pas (très vieux browsers),
-    // on rend tout visible immédiatement.
-    // ========================
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ─────────────────────────────────────────────────────────────
+    // 2. REVEAL — IntersectionObserver
+    // ─────────────────────────────────────────────────────────────
+
     var revealEls = document.querySelectorAll('.reveal');
 
     function showAllReveals() {
         document.body.classList.add('reveal-done');
-        for (var i = 0; i < revealEls.length; i++) {
-            revealEls[i].classList.add('revealed');
-        }
+        revealEls.forEach(function (el) { el.classList.add('revealed'); });
     }
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-        // Accessibilité ou navigateur très ancien : tout visible immédiatement
         showAllReveals();
     } else {
         var revealObserver = new IntersectionObserver(function (entries) {
@@ -49,40 +84,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0,
-            rootMargin: '0px 0px -40px 0px'
-        });
+        }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
-        revealEls.forEach(function (el) {
-            revealObserver.observe(el);
-        });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+        // Failsafe : force l'affichage si le scroll ne se produit pas
+        setTimeout(showAllReveals, SNAP_FAILSAFE);
     }
 
-    // Sécurité : si la page reste ouverte longtemps sans scroll,
-    // on force l'affichage de tout après 3 secondes
-    setTimeout(showAllReveals, 3000);
 
-    // ========================
-    // 2. HERO ENTRANCE ANIMATION (GSAP si disponible)
-    // ========================
-    var hero = document.querySelector('.hero');
+    // ─────────────────────────────────────────────────────────────
+    // 3. HERO ENTRANCE
+    // ─────────────────────────────────────────────────────────────
 
-    // Déclenche les transitions CSS du hero (eyebrow, sub, ctas, location)
     requestAnimationFrame(function () {
         setTimeout(function () {
             if (hero) hero.classList.add('hero-loaded');
-        }, 80);
+        }, HERO_ENTER_DELAY);
     });
 
-    // Hero words : gérés par CSS transitions via .hero-loaded
-    // Pas de dépendance GSAP — toujours visible même si CDN échoue
-
-    // GSAP optionnel : uniquement pour effets de scroll décoratifs
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Scroll hint — disparaît au scroll
         var scrollHint = document.querySelector('.hero-scroll-hint');
         if (scrollHint) {
             gsap.to(scrollHint, {
@@ -96,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Footer watermark parallax
         var footerWatermark = document.querySelector('.footer-watermark');
         if (footerWatermark) {
             gsap.fromTo(footerWatermark,
@@ -115,24 +137,102 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ========================
-    // 3. NAVIGATION OVERLAY
-    // ========================
-    var menuToggle = document.getElementById('menuToggle');
-    var navOverlay = document.getElementById('navOverlay');
-    var navLinks = document.querySelectorAll('[data-nav-link]');
-    var menuOpen = false;
+
+    // ─────────────────────────────────────────────────────────────
+    // 4. SMOOTH SCROLL
+    // ─────────────────────────────────────────────────────────────
+
+    function smoothScrollTo(target) {
+        if (!target) return;
+        var finalY = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - HEADER_HEIGHT);
+
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo({ top: finalY, behavior: 'smooth' });
+        } else {
+            var startY    = window.pageYOffset;
+            var distance  = finalY - startY;
+            var duration  = 600;
+            var startTime = null;
+
+            function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+            function step(ts) {
+                if (!startTime) startTime = ts;
+                var p = Math.min((ts - startTime) / duration, 1);
+                window.scrollTo(0, startY + distance * ease(p));
+                if (p < 1) requestAnimationFrame(step);
+            }
+
+            requestAnimationFrame(step);
+        }
+    }
+
+
+    // ─────────────────────────────────────────────────────────────
+    // 5. HEADER LOCK — navigation programmatique
+    // ─────────────────────────────────────────────────────────────
+
+    function lockHeader() {
+        snapAnimating = true;
+        if (header) header.classList.remove('hide-up');
+        headerHidden = false;
+    }
+
+    function cleanupNavWatcher() {
+        if (navScrollHandler) {
+            window.removeEventListener('scroll', navScrollHandler);
+            navScrollHandler = null;
+        }
+        clearTimeout(navScrollEndTimer);
+        clearTimeout(navScrollFailsafe);
+    }
+
+    function releaseNavSnap() {
+        cleanupNavWatcher();
+        snapAnimating = false;
+        lastScrollY   = window.pageYOffset;
+    }
+
+    function watchNavScrollEnd() {
+        // Nettoie le watcher précédent sans toucher snapAnimating
+        cleanupNavWatcher();
+
+        navScrollHandler = function () {
+            clearTimeout(navScrollEndTimer);
+            navScrollEndTimer = setTimeout(releaseNavSnap, SNAP_RELEASE_DELAY);
+        };
+        window.addEventListener('scroll', navScrollHandler, { passive: true });
+
+        // Failsafe : libère même si aucun événement scroll ne se déclenche
+        navScrollFailsafe = setTimeout(releaseNavSnap, SNAP_FAILSAFE);
+    }
+
+    function navigateTo(target) {
+        if (!target) return;
+        lockHeader();
+        smoothScrollTo(target);
+        watchNavScrollEnd();
+    }
+
+
+    // ─────────────────────────────────────────────────────────────
+    // 6. NAVIGATION OVERLAY
+    // ─────────────────────────────────────────────────────────────
 
     function openMenu() {
         menuOpen = true;
-        menuToggle.classList.add('active');
-        menuToggle.setAttribute('aria-expanded', 'true');
-        navOverlay.classList.add('open');
-        navOverlay.setAttribute('aria-hidden', 'false');
+        if (menuToggle) {
+            menuToggle.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+        }
+        if (navOverlay) {
+            navOverlay.classList.add('open');
+            navOverlay.setAttribute('aria-hidden', 'false');
+        }
         document.body.classList.add('menu-open');
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
+        document.body.style.width    = '100%';
 
         if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
             gsap.fromTo('.nav-link',
@@ -148,14 +248,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function closeMenu() {
         menuOpen = false;
-        menuToggle.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        navOverlay.classList.remove('open');
-        navOverlay.setAttribute('aria-hidden', 'true');
+        if (menuToggle) {
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.focus(); // Accessibilité : renvoie le focus avant aria-hidden
+        }
+        if (navOverlay) {
+            navOverlay.classList.remove('open');
+            navOverlay.setAttribute('aria-hidden', 'true');
+        }
         document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
         document.body.style.position = '';
-        document.body.style.width = '';
+        document.body.style.width    = '';
     }
 
     if (menuToggle) {
@@ -164,187 +269,85 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var navClose = document.getElementById('navClose');
     if (navClose) {
-        navClose.addEventListener('click', function () { closeMenu(); });
+        navClose.addEventListener('click', closeMenu);
     }
 
-    // Handler et timers globaux pour éviter les doublons entre clics successifs
-    var navScrollHandler = null;
-    var navScrollStopTimer = null;
-    var navScrollFailsafe = null;
-
-    function releaseNavSnap() {
-        if (navScrollHandler) {
-            window.removeEventListener('scroll', navScrollHandler);
-            navScrollHandler = null;
-        }
-        clearTimeout(navScrollStopTimer);
-        clearTimeout(navScrollFailsafe);
-        snapAnimating = false;
-        lastScrollY = window.pageYOffset;
-    }
-
-    function watchNavScrollEnd() {
-        // Nettoie un éventuel watcher précédent
-        if (navScrollHandler) {
-            window.removeEventListener('scroll', navScrollHandler);
-        }
-        clearTimeout(navScrollStopTimer);
-        clearTimeout(navScrollFailsafe);
-
-        navScrollHandler = function () {
-            clearTimeout(navScrollStopTimer);
-            navScrollStopTimer = setTimeout(function () {
-                releaseNavSnap();
-            }, 200);
-        };
-        window.addEventListener('scroll', navScrollHandler, { passive: true });
-
-        // Failsafe : libère après 3s même si pas de scroll
-        navScrollFailsafe = setTimeout(function () {
-            releaseNavSnap();
-        }, 3000);
-    }
-
-    navLinks.forEach(function (link) {
+    document.querySelectorAll('[data-nav-link]').forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
-            var targetId = link.getAttribute('href');
-            var targetEl = targetId ? document.querySelector(targetId) : null;
+            var target  = document.querySelector(link.getAttribute('href'));
             var wasOpen = menuOpen;
 
-            // Verrouille le header immédiatement (avant closeMenu)
-            snapAnimating = true;
-            header.classList.remove('hide-up');
-            headerHidden = false;
-
+            lockHeader(); // Verrouille immédiatement, avant closeMenu
             if (menuOpen) { closeMenu(); }
-            setTimeout(function () {
-                if (targetEl) {
-                    smoothScrollTo(targetEl);
-                    watchNavScrollEnd();
-                }
-            }, wasOpen ? 350 : 0);
+
+            setTimeout(function () { navigateTo(target); }, wasOpen ? MENU_CLOSE_DELAY : 0);
         });
     });
 
     document.addEventListener('keydown', function (e) {
-        if ((e.key === 'Escape' || e.keyCode === 27) && menuOpen) {
-            closeMenu();
-        }
+        if (e.key === 'Escape' && menuOpen) { closeMenu(); }
     });
 
-    // ========================
-    // 4. SMOOTH SCROLL (cross-browser)
-    // ========================
-    function smoothScrollTo(target) {
-        if (!target) return;
-        var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-        var finalY = Math.max(0, targetTop - 68);
 
-        if ('scrollBehavior' in document.documentElement.style) {
-            window.scrollTo({ top: finalY, behavior: 'smooth' });
-        } else {
-            var startY = window.pageYOffset;
-            var distance = finalY - startY;
-            var duration = 600;
-            var startTime = null;
+    // ─────────────────────────────────────────────────────────────
+    // 7. BOUTONS SCROLL-TO + LOGO
+    // ─────────────────────────────────────────────────────────────
 
-            function ease(t) {
-                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-            }
-
-            function step(ts) {
-                if (!startTime) startTime = ts;
-                var p = Math.min((ts - startTime) / duration, 1);
-                window.scrollTo(0, startY + distance * ease(p));
-                if (p < 1) requestAnimationFrame(step);
-            }
-
-            requestAnimationFrame(step);
-        }
-    }
-
-    // ========================
-    // 5. SCROLL-TO BUTTONS (data-scroll-to)
-    // ========================
-    var scrollToButtons = document.querySelectorAll('[data-scroll-to]');
-    scrollToButtons.forEach(function (btn) {
+    document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            var target = document.getElementById(btn.getAttribute('data-scroll-to'));
-            if (target) {
-                snapAnimating = true;
-                header.classList.remove('hide-up');
-                headerHidden = false;
-                smoothScrollTo(target);
-                watchNavScrollEnd();
-            }
+            navigateTo(document.getElementById(btn.getAttribute('data-scroll-to')));
         });
     });
 
-    var logoBtn = document.getElementById('logoBtn');
     if (logoBtn) {
         logoBtn.addEventListener('click', function () {
+            lockHeader();
             if ('scrollBehavior' in document.documentElement.style) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 window.scrollTo(0, 0);
             }
+            watchNavScrollEnd();
         });
     }
 
-    // ========================
-    // 6. HEADER SCROLL BEHAVIOR
-    // ========================
-    var header = document.getElementById('header');
-    var floatingCta = document.getElementById('floatingCta');
-    var lastScrollY = 0;
-    var headerHidden = false;
-    var ticking = false;
-    var snapAnimating = false;
+
+    // ─────────────────────────────────────────────────────────────
+    // 8. HEADER SCROLL BEHAVIOR
+    // ─────────────────────────────────────────────────────────────
 
     function updateHeader() {
+        if (!header) { ticking = false; return; }
+
         var scroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Background header
-        if (scroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        header.classList.toggle('scrolled', scroll > SCROLL_THRESHOLD);
 
-        // Cache le hero fixe quand il est hors champ (performance)
         if (hero) {
             hero.style.visibility = scroll > window.innerHeight * 1.5 ? 'hidden' : 'visible';
         }
 
-        // Cache/montre le header selon direction du scroll
-        // Désactivé pendant le snap pour garder le header visible
-        if (!snapAnimating && scroll > 120) {
-            if (scroll > lastScrollY + 5 && !headerHidden) {
+        if (!snapAnimating && scroll > SCROLL_HIDE_MIN) {
+            if (scroll > lastScrollY + SCROLL_DELTA && !headerHidden) {
                 header.classList.add('hide-up');
                 headerHidden = true;
-            } else if (scroll < lastScrollY - 5 && headerHidden) {
+            } else if (scroll < lastScrollY - SCROLL_DELTA && headerHidden) {
                 header.classList.remove('hide-up');
                 headerHidden = false;
             }
-        } else if (snapAnimating || scroll <= 120) {
+        } else {
             header.classList.remove('hide-up');
             headerHidden = false;
         }
 
-        // Floating CTA (desktop)
         if (floatingCta) {
-            if (scroll > 500) {
-                floatingCta.classList.add('visible');
-            } else {
-                floatingCta.classList.remove('visible');
-            }
+            floatingCta.classList.toggle('visible', scroll > FLOATING_CTA_MIN);
         }
 
         lastScrollY = scroll;
-        ticking = false;
+        ticking     = false;
     }
 
     function onScroll() {
@@ -358,46 +361,42 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('touchmove', onScroll, { passive: true });
     updateHeader();
 
-    // ========================
-    // 7. HERO SNAP SCROLL
-    // Un scroll depuis le hero amène directement au contenu
-    // ========================
-    var heroWrap = document.querySelector('.hero-wrapper');
+
+    // ─────────────────────────────────────────────────────────────
+    // 9. HERO SNAP SCROLL
+    // ─────────────────────────────────────────────────────────────
 
     if (heroWrap) {
-
         function heroSnapTo(dest) {
             if (snapAnimating) return;
-            snapAnimating = true;
-            header.classList.remove('hide-up');
-            headerHidden = false;
+            lockHeader();
             window.scrollTo({ top: dest, behavior: 'smooth' });
-            setTimeout(function () {
-                snapAnimating = false;
-                lastScrollY = window.pageYOffset;
-            }, 1000);
+            watchNavScrollEnd();
         }
 
-        // Desktop : bloque le scroll natif dans la zone hero, snap direct
+        function getHeroSnapTarget() {
+            return heroWrap.offsetHeight - HEADER_HEIGHT;
+        }
+
+        // Desktop : snap via molette dans la zone hero
         window.addEventListener('wheel', function (e) {
             if (snapAnimating) return;
-            var scroll = window.pageYOffset;
-            var target = heroWrap.offsetHeight - 68;
-
-            if (scroll < target) {
+            var scroll     = window.pageYOffset;
+            var snapTarget = getHeroSnapTarget();
+            if (scroll < snapTarget) {
                 e.preventDefault();
-                if (e.deltaY > 0) heroSnapTo(target);
-                else if (e.deltaY < 0 && scroll > 0) heroSnapTo(0);
+                if (e.deltaY > 0)                    { heroSnapTo(snapTarget); }
+                else if (e.deltaY < 0 && scroll > 0) { heroSnapTo(0); }
             }
         }, { passive: false });
 
-        // Mobile : détecte le swipe et snap
+        // Mobile : snap via swipe
         var touchStartY = 0;
-        var inHeroZone = false;
+        var inHeroZone  = false;
 
         window.addEventListener('touchstart', function (e) {
             touchStartY = e.touches[0].clientY;
-            inHeroZone = window.pageYOffset < heroWrap.offsetHeight - 68;
+            inHeroZone  = window.pageYOffset < getHeroSnapTarget();
         }, { passive: true });
 
         window.addEventListener('touchmove', function (e) {
@@ -406,30 +405,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
         window.addEventListener('touchend', function (e) {
             if (!inHeroZone || snapAnimating) return;
-            var diff = touchStartY - e.changedTouches[0].clientY;
-            var target = heroWrap.offsetHeight - 68;
-            if (diff > 20) heroSnapTo(target);
-            else if (diff < -20 && window.pageYOffset > 0) heroSnapTo(0);
+            var diff       = touchStartY - e.changedTouches[0].clientY;
+            var snapTarget = getHeroSnapTarget();
+            if (diff > SWIPE_MIN)                              { heroSnapTo(snapTarget); }
+            else if (diff < -SWIPE_MIN && window.pageYOffset > 0) { heroSnapTo(0); }
             inHeroZone = false;
         }, { passive: true });
     }
 
-    // ========================
-    // 8. REFRESH SCROLLTRIGGER ON RESIZE
-    // ========================
+
+    // ─────────────────────────────────────────────────────────────
+    // 10. SCROLLTRIGGER REFRESH
+    // ─────────────────────────────────────────────────────────────
+
     if (typeof ScrollTrigger !== 'undefined') {
         var resizeTimer;
         window.addEventListener('resize', function () {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function () {
-                ScrollTrigger.refresh();
-            }, 250);
+            resizeTimer = setTimeout(function () { ScrollTrigger.refresh(); }, 250);
         }, { passive: true });
 
         window.addEventListener('orientationchange', function () {
-            setTimeout(function () {
-                ScrollTrigger.refresh();
-            }, 400);
+            setTimeout(function () { ScrollTrigger.refresh(); }, 400);
         }, { passive: true });
     }
 
