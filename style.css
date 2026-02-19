@@ -263,6 +263,14 @@ img { max-width: 100%; display: block; }
     touch-action: manipulation;
     display: block;
     padding: 4px 0;
+    transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+    -webkit-transition: color 0.25s var(--ease), -webkit-transform 0.25s var(--ease);
+}
+
+.nav-phone:hover {
+    color: var(--red-dark);
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
 }
 
 .nav-email {
@@ -851,9 +859,17 @@ img { max-width: 100%; display: block; }
     letter-spacing: 0.02em;
     min-height: 44px;
     touch-action: manipulation;
+    transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+    -webkit-transition: color 0.25s var(--ease), -webkit-transform 0.25s var(--ease);
 }
 
-.about-footer-phone:active { opacity: 0.7; }
+.about-footer-phone:hover {
+    color: var(--red-dark);
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+}
+
+.about-footer-phone:active { opacity: 0.7; transform: translateY(0); -webkit-transform: translateY(0); }
 
 /* ============================================
    CONTACT
