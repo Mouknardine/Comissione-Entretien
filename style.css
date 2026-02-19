@@ -413,10 +413,10 @@ body.menu-open .header-menu-btn {
     border-left: 3px solid var(--red);
     padding-left: 12px;
     opacity: 0;
-    transform: translateY(20px);
-    -webkit-transform: translateY(20px);
-    transition: opacity 0.8s var(--ease) 0.1s, transform 0.8s var(--ease) 0.1s;
-    -webkit-transition: opacity 0.8s var(--ease) 0.1s, -webkit-transform 0.8s var(--ease) 0.1s;
+    transform: translateY(10px);
+    -webkit-transform: translateY(10px);
+    transition: opacity 1s var(--ease) 0s, transform 1s var(--ease) 0s;
+    -webkit-transition: opacity 1s var(--ease) 0s, -webkit-transform 1s var(--ease) 0s;
 }
 
 .hero-eyebrow span {
@@ -447,19 +447,19 @@ body.menu-open .header-menu-btn {
 .hero-word {
     display: inline-block;
     color: #fff;
-    transform: translateY(110%);
-    -webkit-transform: translateY(110%);
+    transform: translateY(115%);
+    -webkit-transform: translateY(115%);
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    -webkit-transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        -webkit-transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+                        -webkit-transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Quand .hero-loaded est ajouté par JS : les mots apparaissent */
-.hero-loaded .hero-word:nth-child(1) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.1s; -webkit-transition-delay: 0.1s; }
-.hero-loaded .hero-word:nth-child(2) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.25s; -webkit-transition-delay: 0.25s; }
-.hero-loaded .hero-word:nth-child(3) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.4s; -webkit-transition-delay: 0.4s; }
+.hero-loaded .hero-word:nth-child(1) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.1s;  -webkit-transition-delay: 0.1s; }
+.hero-loaded .hero-word:nth-child(2) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.32s; -webkit-transition-delay: 0.32s; }
+.hero-loaded .hero-word:nth-child(3) { opacity: 1; transform: translateY(0); -webkit-transform: translateY(0); transition-delay: 0.54s; -webkit-transition-delay: 0.54s; }
 
 .hero-word--red { color: var(--red); }
 
