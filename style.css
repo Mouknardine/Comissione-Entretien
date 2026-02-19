@@ -672,10 +672,12 @@ body.menu-open .header-menu-btn {
 
 .service-card--reverse .service-info {
     justify-self: start;
+    order: 2;
 }
 
-.service-card--reverse .service-info   { order: 2; }
-.service-card--reverse .service-details { order: 1; }
+.service-card--reverse .service-details {
+    order: 1;
+}
 
 .service-badge {
     display: inline-block;
@@ -1299,12 +1301,16 @@ body.reveal-done .reveal {
     .service-info    {
         padding: clamp(24px, 5vw, 40px);
         border-top: 1px solid rgba(0,0,0,0.06);
+        max-width: 100%;
+        justify-self: stretch;
     }
     .service-details {
         padding: clamp(24px, 5vw, 40px);
         border-left: none !important;
         border-right: none !important;
         border-top: 1px solid rgba(0,0,0,0.05);
+        max-width: 100%;
+        justify-self: stretch;
     }
     .service-number { font-size: 28px; }
     .service-icon { width: 16px; height: 16px; }
@@ -1354,6 +1360,7 @@ body.reveal-done .reveal {
 /* ── Pas de survol (écran tactile) — désactive tous les hovers ── */
 @media (hover: none) {
     .nav-link:hover,
+    .nav-phone:hover,
     .header-phone:hover,
     .hero-cta-secondary:hover,
     .service-cta--red:hover,

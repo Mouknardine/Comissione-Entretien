@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var SNAP_RELEASE_DELAY = 200;  // debounce fin de scroll (ms)
     var SNAP_FAILSAFE      = 3000; // libération forcée de snapAnimating (ms)
     var MENU_CLOSE_DELAY   = 350;  // délai après fermeture menu avant scroll (ms)
-    var HERO_ENTER_DELAY   = 80;   // délai animation entrée hero (ms)
 
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
