@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var SCROLL_HIDE_MIN  = 120;
     var SCROLL_DELTA     = 5;
     var FLOATING_CTA_MIN = 500;
-    var MENU_CLOSE_DELAY = 400;   // aligné sur la transition CSS du nav-overlay (0.4s)
+    var MENU_CLOSE_DELAY = 400;
 
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -21,12 +21,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var floatingCta = document.getElementById('floatingCta');
     var hero        = document.querySelector('.hero');
 
+    // Pré-cache les références GSAP pour éviter querySelectorAll à chaque ouverture
+    var navLinks       = document.querySelectorAll('#navOverlay .nav-link');
+    var navContactInfo = document.querySelector('#navOverlay .nav-contact-info');
+
     var lastScrollY      = 0;
     var headerHidden     = false;
     var ticking          = false;
     var menuOpen         = false;
     var scrollStopTimer  = null;
-    var savedScrollY     = 0;     // sauvegarde la position avant de fixer le body
+    var savedScrollY     = 0;
 
 
     // ─────────────────────────────────────────────────────────────
@@ -39,9 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setVh();
     window.addEventListener('resize', setVh, { passive: true });
+
+    // Annule les timers précédents avant d'en créer de nouveaux
+    var vhTimer1 = null, vhTimer2 = null;
     window.addEventListener('orientationchange', function () {
-        setTimeout(setVh, 100);
-        setTimeout(setVh, 300);
+        clearTimeout(vhTimer1);
+        clearTimeout(vhTimer2);
+        vhTimer1 = setTimeout(setVh, 100);
+        vhTimer2 = setTimeout(setVh, 300);
     }, { passive: true });
 
 
@@ -49,9 +58,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2. REVEAL — IntersectionObserver
     // ─────────────────────────────────────────────────────────────
 
-    var revealEls = document.querySelectorAll('.reveal');
+    var revealEls        = document.querySelectorAll('.reveal');
+    var revealCount      = 0;
+    var revealFallback   = null;
 
     function showAllReveals() {
+        clearTimeout(revealFallback);
         document.body.classList.add('reveal-done');
         revealEls.forEach(function (el) { el.classList.add('revealed'); });
     }
@@ -64,22 +76,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('revealed');
                     revealObserver.unobserve(entry.target);
+                    revealCount++;
+                    if (revealCount >= revealEls.length) {
+                        clearTimeout(revealFallback);
+                        document.body.classList.add('reveal-done');
+                    }
                 }
             });
         }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
         revealEls.forEach(function (el) { revealObserver.observe(el); });
-        setTimeout(showAllReveals, 3000);
+        revealFallback = setTimeout(showAllReveals, 3000);
     }
 
 
     // ─────────────────────────────────────────────────────────────
-    // 3. HERO ENTRANCE
+    // 3. HERO ENTRANCE + will-change libéré après animation
     // ─────────────────────────────────────────────────────────────
+
+    var heroWords = document.querySelectorAll('.hero-word');
 
     requestAnimationFrame(function () {
         requestAnimationFrame(function () {
             if (hero) hero.classList.add('hero-loaded');
+            // Libère les couches GPU des hero-words après la fin de la dernière transition
+            setTimeout(function () {
+                heroWords.forEach(function (w) { w.style.willChange = 'auto'; });
+            }, 1200);
         });
     });
 
@@ -90,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function smoothScrollTo(target) {
         if (!target) return;
-        var finalY = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - HEADER_HEIGHT);
+        var finalY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT);
         window.scrollTo({ top: finalY, behavior: 'smooth' });
     }
 
@@ -100,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ─────────────────────────────────────────────────────────────
 
     function openMenu() {
-        menuOpen    = true;
-        savedScrollY = window.pageYOffset;  // sauvegarde avant position: fixed
+        menuOpen     = true;
+        savedScrollY = window.scrollY;
 
         if (menuToggle) {
             menuToggle.classList.add('active');
@@ -111,24 +134,33 @@ document.addEventListener('DOMContentLoaded', function () {
             navOverlay.classList.add('open');
             navOverlay.setAttribute('aria-hidden', 'false');
         }
-
-        // Fige le body sans faire sauter la page
         document.body.classList.add('menu-open');
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top      = '-' + savedScrollY + 'px';
-        document.body.style.width    = '100%';
 
-        if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
-            gsap.fromTo('.nav-link',
-                { y: 60, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.05 }
-            );
-            gsap.fromTo('.nav-contact-info',
-                { y: 20, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.38 }
-            );
-        }
+        // Toutes les mutations body dans un seul rAF pour éviter les reflows en cascade
+        requestAnimationFrame(function () {
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top      = '-' + savedScrollY + 'px';
+            document.body.style.width    = '100%';
+
+            // GSAP lancé dans le frame suivant, layout déjà validé
+            requestAnimationFrame(function () {
+                if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+                    gsap.killTweensOf(navLinks);
+                    gsap.killTweensOf(navContactInfo);
+                    gsap.fromTo(navLinks,
+                        { y: 60, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out', delay: 0.05 }
+                    );
+                    if (navContactInfo) {
+                        gsap.fromTo(navContactInfo,
+                            { y: 20, opacity: 0 },
+                            { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.38 }
+                        );
+                    }
+                }
+            });
+        });
     }
 
     function closeMenu() {
@@ -143,13 +175,16 @@ document.addEventListener('DOMContentLoaded', function () {
             navOverlay.setAttribute('aria-hidden', 'true');
         }
 
-        // Restaure le scroll exactement où on était
-        document.body.classList.remove('menu-open');
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top      = '';
-        document.body.style.width    = '';
-        window.scrollTo(0, savedScrollY);
+        // Attend la fin de la transition CSS du nav-overlay (0.4s) avant de libérer le body
+        // Evite le flash de la page qui apparaît pendant que le menu est encore visible
+        setTimeout(function () {
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top      = '';
+            document.body.style.width    = '';
+            window.scrollTo(0, savedScrollY);
+        }, 410);
     }
 
     if (menuToggle) {
@@ -168,8 +203,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var target  = document.querySelector(link.getAttribute('href'));
             var wasOpen = menuOpen;
             if (menuOpen) { closeMenu(); }
-            // Attend que le menu ait fini de disparaître avant de scroller
-            setTimeout(function () { smoothScrollTo(target); }, wasOpen ? MENU_CLOSE_DELAY : 0);
+            // Attend que le body soit restauré (closeMenu attend 410ms) + marge
+            setTimeout(function () { smoothScrollTo(target); }, wasOpen ? MENU_CLOSE_DELAY + 50 : 0);
         });
     });
 
@@ -201,8 +236,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateHeader() {
         if (!header) { ticking = false; return; }
+        // Ne rien faire si le menu est ouvert (évite les mutations DOM parasites)
+        if (menuOpen) { ticking = false; return; }
 
-        var scroll = window.pageYOffset || document.documentElement.scrollTop;
+        var scroll = window.scrollY;
 
         header.classList.toggle('scrolled', scroll > SCROLL_THRESHOLD);
 
@@ -228,10 +265,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', function () {
-        // Navbar réapparaît 300ms après l'arrêt du scroll (momentum inclus)
+        // Guard : ignorer les scroll events quand le menu est ouvert
+        if (menuOpen) return;
+
         clearTimeout(scrollStopTimer);
         scrollStopTimer = setTimeout(function () {
-            if (header && headerHidden) {
+            if (header && headerHidden && !menuOpen) {
                 header.classList.remove('hide-up');
                 headerHidden = false;
             }

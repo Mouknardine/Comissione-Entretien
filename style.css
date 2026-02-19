@@ -80,7 +80,9 @@ img { max-width: 100%; display: block; }
     align-items: center;
     padding: 0 clamp(20px, 4vw, 60px);
     height: 68px;
-    will-change: transform;
+    /* GPU layer permanent justifié : le header se translate continuellement au scroll */
+    transform: translateZ(0);
+    isolation: isolate;
     transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.4s var(--ease);
     -webkit-transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease), -webkit-transform 0.4s var(--ease);
 }
@@ -199,12 +201,7 @@ img { max-width: 100%; display: block; }
     -webkit-transform: translateY(-4px) rotate(-45deg);
 }
 
-/* Menu ouvert : le header laisse passer les clics (sinon il bloque la croix de fermeture) */
-body.menu-open .header {
-    pointer-events: none;
-}
-
-/* Menu ouvert : cache le hamburger (croix blanche) — seule la croix noire reste visible */
+/* Menu ouvert : seul le hamburger disparaît, les autres éléments du header restent accessibles */
 body.menu-open .header-menu-btn {
     opacity: 0;
     pointer-events: none;
@@ -234,6 +231,7 @@ body.menu-open .header-menu-btn {
     pointer-events: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     transition: opacity 0.4s var(--ease);
     -webkit-transition: opacity 0.4s var(--ease);
 }
@@ -247,8 +245,8 @@ body.menu-open .header-menu-btn {
     position: absolute;
     top: 24px;
     right: 24px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: none;
     border: none;
     cursor: pointer;
@@ -259,6 +257,7 @@ body.menu-open .header-menu-btn {
     justify-content: center;
     gap: 0;
     z-index: 10;
+    touch-action: manipulation;
 }
 
 .nav-close-line {
@@ -370,6 +369,8 @@ body.menu-open .header-menu-btn {
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
+    /* Isole le hero sur sa propre couche GPU */
+    transform: translateZ(0);
 }
 
 .hero-bg-img {
@@ -458,7 +459,7 @@ body.menu-open .header-menu-btn {
     color: #fff;
     transform: translateY(110%);
     -webkit-transform: translateY(110%);
-    will-change: transform;
+    /* will-change retiré du CSS : géré dynamiquement par JS (libéré après animation) */
     transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     -webkit-transition: -webkit-transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
