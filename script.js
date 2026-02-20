@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const header      = document.getElementById('header');
     const menuToggle  = document.getElementById('menuToggle');
     const navOverlay  = document.getElementById('navOverlay');
-    const navClose    = document.getElementById('navClose');
     const logoBtn     = document.getElementById('logoBtn');
     const floatingCta = document.getElementById('floatingCta');
     const hero        = document.querySelector('.hero');
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── État ─────────────────────────────────────────────────────
     let ticking         = false;
     let menuOpen        = false;
-    let scrollStopTimer = null;
     let savedScrollY    = 0;
     let restoringScroll = false; // bloque le scroll listener pendant la restauration
 
@@ -41,25 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. VIEWPORT HEIGHT — iOS Safari
     // ─────────────────────────────────────────────────────────────
 
-    // Fixe la hauteur du hero-wrapper une seule fois (évite les rollbacks iOS Safari)
-    if (heroWrapper) {
-        heroWrapper.style.height = window.innerHeight + 'px';
-    }
-
     function setVh() {
         document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
     }
 
+    // Met à jour la hauteur du hero-wrapper (évite les rollbacks iOS Safari)
+    function updateHeroHeight() {
+        if (heroWrapper) heroWrapper.style.height = window.innerHeight + 'px';
+    }
+
+    updateHeroHeight();
     setVh();
-    window.addEventListener('resize', setVh, { passive: true });
+    window.addEventListener('resize', () => { setVh(); updateHeroHeight(); }, { passive: true });
 
     let vhTimer1 = null;
     let vhTimer2 = null;
     window.addEventListener('orientationchange', () => {
         clearTimeout(vhTimer1);
         clearTimeout(vhTimer2);
-        vhTimer1 = setTimeout(setVh, 100);
-        vhTimer2 = setTimeout(setVh, 300);
+        vhTimer1 = setTimeout(() => { setVh(); updateHeroHeight(); }, 100);
+        vhTimer2 = setTimeout(() => { setVh(); updateHeroHeight(); }, 300);
     }, { passive: true });
 
 
@@ -191,8 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle?.addEventListener('click', () => {
         if (menuOpen) { closeMenu(); } else { openMenu(); }
     });
-
-    navClose?.addEventListener('click', closeMenu);
 
     document.querySelectorAll('[data-nav-link]').forEach(link => {
         link.addEventListener('click', e => {
