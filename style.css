@@ -89,7 +89,7 @@ img { max-width: 100%; display: block; }
 }
 
 .header.scrolled {
-    background: rgba(255,255,255,0.98);
+    background: #ffffff;
     box-shadow: 0 1px 0 rgba(0,0,0,0.07);
 }
 
@@ -97,9 +97,7 @@ img { max-width: 100%; display: block; }
 @media (min-width: 769px) {
     @supports (backdrop-filter: blur(1px)) {
         .header.scrolled {
-            background: rgba(255,255,255,0.92);
-            -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
+            background: #ffffff;
         }
     }
 }
@@ -1294,7 +1292,7 @@ body.reveal-done .reveal {
 
     /* Header : toujours opaque et fixe en haut sur mobile */
     .header {
-        background: rgba(255,255,255,0.98);
+        background: #ffffff;
         box-shadow: 0 1px 0 rgba(0,0,0,0.07);
     }
     .logo-name { color: var(--black); }
