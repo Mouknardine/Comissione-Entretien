@@ -2,44 +2,46 @@
  * Commissione Entretien — script.js
  */
 
-document.addEventListener('DOMContentLoaded', function () {
+'use strict';
 
-    var HEADER_HEIGHT    = 68;
-    var SCROLL_THRESHOLD = 50;
-    var SCROLL_HIDE_MIN  = 120;
-    var SCROLL_DELTA     = 5;
-    var FLOATING_CTA_MIN = 500;
-    var MENU_CLOSE_DELAY = 400;
+document.addEventListener('DOMContentLoaded', () => {
 
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // ── Constantes ───────────────────────────────────────────────
+    const HEADER_HEIGHT    = 68;
+    const SCROLL_THRESHOLD = 50;
+    const FLOATING_CTA_MIN = 500;
+    const MENU_CLOSE_DELAY = 400; // durée transition CSS nav-overlay (0.4s)
+    const WILL_CHANGE_TTL  = 1200; // durée totale animation hero-words (ms)
 
-    var header      = document.getElementById('header');
-    var menuToggle  = document.getElementById('menuToggle');
-    var navOverlay  = document.getElementById('navOverlay');
-    var navClose    = document.getElementById('navClose');
-    var logoBtn     = document.getElementById('logoBtn');
-    var floatingCta = document.getElementById('floatingCta');
-    var hero        = document.querySelector('.hero');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Pré-cache les références GSAP pour éviter querySelectorAll à chaque ouverture
-    var navLinks       = document.querySelectorAll('#navOverlay .nav-link');
-    var navContactInfo = document.querySelector('#navOverlay .nav-contact-info');
+    // ── Références DOM ───────────────────────────────────────────
+    const header      = document.getElementById('header');
+    const menuToggle  = document.getElementById('menuToggle');
+    const navOverlay  = document.getElementById('navOverlay');
+    const navClose    = document.getElementById('navClose');
+    const logoBtn     = document.getElementById('logoBtn');
+    const floatingCta = document.getElementById('floatingCta');
+    const hero        = document.querySelector('.hero');
+    const heroWrapper = document.querySelector('.hero-wrapper');
+    const heroWords   = document.querySelectorAll('.hero-word');
 
-    var lastScrollY      = 0;
-    var headerHidden     = false;
-    var ticking          = false;
-    var menuOpen         = false;
-    var scrollStopTimer  = null;
-    var savedScrollY     = 0;
-    var restoringScroll  = false;  // bloque le scroll listener pendant la restauration du scroll
+    // Pré-cache pour éviter querySelectorAll à chaque ouverture du menu
+    const navLinks       = document.querySelectorAll('#navOverlay .nav-link');
+    const navContactInfo = document.querySelector('#navOverlay .nav-contact-info');
 
+    // ── État ─────────────────────────────────────────────────────
+    let ticking         = false;
+    let menuOpen        = false;
+    let scrollStopTimer = null;
+    let savedScrollY    = 0;
+    let restoringScroll = false; // bloque le scroll listener pendant la restauration
 
     // ─────────────────────────────────────────────────────────────
     // 1. VIEWPORT HEIGHT — iOS Safari
     // ─────────────────────────────────────────────────────────────
 
-    // Fixe la hauteur du hero-wrapper une seule fois au chargement (évite les rollbacks de scroll sur iOS Safari)
-    var heroWrapper = document.querySelector('.hero-wrapper');
+    // Fixe la hauteur du hero-wrapper une seule fois (évite les rollbacks iOS Safari)
     if (heroWrapper) {
         heroWrapper.style.height = window.innerHeight + 'px';
     }
@@ -51,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
     setVh();
     window.addEventListener('resize', setVh, { passive: true });
 
-    // Annule les timers précédents avant d'en créer de nouveaux
-    var vhTimer1 = null, vhTimer2 = null;
-    window.addEventListener('orientationchange', function () {
+    let vhTimer1 = null;
+    let vhTimer2 = null;
+    window.addEventListener('orientationchange', () => {
         clearTimeout(vhTimer1);
         clearTimeout(vhTimer2);
         vhTimer1 = setTimeout(setVh, 100);
@@ -65,51 +67,49 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2. REVEAL — IntersectionObserver
     // ─────────────────────────────────────────────────────────────
 
-    var revealEls        = document.querySelectorAll('.reveal');
-    var revealCount      = 0;
-    var revealFallback   = null;
+    const revealEls = document.querySelectorAll('.reveal');
+    let revealCount    = 0;
+    let revealFallback = null;
 
     function showAllReveals() {
         clearTimeout(revealFallback);
         document.body.classList.add('reveal-done');
-        revealEls.forEach(function (el) { el.classList.add('revealed'); });
+        revealEls.forEach(el => el.classList.add('revealed'));
     }
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
         showAllReveals();
     } else {
-        var revealObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    revealObserver.unobserve(entry.target);
-                    revealCount++;
-                    if (revealCount >= revealEls.length) {
-                        clearTimeout(revealFallback);
-                        document.body.classList.add('reveal-done');
-                    }
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+                revealCount++;
+                if (revealCount >= revealEls.length) {
+                    clearTimeout(revealFallback);
+                    document.body.classList.add('reveal-done');
                 }
             });
         }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
-        revealEls.forEach(function (el) { revealObserver.observe(el); });
+        revealEls.forEach(el => revealObserver.observe(el));
+        // Fallback de sécurité si IntersectionObserver ne répond pas
         revealFallback = setTimeout(showAllReveals, 3000);
     }
 
 
     // ─────────────────────────────────────────────────────────────
-    // 3. HERO ENTRANCE + will-change libéré après animation
+    // 3. HERO ENTRANCE + libération will-change après animation
     // ─────────────────────────────────────────────────────────────
 
-    var heroWords = document.querySelectorAll('.hero-word');
-
-    requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
             if (hero) hero.classList.add('hero-loaded');
             // Libère les couches GPU des hero-words après la fin de la dernière transition
-            setTimeout(function () {
-                heroWords.forEach(function (w) { w.style.willChange = 'auto'; });
-            }, 1200);
+            setTimeout(() => {
+                heroWords.forEach(w => { w.style.willChange = 'auto'; });
+            }, WILL_CHANGE_TTL);
         });
     });
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function smoothScrollTo(target) {
         if (!target) return;
-        var finalY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT);
+        const finalY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT);
         window.scrollTo({ top: finalY, behavior: 'smooth' });
     }
 
@@ -133,25 +133,21 @@ document.addEventListener('DOMContentLoaded', function () {
         menuOpen     = true;
         savedScrollY = window.scrollY;
 
-        if (menuToggle) {
-            menuToggle.classList.add('active');
-            menuToggle.setAttribute('aria-expanded', 'true');
-        }
-        if (navOverlay) {
-            navOverlay.classList.add('open');
-            navOverlay.setAttribute('aria-hidden', 'false');
-        }
+        menuToggle?.classList.add('active');
+        menuToggle?.setAttribute('aria-expanded', 'true');
+        navOverlay?.classList.add('open');
+        navOverlay?.setAttribute('aria-hidden', 'false');
         document.body.classList.add('menu-open');
 
         // Toutes les mutations body dans un seul rAF pour éviter les reflows en cascade
-        requestAnimationFrame(function () {
+        requestAnimationFrame(() => {
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
-            document.body.style.top      = '-' + savedScrollY + 'px';
+            document.body.style.top      = `-${savedScrollY}px`;
             document.body.style.width    = '100%';
 
             // GSAP lancé dans le frame suivant, layout déjà validé
-            requestAnimationFrame(function () {
+            requestAnimationFrame(() => {
                 if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
                     gsap.killTweensOf(navLinks);
                     gsap.killTweensOf(navContactInfo);
@@ -173,18 +169,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeMenu() {
         menuOpen = false;
 
-        if (menuToggle) {
-            menuToggle.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-        if (navOverlay) {
-            navOverlay.classList.remove('open');
-            navOverlay.setAttribute('aria-hidden', 'true');
-        }
+        menuToggle?.classList.remove('active');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        navOverlay?.classList.remove('open');
+        navOverlay?.setAttribute('aria-hidden', 'true');
 
-        // Attend la fin de la transition CSS du nav-overlay (0.4s) avant de libérer le body
-        // Evite le flash de la page qui apparaît pendant que le menu est encore visible
-        setTimeout(function () {
+        // Attend la fin de la transition CSS du nav-overlay avant de libérer le body
+        // (+10ms de marge pour éviter tout flash)
+        setTimeout(() => {
             document.body.classList.remove('menu-open');
             document.body.style.overflow = '';
             document.body.style.position = '';
@@ -192,37 +184,34 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.width    = '';
             restoringScroll = true;
             window.scrollTo(0, savedScrollY);
-            setTimeout(function () { restoringScroll = false; }, 200);
-        }, 410);
+            setTimeout(() => { restoringScroll = false; }, 200);
+        }, MENU_CLOSE_DELAY + 10);
     }
 
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function () {
-            if (menuOpen) { closeMenu(); } else { openMenu(); }
-        });
-    }
+    menuToggle?.addEventListener('click', () => {
+        if (menuOpen) { closeMenu(); } else { openMenu(); }
+    });
 
-    if (navClose) {
-        navClose.addEventListener('click', closeMenu);
-    }
+    navClose?.addEventListener('click', closeMenu);
 
-    document.querySelectorAll('[data-nav-link]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
+    document.querySelectorAll('[data-nav-link]').forEach(link => {
+        link.addEventListener('click', e => {
             e.preventDefault();
-            var href    = link.getAttribute('href');
-            var target  = (href === '#home') ? null : document.querySelector(href);
-            var wasOpen = menuOpen;
-            if (menuOpen) { closeMenu(); }
-            // Attend que le body soit restauré (closeMenu attend 410ms) + marge
-            setTimeout(function () {
+            const href    = link.getAttribute('href');
+            if (!href) return;
+            const target  = href === '#home' ? null : document.querySelector(href);
+            const wasOpen = menuOpen;
+            if (menuOpen) closeMenu();
+            // Attend que le body soit restauré (closeMenu attend MENU_CLOSE_DELAY + 10ms) + marge
+            setTimeout(() => {
                 if (!target) { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-                else { smoothScrollTo(target); }
+                else         { smoothScrollTo(target); }
             }, wasOpen ? MENU_CLOSE_DELAY + 50 : 0);
         });
     });
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && menuOpen) { closeMenu(); }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && menuOpen) closeMenu();
     });
 
 
@@ -230,17 +219,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // 6. BOUTONS SCROLL-TO + LOGO
     // ─────────────────────────────────────────────────────────────
 
-    document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
+    document.querySelectorAll('[data-scroll-to]').forEach(btn => {
+        btn.addEventListener('click', () => {
             smoothScrollTo(document.getElementById(btn.getAttribute('data-scroll-to')));
         });
     });
 
-    if (logoBtn) {
-        logoBtn.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
+    logoBtn?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
 
     // ─────────────────────────────────────────────────────────────
@@ -252,42 +239,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // Ne rien faire si le menu est ouvert (évite les mutations DOM parasites)
         if (menuOpen) { ticking = false; return; }
 
-        var scroll = window.scrollY;
+        const scroll = window.scrollY;
 
         header.classList.toggle('scrolled', scroll > SCROLL_THRESHOLD);
 
-        if (scroll > SCROLL_HIDE_MIN) {
-            if (scroll > lastScrollY + SCROLL_DELTA && !headerHidden) {
-                header.classList.add('hide-up');
-                headerHidden = true;
-            } else if (scroll < lastScrollY - SCROLL_DELTA && headerHidden) {
-                header.classList.remove('hide-up');
-                headerHidden = false;
-            }
-        } else {
-            header.classList.remove('hide-up');
-            headerHidden = false;
-        }
+        floatingCta?.classList.toggle('visible', scroll > FLOATING_CTA_MIN);
 
-        if (floatingCta) {
-            floatingCta.classList.toggle('visible', scroll > FLOATING_CTA_MIN);
-        }
-
-        lastScrollY = scroll;
-        ticking     = false;
+        ticking = false;
     }
 
-    window.addEventListener('scroll', function () {
-        // Guard : ignorer les scroll events quand le menu est ouvert ou pendant la restauration du scroll
+    window.addEventListener('scroll', () => {
+        // Guard : ignorer les scroll events quand le menu est ouvert ou pendant la restauration
         if (menuOpen || restoringScroll) return;
-
-        clearTimeout(scrollStopTimer);
-        scrollStopTimer = setTimeout(function () {
-            if (header && headerHidden && !menuOpen) {
-                header.classList.remove('hide-up');
-                headerHidden = false;
-            }
-        }, 500);
 
         if (!ticking) {
             requestAnimationFrame(updateHeader);
