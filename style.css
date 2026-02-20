@@ -28,6 +28,7 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    overflow-x: hidden; /* fix position:fixed sur iOS Safari quand body a overflow-x:hidden */
 }
 
 body {
@@ -448,8 +449,8 @@ body.menu-open .header-menu-btn {
 .hero-line {
     display: block;
     overflow: hidden;
-    padding-bottom: 0.15em;
-    margin-bottom: -0.15em;
+    padding-bottom: 0.3em;
+    margin-bottom: -0.3em;
 }
 
 .hero-word {
@@ -1303,7 +1304,16 @@ body.reveal-done .reveal {
    ============================================ */
 @media (max-width: 768px) {
 
-    /* Header : cache le bouton téléphone, garde le hamburger */
+    /* Header : toujours opaque et fixe en haut sur mobile */
+    .header {
+        background: rgba(255,255,255,0.98);
+        box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+    }
+    .logo-name { color: var(--black); }
+    .logo-sub  { color: #888; }
+    .menu-line { background: var(--black); }
+
+    /* Cache le bouton téléphone, garde le hamburger */
     .header-phone { display: none; }
 
     /* Hero */
