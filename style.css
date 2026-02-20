@@ -200,10 +200,13 @@ img { max-width: 100%; display: block; }
     -webkit-transform: translateY(-4px) rotate(-45deg);
 }
 
-/* Menu ouvert : seul le hamburger disparaît, les autres éléments du header restent accessibles */
+/* Menu ouvert : le hamburger devient une croix noire visible pour fermer */
 body.menu-open .header-menu-btn {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+body.menu-open .menu-line {
+    background: var(--black);
 }
 
 /* Menu ouvert sur desktop : cache le bouton "Urgence 24/7" */
@@ -241,22 +244,7 @@ body.menu-open .header-menu-btn {
 }
 
 .nav-close-btn {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    z-index: 10;
-    touch-action: manipulation;
+    display: none; /* Le bouton hamburger du header fait office de croix de fermeture */
 }
 
 .nav-close-line {
