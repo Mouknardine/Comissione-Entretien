@@ -1,0 +1,342 @@
+/* ==========================================================================
+   PAGE CONTACT — coordonnées en typographie, informations en rangées.
+   Aucune carte : le contenu est porté par la hiérarchie et des filets.
+   ========================================================================== */
+
+/* --- Ouverture ---------------------------------------------------------------- */
+
+/* Bande sombre sur photo, comme le hero de l'accueil : la page de contact
+   commence par une présence, pas par une page beige. */
+.contact-hero {
+    position: relative;
+    padding: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem)) 0 clamp(3rem, 6vw, 4.5rem);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+}
+
+.contact-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 58%;
+}
+
+.contact-hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to right, rgba(14, 12, 11, 0.95) 0%, rgba(14, 12, 11, 0.8) 52%, rgba(14, 12, 11, 0.6) 100%),
+        linear-gradient(to top, rgba(14, 12, 11, 0.7) 0%, rgba(14, 12, 11, 0.15) 60%);
+}
+
+.contact-hero > .container {
+    position: relative;
+}
+
+.contact-hero .page-eyebrow {
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.contact-hero .page-eyebrow .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.7);
+    animation: pulse 2.4s infinite;
+}
+
+.contact-title {
+    margin-top: 1.2rem;
+    font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    max-width: 17ch;
+}
+
+.contact-lead {
+    margin-top: 1.4rem;
+    max-width: 54ch;
+    font-size: var(--step-lead);
+    color: rgba(255, 255, 255, 0.74);
+}
+
+/* Le numéro reprend le geste de la bande urgence de l'accueil */
+.contact-number {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 4.5vw, 3.2rem);
+    padding-block: clamp(1.2rem, 2.8vw, 1.9rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 1;
+    transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.contact-number svg {
+    flex-shrink: 0;
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.contact-number:hover {
+    color: var(--accent);
+    border-color: rgba(200, 16, 46, 0.55);
+}
+
+.contact-number:hover svg {
+    color: var(--accent);
+    transform: translateX(12px);
+}
+
+/* Trois accès rapides sous le numéro */
+.contact-quick {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.quick {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    transition: color 0.25s var(--ease);
+}
+
+.quick:last-child {
+    border-bottom: 0;
+}
+
+.quick-label {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.quick-value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.quick-value svg {
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translate(-3px, 3px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.quick--static {
+    color: rgba(255, 255, 255, 0.74);
+}
+
+@media (hover: hover) {
+
+    a.quick:hover {
+        color: var(--accent);
+    }
+
+    a.quick:hover .quick-label {
+        color: var(--accent);
+    }
+
+    a.quick:hover .quick-value svg {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@media (min-width: 820px) {
+
+    .contact-quick {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .quick {
+        border-bottom: 0;
+        padding-top: 1.2rem;
+    }
+}
+
+/* Fil d'Ariane sur fond sombre */
+.breadcrumb--light {
+    padding: 0 0 clamp(2rem, 5vw, 3.4rem);
+}
+
+.breadcrumb--light ol {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.breadcrumb--light a:hover {
+    color: var(--paper);
+}
+
+.breadcrumb--light li + li::before {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumb--light [aria-current="page"] {
+    color: var(--paper);
+}
+
+/* --- Rangées d'information --------------------------------------------------- */
+
+.rows > div {
+    padding-block: 1.9rem;
+    border-top: 1px solid var(--grey-200);
+}
+
+.rows > div:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.rows h3 {
+    font-size: 1.06rem;
+}
+
+.rows > div > p {
+    margin-top: 0.7rem;
+    max-width: 56ch;
+    font-size: 0.97rem;
+    color: var(--grey-600);
+}
+
+.rows ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 1rem;
+}
+
+.rows ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.97rem;
+    color: var(--grey-600);
+}
+
+.rows ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.rows ul li a {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.rows ul li a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Horaires en deux colonnes alignées */
+.hours {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.hours > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.3rem 1.5rem;
+    padding-block: 0.6rem;
+    border-bottom: 1px dashed var(--grey-200);
+}
+
+.hours > div:last-child {
+    border-bottom: 0;
+}
+
+.hours dt {
+    font-size: 0.97rem;
+    color: var(--grey-600);
+}
+
+.hours dd {
+    margin: 0;
+    font-size: 0.97rem;
+    font-weight: 700;
+}
+
+/* --- Communes ---------------------------------------------------------------- */
+
+.communes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+}
+
+.communes li {
+    padding: 0.42rem 0.85rem;
+    border: 1px solid var(--grey-200);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--grey-600);
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+        transform 0.25s var(--ease);
+}
+
+.communes li:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+}
+
+/* --- Carte -------------------------------------------------------------------- */
+
+.map {
+    position: relative;
+    margin-top: 2.4rem;
+    overflow: hidden;
+    border: 1px solid var(--grey-200);
+    border-radius: var(--radius-lg);
+    background: var(--grey-100);
+}
+
+.map iframe {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 42vw, 460px);
+    border: 0;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.5s var(--ease);
+}
+
+.map:hover iframe {
+    filter: none;
+}
+
+.map-note {
+    margin-top: 1rem;
+    font-size: var(--step-small);
+    color: var(--grey-500);
+}

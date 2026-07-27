@@ -1,0 +1,702 @@
+/* ==========================================================================
+   ACCUEIL — hero, prestations, chiffres, urgence, déroulé, réalisations,
+   à propos, zone, contact
+   ========================================================================== */
+
+/* --- Hero ---------------------------------------------------------------- */
+
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: calc(var(--header-h) + 3rem) var(--gutter) clamp(2.5rem, 6vw, 5rem);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+    /* Respiration lente et continue : le fond n'est jamais figé. */
+    animation: hero-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+    from {
+        transform: scale(1) translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: scale(1.09) translate3d(-1.4%, -1.2%, 0);
+    }
+}
+
+.hero-bg.is-missing {
+    visibility: hidden;
+}
+
+/* Assez sombre pour que le titre reste lisible, assez transparent pour que
+   la photo de fond vive encore. */
+.hero-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(14, 12, 11, 0.92) 0%, rgba(14, 12, 11, 0.55) 46%, rgba(14, 12, 11, 0.2) 100%),
+        linear-gradient(to right, rgba(14, 12, 11, 0.62) 0%, rgba(14, 12, 11, 0) 68%);
+}
+
+/* Filet rouge en bas de hero : couture entre le visuel et la suite */
+.hero-rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--accent);
+}
+
+.hero-inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+}
+
+@media (min-width: 1000px) {
+    .hero-inner {
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 4.5rem;
+        align-items: end;
+    }
+}
+
+/* --- Entrée en cascade au chargement -------------------------------------- */
+
+@keyframes hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+}
+
+/* Le titre ne passe jamais par l'opacité 0 : c'est l'élément LCP, il doit être
+   peint immédiatement. Seule sa position est animée. */
+@keyframes hero-rise {
+    from {
+        transform: translateY(26px);
+    }
+}
+
+.hero-eyebrow {
+    animation: hero-in 0.6s var(--ease) 0.05s backwards;
+}
+
+.hero-title {
+    animation: hero-rise 0.8s var(--ease) backwards;
+}
+
+.hero-sub {
+    animation: hero-in 0.7s var(--ease) 0.26s backwards;
+}
+
+.hero-ctas {
+    animation: hero-in 0.7s var(--ease) 0.4s backwards;
+}
+
+.hero-sheet {
+    animation: hero-in 0.8s var(--ease) 0.52s backwards;
+}
+
+/* --- Colonne de gauche ------------------------------------------------------ */
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    backdrop-filter: blur(6px);
+}
+
+.hero-eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.7);
+    animation: pulse 2.4s infinite;
+}
+
+.hero-title {
+    font-size: clamp(2.4rem, 1.5rem + 3.5vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    margin-top: 1.5rem;
+    max-width: 17ch;
+    margin-left: -0.04em;
+}
+
+.hero-sub {
+    margin-top: 1.4rem;
+    max-width: 46ch;
+    font-size: var(--step-lead);
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.2rem;
+}
+
+/* --- Fiche technique -------------------------------------------------------- */
+
+.hero-sheet {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 0.4rem;
+}
+
+.hero-sheet dl {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-sheet div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.72rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-sheet dt,
+.hero-sheet dd {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+}
+
+.hero-sheet dt {
+    color: rgba(255, 255, 255, 0.58);
+    white-space: nowrap;
+}
+
+.hero-sheet dd {
+    margin: 0;
+    text-align: right;
+    color: var(--paper);
+}
+
+.hero-sheet div:last-of-type {
+    border-bottom: 0;
+}
+
+.hero-sheet div:last-of-type dd {
+    color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-bg,
+    .hero-eyebrow,
+    .hero-title,
+    .hero-sub,
+    .hero-ctas,
+    .hero-sheet,
+    .hero-eyebrow .dot {
+        animation: none;
+    }
+}
+
+/* --- Prestations ----------------------------------------------------------- */
+
+.services-grid {
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--grey-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+        box-shadow 0.35s var(--ease);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--grey-300);
+    box-shadow: 0 26px 50px -32px rgba(0, 0, 0, 0.5);
+}
+
+.service-card .media {
+    border-radius: 0;
+}
+
+.service-card:hover .media img {
+    transform: scale(1.05);
+}
+
+.service-badge {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    z-index: 2;
+    padding: 0.35rem 0.75rem;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 100px;
+}
+
+.service-badge--neutral {
+    background: rgba(20, 17, 15, 0.86);
+    backdrop-filter: blur(6px);
+}
+
+.service-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem 1.4rem 1.6rem;
+}
+
+.service-title {
+    font-size: var(--step-h3);
+}
+
+.service-desc {
+    margin-top: 0.75rem;
+    color: var(--grey-600);
+    font-size: 0.97rem;
+}
+
+.service-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.1rem;
+}
+
+.service-points li {
+    padding: 0.3rem 0.65rem;
+    background: var(--grey-100);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    color: var(--grey-600);
+}
+
+.service-card .link {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.service-card .link svg {
+    transition: transform 0.3s var(--ease);
+}
+
+.service-card:hover .link svg {
+    transform: translateX(4px);
+}
+
+@media (min-width: 700px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1040px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Tout ce que nous faisons ---------------------------------------------- */
+
+.everything {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding-top: clamp(2.4rem, 5vw, 3.4rem);
+    border-top: 1px solid var(--grey-200);
+}
+
+.everything h3 {
+    font-size: 1.06rem;
+}
+
+.everything p {
+    margin-top: 0.6rem;
+    max-width: 62ch;
+    color: var(--grey-600);
+    font-size: 0.96rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+}
+
+.tags li {
+    padding: 0.5rem 0.95rem;
+    background: var(--card);
+    border: 1px solid var(--grey-200);
+    border-radius: 100px;
+    font-size: 0.88rem;
+    color: var(--grey-600);
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+        transform 0.25s var(--ease);
+}
+
+.tags li:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+}
+
+/* --- Bande urgence — le pic de la page ------------------------------------- */
+
+/* Un seul geste : le numéro à l'échelle d'un titre, tout le reste s'efface
+   autour. C'est le moment fort du défilement. */
+.urgence-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: var(--accent);
+}
+
+.urgence-kicker .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(200, 16, 46, 0.7);
+    animation: pulse 2.4s infinite;
+}
+
+.urgence-title {
+    margin-top: 1.4rem;
+    font-size: var(--step-h2);
+    max-width: 19ch;
+}
+
+.urgence-number {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: clamp(2.2rem, 5vw, 3.6rem);
+    padding-block: clamp(1.3rem, 3vw, 2.1rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: clamp(2.5rem, 8.5vw, 5.4rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 1;
+    transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.urgence-number svg {
+    flex-shrink: 0;
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.urgence-number:hover {
+    color: var(--accent);
+    border-color: rgba(200, 16, 46, 0.55);
+}
+
+.urgence-number:hover svg {
+    color: var(--accent);
+    transform: translateX(12px);
+}
+
+.urgence-note {
+    margin-top: 1.6rem;
+    max-width: 54ch;
+    color: rgba(255, 255, 255, 0.66);
+}
+
+/* Le repère typographique reste sur les bandes de fin de page service */
+.cta-band {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-band .urgence-mark {
+    display: block;
+    position: absolute;
+    margin: 0;
+    max-width: none;
+    right: -0.03em;
+    bottom: -0.17em;
+    font-size: clamp(6.5rem, 17vw, 14rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.75;
+    color: rgba(255, 255, 255, 0.055);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* --- Déroulé d'une intervention -------------------------------------------- */
+
+.process {
+    display: grid;
+    gap: 1.9rem;
+    margin-top: 3rem;
+}
+
+.step {
+    padding-top: 1.1rem;
+    border-top: 2px solid var(--ink);
+}
+
+/* Sélecteur renforcé : ne doit pas hériter de la couleur de `.step p` */
+.step .step-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+
+.step h3 {
+    margin-top: 0.55rem;
+    font-size: 1.1rem;
+}
+
+.step p {
+    margin-top: 0.55rem;
+    font-size: 0.94rem;
+    color: var(--grey-600);
+}
+
+@media (min-width: 760px) {
+    .process {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.7rem;
+    }
+}
+
+/* --- Réalisations — mosaïque, aucune photo rognée -------------------------- */
+
+.works {
+    margin-top: 3rem;
+    column-gap: 1.3rem;
+}
+
+.work {
+    break-inside: avoid;
+    margin-bottom: 1.3rem;
+}
+
+@media (min-width: 720px) {
+    .works {
+        columns: 2;
+    }
+}
+
+@media (min-width: 1100px) {
+    .works {
+        columns: 3;
+    }
+}
+
+/* --- À propos -------------------------------------------------------------- */
+
+.about-grid {
+    display: grid;
+    gap: 2.4rem;
+    align-items: center;
+}
+
+.about-text p + p {
+    margin-top: 1.1rem;
+}
+
+.about-text p {
+    color: var(--grey-600);
+    font-size: var(--step-lead);
+}
+
+.values {
+    display: grid;
+    gap: 1.6rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding-top: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--grey-200);
+}
+
+.value h3 {
+    font-size: 1.05rem;
+    padding-top: 0.9rem;
+    border-top: 2px solid var(--accent);
+}
+
+.value p {
+    margin-top: 0.6rem;
+    font-size: 0.94rem;
+    color: var(--grey-600);
+}
+
+@media (min-width: 860px) {
+
+    .about-grid {
+        grid-template-columns: 1fr 1.05fr;
+        gap: 3.5rem;
+    }
+
+    .values {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.8rem;
+    }
+}
+
+/* --- Zone d'intervention ---------------------------------------------------- */
+
+.zone-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.6rem;
+}
+
+.zone-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.zone-list li {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--grey-200);
+    border-radius: 100px;
+    font-size: 0.88rem;
+    color: var(--grey-600);
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+        transform 0.25s var(--ease);
+}
+
+.zone-list li:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+}
+
+@media (min-width: 900px) {
+    .zone-grid {
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 3.5rem;
+    }
+}
+
+/* --- Contact ---------------------------------------------------------------- */
+
+.contact-grid {
+    display: grid;
+    gap: 2.4rem;
+    margin-top: 2.4rem;
+}
+
+.contact-heading {
+    font-size: var(--step-h2);
+    max-width: 14ch;
+}
+
+.contact-sub {
+    margin-top: 1.1rem;
+    max-width: 42ch;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.contact-card {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.25s var(--ease);
+}
+
+.contact-row:last-child {
+    border-bottom: 0;
+}
+
+a.contact-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.contact-row-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(200, 16, 46, 0.14);
+    color: var(--accent);
+}
+
+.contact-row-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.contact-row-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-row-value {
+    font-size: 0.96rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: start;
+    }
+}

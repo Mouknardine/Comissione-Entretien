@@ -1,0 +1,485 @@
+/* ==========================================================================
+   PAGES SERVICE — en-tête, corps éditorial, blocs texte+image, repères,
+   questions fréquentes, CTA final
+   ========================================================================== */
+
+.page-body {
+    padding-top: 1.2rem;
+}
+
+/* Page dont l'ouverture est une bande pleine largeur passant sous le header */
+.page-body--flush {
+    padding-top: 0;
+}
+
+/* Respiration entre deux blocs de contenu qui se suivent */
+.page-body > section.container {
+    padding-block: clamp(2rem, 4vw, 3.4rem);
+}
+
+/* --- En-tête de page ------------------------------------------------------- */
+
+.page-head {
+    padding-bottom: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+/* L'en-tête accueille directement une photo à sa droite : aucune image n'est
+   jamais posée seule, elle a toujours du texte à côté. */
+.head-split {
+    display: grid;
+    gap: 2.2rem;
+    align-items: center;
+}
+
+@media (min-width: 940px) {
+    .head-split {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 3.6rem;
+    }
+}
+
+.page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: var(--accent);
+}
+
+.page-title {
+    font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    margin-top: 1.1rem;
+    max-width: 19ch;
+}
+
+.page-lead {
+    margin-top: 1.6rem;
+    max-width: var(--measure);
+    font-size: var(--step-lead);
+    color: var(--grey-600);
+}
+
+.page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+/* --- Figures --------------------------------------------------------------- */
+
+.page-figure {
+    margin-block: clamp(2rem, 4vw, 3rem);
+}
+
+/* --- Bloc texte + image ----------------------------------------------------- */
+
+.split {
+    display: grid;
+    gap: 1.8rem;
+    margin-block: clamp(2rem, 4vw, 3rem);
+    align-items: start;
+}
+
+.split-text > * + * {
+    margin-top: 1.15rem;
+}
+
+.split-text p {
+    color: var(--grey-600);
+}
+
+.split-text h2 {
+    font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.15rem);
+}
+
+@media (min-width: 880px) {
+
+    .split {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3.2rem;
+    }
+
+    /* Variante inversée : image à gauche */
+    .split--reverse .split-text {
+        order: 2;
+    }
+
+    /* La colonne image d'un portrait ne doit pas écraser la page */
+    .split--portrait {
+        grid-template-columns: 1.25fr 0.75fr;
+    }
+}
+
+/* --- Corps éditorial --------------------------------------------------------- */
+
+.prose {
+    max-width: var(--measure);
+}
+
+.prose > * + * {
+    margin-top: 1.15rem;
+}
+
+.prose h2 {
+    font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.15rem);
+    margin-top: clamp(2.8rem, 5vw, 4rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--grey-200);
+}
+
+.prose h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.prose h3 {
+    font-size: var(--step-h3);
+    margin-top: 2.2rem;
+}
+
+.prose p {
+    color: var(--grey-600);
+}
+
+.prose strong {
+    color: var(--ink);
+}
+
+.prose a:not(.btn) {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+.prose a:not(.btn):hover {
+    text-decoration-thickness: 2px;
+}
+
+.prose ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.prose ul li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--grey-600);
+}
+
+.prose ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.prose .page-figure,
+.prose .split {
+    max-width: none;
+}
+
+/* --- Spécifications ---------------------------------------------------------- */
+
+/* Des rangées, pas des cartes : le nom de la technique porte, la description
+   suit à côté. Aucune boîte, aucune icône décorative. */
+.specs {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--ink);
+}
+
+.spec {
+    display: grid;
+    gap: 0.4rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--grey-200);
+    transition: background-color 0.3s var(--ease);
+}
+
+.spec dt {
+    position: relative;
+    font-size: clamp(1.14rem, 0.95rem + 0.8vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+/* Repère rouge qui se déploie à gauche du titre au survol de la rangée */
+.spec dt::before {
+    content: "";
+    position: absolute;
+    left: -1.15rem;
+    top: 0.52em;
+    width: 0.75rem;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s var(--ease);
+}
+
+.spec dd {
+    margin: 0;
+    color: var(--grey-600);
+    font-size: 0.98rem;
+}
+
+@media (hover: hover) {
+    .spec:hover dt::before {
+        transform: scaleX(1);
+    }
+}
+
+@media (min-width: 820px) {
+
+    .spec {
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 2.5rem;
+        align-items: baseline;
+        padding-block: 1.7rem;
+    }
+
+    .spec:hover {
+        background: var(--grey-100);
+    }
+}
+
+/* --- Encadré méthode / points clés ------------------------------------------- */
+
+.callout {
+    padding: 1.6rem 1.5rem;
+    background: var(--grey-100);
+    border: 1px solid var(--grey-200);
+    border-radius: var(--radius);
+}
+
+.callout h3::before {
+    content: "";
+    display: block;
+    width: 1.6rem;
+    height: 2px;
+    margin-bottom: 0.9rem;
+    background: var(--accent);
+}
+
+.callout h3 {
+    font-size: 1.02rem;
+    margin-top: 0;
+}
+
+.callout p,
+.callout ul {
+    margin-top: 0.7rem;
+}
+
+/* Les puces de l'encadré ne dépendent pas du contexte éditorial : elles
+   s'affichent aussi dans un bloc texte+image. */
+.callout ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.callout ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.97rem;
+    color: var(--grey-600);
+}
+
+.callout ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 2px;
+    background: var(--accent);
+}
+
+/* --- Questions fréquentes ----------------------------------------------------- */
+
+.faq {
+    margin-top: 2.4rem;
+    border-top: 1px solid var(--grey-200);
+}
+
+.faq details {
+    border-bottom: 1px solid var(--grey-200);
+}
+
+.faq summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.25rem;
+    font-size: 1.04rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.25s var(--ease);
+}
+
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq summary:hover {
+    color: var(--accent);
+}
+
+.faq summary::after {
+    content: "";
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+    margin-top: 0.4rem;
+    background: currentColor;
+    transition: transform 0.35s var(--ease);
+    clip-path: polygon(46% 0, 54% 0, 54% 46%, 100% 46%, 100% 54%, 54% 54%, 54% 100%, 46% 100%, 46% 54%, 0 54%, 0 46%, 46% 46%);
+}
+
+.faq details[open] summary {
+    color: var(--accent);
+}
+
+.faq details[open] summary::after {
+    transform: rotate(135deg);
+}
+
+.faq-answer {
+    padding-bottom: 1.4rem;
+    max-width: var(--measure);
+    color: var(--grey-600);
+}
+
+.faq-answer p + p {
+    margin-top: 0.8rem;
+}
+
+.faq-answer a {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* --- Liens vers les autres services ------------------------------------------ */
+
+/* Trois rangées pleine largeur plutôt que trois cartes identiques : le titre
+   porte, la flèche tire l'œil vers la droite. */
+.related {
+    margin-top: clamp(2rem, 4vw, 2.8rem);
+    border-top: 1px solid var(--ink);
+}
+
+.related-card {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 1.7rem;
+    border-bottom: 1px solid var(--grey-200);
+    transition: transform 0.35s var(--ease), color 0.3s var(--ease);
+}
+
+.related-card h3 {
+    font-size: clamp(1.2rem, 1rem + 0.9vw, 1.65rem);
+    letter-spacing: -0.03em;
+}
+
+.related-card p {
+    color: var(--grey-600);
+    font-size: 0.98rem;
+    max-width: 54ch;
+}
+
+.related-card .arrow {
+    justify-self: start;
+    color: var(--grey-300);
+    transition: transform 0.35s var(--ease), color 0.3s var(--ease);
+}
+
+@media (min-width: 820px) {
+
+    .related-card {
+        grid-template-columns: 0.85fr 1.15fr auto;
+        gap: 2.5rem;
+        align-items: baseline;
+    }
+
+    .related-card .arrow {
+        justify-self: end;
+    }
+}
+
+@media (hover: hover) {
+
+    .related-card:hover {
+        transform: translateX(0.85rem);
+        color: var(--accent);
+    }
+
+    .related-card:hover p {
+        color: var(--grey-600);
+    }
+
+    .related-card:hover .arrow {
+        color: var(--accent);
+        transform: translateX(8px);
+    }
+}
+
+/* --- CTA final ---------------------------------------------------------------- */
+
+.cta-band {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-band-inner {
+    display: grid;
+    gap: 1.8rem;
+    align-items: center;
+}
+
+.cta-band h2 {
+    font-size: var(--step-h2);
+    max-width: 17ch;
+}
+
+.cta-band p {
+    margin-top: 1rem;
+    max-width: 44ch;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.cta-band-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+@media (min-width: 900px) {
+    .cta-band-inner {
+        grid-template-columns: 1.3fr 1fr;
+        gap: 3rem;
+    }
+
+    .cta-band-actions {
+        justify-content: flex-end;
+    }
+}

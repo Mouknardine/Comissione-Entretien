@@ -4,439 +4,847 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Débouchage, Nettoyage &amp; Conciergerie Vaud | Commissione Entretien</title>
+    <meta name="description" content="Débouchage, curage et inspection caméra de canalisations, nettoyage de panneaux solaires, façades, terrasses et conciergerie d'immeubles dans tout le canton de Vaud. 24h/24 depuis Bavois. Devis gratuit.">
+    <link rel="canonical" href="https://commissione-entretien.ch/">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="#c8102e">
+    <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+    <meta name="author" content="Commissione Entretien">
+    <meta name="geo.region" content="CH-VD">
+    <meta name="geo.placename" content="Bavois">
+    <meta name="geo.position" content="46.6883;6.5556">
+    <meta name="ICBM" content="46.6883, 6.5556">
 
-    <!-- Favicons -->
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Commissione Entretien">
+    <meta property="og:title" content="Débouchage, Nettoyage &amp; Conciergerie — Canton de Vaud">
+    <meta property="og:description" content="Entreprise familiale vaudoise basée à Bavois. Débouchage, curage, inspection caméra, nettoyage et conciergerie. Intervention 24h/24, 7j/7.">
+    <meta property="og:url" content="https://commissione-entretien.ch/">
+    <meta property="og:image" content="https://commissione-entretien.ch/assets/paysage-vaud-bavois.png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="624">
+    <meta property="og:image:alt" content="Campagne vaudoise autour de Bavois">
+    <meta property="og:locale" content="fr_CH">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Débouchage, Nettoyage &amp; Conciergerie — Canton de Vaud">
+    <meta name="twitter:description" content="Entreprise familiale vaudoise basée à Bavois. Intervention 24h/24, 7j/7 dans tout le canton.">
+    <meta name="twitter:image" content="https://commissione-entretien.ch/assets/paysage-vaud-bavois.png">
+
+    <!-- Icônes -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Commissione Entretien — Débouchage & Entretien 24h/24</title>
-    <meta name="description" content="Commissione Entretien — Entreprise familiale vaudoise basée à Bavois. Débouchage, curage, inspection par caméra, nettoyage et conciergerie. Intervention rapide 24h/24, 7j/7.">
-    <meta name="robots" content="index, follow">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Commissione Entretien — Débouchage & Entretien 24h/24">
-    <meta property="og:description" content="Entreprise familiale vaudoise. Débouchage, curage, inspection caméra, nettoyage et conciergerie. Intervention rapide 24h/24, 7j/7.">
-    <meta property="og:locale" content="fr_CH">
-
-    <!-- Fonts -->
+    <!-- Typographie -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+
+    <!-- Image LCP -->
+    <link rel="preload" as="image" href="assets/paysage-vaud-bavois.png" fetchpriority="high">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/lightbox.css">
 
-    <!-- GSAP (menu overlay animation) -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
 
-    <!-- Main Script -->
-    <script src="script.js" defer></script>
+    <!-- Données structurées -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+          "@id": "https://commissione-entretien.ch/#business",
+          "name": "Commissione Entretien",
+          "description": "Entreprise familiale vaudoise spécialisée dans le débouchage et le curage de canalisations, l'inspection par caméra, la pose et la réfection de conduites, le nettoyage intérieur-extérieur, le nettoyage de panneaux solaires et la conciergerie d'immeubles.",
+          "url": "https://commissione-entretien.ch/",
+          "telephone": "+41775217328",
+          "email": "commissione.entretien@hotmail.com",
+          "image": "https://commissione-entretien.ch/assets/photos/camion-hydrocureuse-immeuble-vaud.jpg",
+          "logo": "https://commissione-entretien.ch/android-chrome-512x512.png",
+          "priceRange": "$$",
+          "currenciesAccepted": "CHF",
+          "founder": { "@type": "Person", "name": "Lorenzo Commissione" },
+          "knowsLanguage": "fr",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rue du Haut du Village 5",
+            "postalCode": "1372",
+            "addressLocality": "Bavois",
+            "addressRegion": "Vaud",
+            "addressCountry": "CH"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 46.6883, "longitude": 6.5556 },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }],
+          "areaServed": [
+            { "@type": "AdministrativeArea", "name": "Canton de Vaud" },
+            { "@type": "City", "name": "Lausanne" },
+            { "@type": "City", "name": "Yverdon-les-Bains" },
+            { "@type": "City", "name": "Nyon" },
+            { "@type": "City", "name": "Payerne" },
+            { "@type": "City", "name": "Morges" },
+            { "@type": "City", "name": "Orbe" },
+            { "@type": "City", "name": "Cossonay" },
+            { "@type": "City", "name": "Échallens" },
+            { "@type": "City", "name": "Chavornay" },
+            { "@type": "City", "name": "La Sarraz" },
+            { "@type": "City", "name": "Moudon" },
+            { "@type": "City", "name": "Renens" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Prestations Commissione Entretien",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Débouchage d'urgence de canalisation", "url": "https://commissione-entretien.ch/debouchage-curage-canalisation/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Curage haute et basse pression", "url": "https://commissione-entretien.ch/debouchage-curage-canalisation/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Inspection de canalisation par caméra", "url": "https://commissione-entretien.ch/debouchage-curage-canalisation/#inspection-camera" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose et réfection de canalisation", "url": "https://commissione-entretien.ch/debouchage-curage-canalisation/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nettoyage de panneaux solaires", "url": "https://commissione-entretien.ch/nettoyage-panneaux-solaires/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nettoyage de façades et terrasses", "url": "https://commissione-entretien.ch/nettoyage-conciergerie/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nettoyage intérieur", "url": "https://commissione-entretien.ch/nettoyage-conciergerie/" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Conciergerie d'immeubles", "url": "https://commissione-entretien.ch/nettoyage-conciergerie/#conciergerie" } }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://commissione-entretien.ch/#website",
+          "url": "https://commissione-entretien.ch/",
+          "name": "Commissione Entretien",
+          "inLanguage": "fr-CH",
+          "publisher": { "@id": "https://commissione-entretien.ch/#business" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://commissione-entretien.ch/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Intervenez-vous la nuit et le week-end ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Oui. Les urgences de canalisation sont prises en charge 24h/24 et 7j/7, week-ends et jours fériés compris, sur l'ensemble du canton de Vaud. Un seul numéro : 077 521 73 28." }
+            },
+            {
+              "@type": "Question",
+              "name": "Dans quelles communes du canton de Vaud intervenez-vous ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Nous sommes basés à Bavois et intervenons dans tout le canton de Vaud : Orbe, Yverdon-les-Bains, Chavornay, La Sarraz, Cossonay, Échallens, Lausanne, Renens, Prilly, Morges, Nyon, Payerne, Moudon, Vallorbe et les communes environnantes." }
+            },
+            {
+              "@type": "Question",
+              "name": "Combien coûte une intervention ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Le devis est gratuit et sans engagement. Le montant dépend de la nature du blocage, de sa localisation et de la technique nécessaire — machine électromécanique, furet ou hydrocurage haute pression. Nous annonçons le cadre tarifaire avant d'intervenir." }
+            },
+            {
+              "@type": "Question",
+              "name": "Faut-il creuser pour localiser un bouchon ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Non. Notre caméra endoscopique haute résolution permet un examen non destructif de la conduite : fissures, racines, affaissements et obstructions sont localisés sans creuser à l'aveugle. Un rapport écrit est remis après l'inspection." }
+            },
+            {
+              "@type": "Question",
+              "name": "Faut-il accéder au toit pour nettoyer des panneaux solaires ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Non. Nous travaillons exclusivement à la perche télescopique, depuis le sol ou une plateforme stable, à l'eau déminéralisée et sans produit chimique. Aucun risque de casse de tuile ni de dommage à l'installation." }
+            },
+            {
+              "@type": "Question",
+              "name": "Travaillez-vous avec les régies et les copropriétés ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Oui. Nous assurons l'entretien régulier des parties communes pour les régies, gérances et copropriétés, avec des contrats d'entretien adaptables : la fréquence des passages est ajustée à la taille et aux besoins de l'immeuble." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
 
-    <!-- ============================================
-         HEADER
-         ============================================ -->
-    <header class="header" id="header">
-        <button class="header-logo" id="logoBtn" aria-label="Retour en haut">
-            <span class="logo-name">Commissione</span>
-            <span class="logo-sub">Entretien</span>
-        </button>
+    <a href="#contenu" class="skip-link">Aller au contenu</a>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header" data-header>
+        <a href="./" class="header-logo" aria-label="Commissione Entretien — accueil">
+            <svg class="logo-mark" width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="1.3" y="1.3" width="37.4" height="37.4" rx="9.5" stroke="currentColor" stroke-width="1.8"/><path d="M20.4 14.6a6.7 6.7 0 100 10.8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M24.6 14.2h6.6M24.6 20h5M24.6 25.8h6.6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <span class="header-logo-text">
+                <span class="logo-name">Commissione</span>
+                <span class="logo-sub">Entretien</span>
+            </span>
+        </a>
+
+        <nav class="header-nav" aria-label="Navigation principale">
+            <a href="./" aria-current="page">Accueil</a>
+            <a href="debouchage-curage-canalisation/">Canalisations</a>
+            <a href="nettoyage-panneaux-solaires/">Panneaux solaires</a>
+            <a href="nettoyage-conciergerie/">Nettoyage &amp; conciergerie</a>
+            <a href="contact/">Contact</a>
+        </nav>
+
         <div class="header-right">
-            <a href="tel:+41775217328" class="header-phone" aria-label="Appel urgence 24/7">
+            <a href="tel:+41775217328" class="header-phone">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
                 Urgence 24/7
             </a>
-            <button class="header-menu-btn" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navOverlay">
+            <button class="header-menu-btn" data-menu-toggle aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-overlay">
                 <span class="menu-line"></span>
                 <span class="menu-line"></span>
             </button>
         </div>
     </header>
 
-    <!-- ============================================
-         NAV OVERLAY
-         ============================================ -->
-    <nav class="nav-overlay" id="navOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Navigation principale">
-        <div class="nav-content">
-            <div class="nav-links">
-                <a href="#home" class="nav-link" data-nav-link>ACCUEIL</a>
-                <a href="#services" class="nav-link" data-nav-link>SERVICES</a>
-                <a href="#about" class="nav-link" data-nav-link>À PROPOS</a>
-                <a href="#contact" class="nav-link" data-nav-link>CONTACT</a>
-            </div>
-            <div class="nav-contact-info">
-                <a href="tel:+41775217328" class="nav-phone">077.521.73.28</a>
-                <a href="mailto:commissione.entretien@hotmail.com" class="nav-email">commissione.entretien@hotmail.com</a>
-            </div>
+    <!-- ==================== NAVIGATION MOBILE ==================== -->
+    <nav class="nav-overlay" id="nav-overlay" data-nav-overlay aria-hidden="true" aria-label="Navigation mobile">
+        <div class="nav-links">
+            <a href="./" class="nav-link">Accueil</a>
+            <a href="debouchage-curage-canalisation/" class="nav-link">Canalisations</a>
+            <a href="nettoyage-panneaux-solaires/" class="nav-link">Panneaux solaires</a>
+            <a href="nettoyage-conciergerie/" class="nav-link">Nettoyage &amp; conciergerie</a>
+            <a href="contact/" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-contact">
+            <a href="tel:+41775217328" class="nav-phone">077 521 73 28</a>
+            <a href="mailto:commissione.entretien@hotmail.com">commissione.entretien@hotmail.com</a>
+            <a href="https://maps.google.com/?q=Rue+du+Haut+du+Village+5,+1372+Bavois" target="_blank" rel="noopener">Rue du Haut du Village 5, 1372 Bavois</a>
         </div>
     </nav>
 
-    <!-- ============================================
-         MAIN
-         ============================================ -->
-    <main class="main">
+    <main id="contenu">
 
-        <!-- HERO -->
-        <div class="hero-wrapper">
-            <section class="hero" id="home" aria-label="Bienvenue">
-                <img
-                    src="src/assets/da04f2448c38c440d97f352f6c9f386a257c6f26.png"
-                    alt="Canton de Vaud — Commissione Entretien"
-                    class="hero-bg-img"
-                    fetchpriority="high"
-                    decoding="async"
-                    width="1920"
-                    height="1080"
-                >
-                <div class="hero-overlay" aria-hidden="true"></div>
-                <div class="hero-overlay hero-overlay--grad" aria-hidden="true"></div>
-                <div class="hero-overlay hero-overlay--bottom" aria-hidden="true"></div>
+        <span class="header-sentinel" data-header-sentinel aria-hidden="true"></span>
 
-                <div class="hero-inner">
-                    <div class="hero-eyebrow">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <span>Intervention rapide — Canton de Vaud</span>
-                    </div>
-                    <h1 class="hero-title">
-                        <span class="hero-line"><span class="hero-word">Débouchage &amp;</span></span>
-                        <span class="hero-line"><span class="hero-word">Entretien</span></span>
-                        <span class="hero-line"><span class="hero-word hero-word--red">24h/24, 7j/7.</span></span>
-                    </h1>
-                    <p class="hero-sub">
-                        Entreprise familiale vaudoise basée à Bavois. Débouchage, curage, inspection par caméra, nettoyage et conciergerie.
+        <!-- ==================== HERO ==================== -->
+        <section class="hero" aria-labelledby="hero-title">
+            <img
+                src="assets/paysage-vaud-bavois.png"
+                alt="Campagne vaudoise autour de Bavois, zone d'intervention de Commissione Entretien"
+                class="hero-bg"
+                width="1080"
+                height="624"
+                fetchpriority="high"
+                decoding="async">
+            <div class="hero-scrim" aria-hidden="true"></div>
+            <div class="hero-rule" aria-hidden="true"></div>
+
+            <div class="hero-inner">
+                <div class="hero-main">
+                <p class="hero-eyebrow">
+                    <span class="dot" aria-hidden="true"></span>
+                    Bavois — intervention 24h/24, 7j/7
+                </p>
+
+                <h1 class="hero-title" id="hero-title">Débouchage, nettoyage et conciergerie dans le canton de Vaud</h1>
+
+                <p class="hero-sub">
+                    Entreprise familiale basée à Bavois. Un seul interlocuteur pour l'entretien de votre bâtiment.
+                </p>
+
+                <div class="hero-ctas">
+                    <a href="tel:+41775217328" class="btn btn--accent">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
+                        077 521 73 28
+                    </a>
+                    <a href="#prestations" class="btn btn--light">
+                        Voir les prestations
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+
+                </div>
+
+                <div class="hero-sheet">
+                    <dl>
+                        <div><dt>secteur</dt><dd>canton de vaud</dd></div>
+                        <div><dt>débouchage</dt><dd>machine, furet, hydrocurage</dd></div>
+                        <div><dt>diagnostic</dt><dd>caméra endoscopique</dd></div>
+                        <div><dt>disponibilité</dt><dd>24 h / 24 — 7 j / 7</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PRESTATIONS ==================== -->
+        <section class="section" id="prestations" aria-labelledby="prestations-title">
+            <div class="container">
+                <p class="section-label reveal"><span>nos prestations</span></p>
+                <h2 class="section-heading reveal" id="prestations-title">Un seul interlocuteur pour tout votre bâtiment.</h2>
+                <p class="section-intro reveal">
+                    Canalisations, surfaces extérieures, intérieurs, panneaux photovoltaïques, parties communes :
+                    nous couvrons l'entretien d'un bâtiment de bout en bout, dans tout le canton de Vaud.
+                </p>
+
+                <div class="services-grid">
+
+                    <article class="service-card reveal">
+                        <p class="service-badge">24h/24 — 7j/7</p>
+                        <div class="media media--crop reveal-media">
+                            <img src="assets/photos/camion-remorque-hydrocurage-bavois.jpg"
+                                 alt="Camion et remorque d'hydrocurage haute pression Commissione Entretien en intervention"
+                                 width="1800" height="1350" loading="lazy" decoding="async">
+                        </div>
+                        <div class="service-body">
+                            <h3 class="service-title">Canalisations</h3>
+                            <p class="service-desc">
+                                Débouchage d'urgence, curage haute et basse pression, inspection par caméra
+                                endoscopique, pose et réfection de conduites.
+                            </p>
+                            <ul class="service-points">
+                                <li>Débouchage d'urgence</li>
+                                <li>Curage préventif</li>
+                                <li>Inspection caméra</li>
+                                <li>Pose de conduites</li>
+                            </ul>
+                            <a href="debouchage-curage-canalisation/" class="link">
+                                Découvrir le service
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" data-delay="1">
+                        <p class="service-badge service-badge--neutral">Sans accès au toit</p>
+                        <div class="media media--crop reveal-media">
+                            <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
+                                 alt="Nettoyage de panneaux solaires à la perche télescopique sur une toiture du canton de Vaud"
+                                 width="1800" height="1350" loading="lazy" decoding="async">
+                        </div>
+                        <div class="service-body">
+                            <h3 class="service-title">Panneaux solaires</h3>
+                            <p class="service-desc">
+                                Poussière, pollen et dépôts font chuter le rendement de vos panneaux. Nettoyage à la
+                                perche télescopique, à l'eau déminéralisée, sans produit chimique.
+                            </p>
+                            <ul class="service-points">
+                                <li>Perche télescopique</li>
+                                <li>Eau déminéralisée</li>
+                                <li>Bilan avant/après</li>
+                            </ul>
+                            <a href="nettoyage-panneaux-solaires/" class="link">
+                                Découvrir le service
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" data-delay="2">
+                        <p class="service-badge service-badge--neutral">Privés &amp; régies</p>
+                        <div class="media media--crop reveal-media">
+                            <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                                 alt="Terrasse en dallage avant et après nettoyage haute pression par Commissione Entretien"
+                                 width="1800" height="1012" loading="lazy" decoding="async">
+                        </div>
+                        <div class="service-body">
+                            <h3 class="service-title">Nettoyage &amp; conciergerie</h3>
+                            <p class="service-desc">
+                                Terrasses, façades, allées, mobilier de jardin, intérieurs, et entretien régulier
+                                des parties communes pour les régies et les copropriétés.
+                            </p>
+                            <ul class="service-points">
+                                <li>Haute pression</li>
+                                <li>Intérieurs</li>
+                                <li>Contrats d'entretien</li>
+                            </ul>
+                            <a href="nettoyage-conciergerie/" class="link">
+                                Découvrir le service
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="everything reveal">
+                    <h3>Et tout le reste de l'entretien du bâtiment</h3>
+                    <p>
+                        Notre activité ne se limite pas à ces trois pages. Si votre besoin n'apparaît pas ici,
+                        appelez-nous : nous vous dirons franchement si nous savons le faire.
                     </p>
-                    <div class="hero-ctas">
-                        <button class="hero-cta-secondary" data-scroll-to="services">
-                            Découvrir nos services
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </button>
-                    </div>
-                    <div class="hero-location">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        <span>Bavois, Canton de Vaud</span>
-                    </div>
+                    <ul class="tags">
+                        <li>Débouchage d'urgence</li>
+                        <li>Curage haute pression</li>
+                        <li>Hydrocurage basse pression</li>
+                        <li>Inspection par caméra</li>
+                        <li>Pose et réfection de conduites</li>
+                        <li>Nettoyage de façades</li>
+                        <li>Terrasses et dallages</li>
+                        <li>Allées et abords</li>
+                        <li>Mobilier de jardin</li>
+                        <li>Abords de piscine</li>
+                        <li>Vitres</li>
+                        <li>Sols et surfaces</li>
+                        <li>Sanitaires</li>
+                        <li>Dégraissage de cuisine</li>
+                        <li>Panneaux photovoltaïques</li>
+                        <li>Parties communes d'immeuble</li>
+                        <li>Sortie et rentrée des containers</li>
+                        <li>Contrats d'entretien</li>
+                    </ul>
                 </div>
+            </div>
+        </section>
 
-                <button class="hero-scroll-hint" data-scroll-to="services" aria-label="Défiler vers les services">
-                    <span>Défiler</span>
-                    <div class="scroll-line" aria-hidden="true"></div>
-                </button>
-            </section>
-        </div>
+        <!-- ==================== BANDE URGENCE ==================== -->
+        <section class="section section--ink urgence" aria-labelledby="urgence-title">
+            <div class="container">
+                <p class="urgence-kicker reveal">
+                    <span class="dot" aria-hidden="true"></span>
+                    urgence — 24h/24, 7j/7
+                </p>
 
-        <!-- CONTENT BODY -->
-        <div class="content-body">
+                <h2 class="urgence-title reveal" id="urgence-title">Une canalisation bouchée n'attend pas.</h2>
 
-<!-- SERVICES SECTION -->
-            <section class="section services-section" id="services">
-                <div class="container">
-                    <div class="section-label reveal">
-                        <span class="label-text">Nos expertises</span>
-                        <div class="label-line" aria-hidden="true"></div>
-                    </div>
-                    <h2 class="section-heading reveal">Une prise en charge totale de votre habitat.</h2>
-                </div>
+                <a href="tel:+41775217328" class="urgence-number reveal">
+                    <span>077 521 73 28</span>
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
 
-                <div class="services-list">
+                <p class="urgence-note reveal">
+                    Nous répondons jour et nuit, week-ends et jours fériés, sur l'ensemble du canton de Vaud.
+                    Un appel suffit pour déclencher une intervention.
+                </p>
+            </div>
+        </section>
 
-                    <!-- Service 01 -->
-                    <article class="service-card" id="service-01">
-                        <div class="service-card-inner">
-                            <div class="service-info">
-                                <div class="service-header">
-                                    <span class="service-number" aria-hidden="true">01</span>
-                                    <div class="service-badge service-badge--urgent">24h/24 — 7j/7</div>
-                                </div>
-                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>Débouchage &amp; Curage</h3>
-                                <p class="service-desc">Intervention rapide pour éliminer les bouchons ponctuels et nettoyer en profondeur vos canalisations par hydrocurage haute pression.</p>
-                                <a href="tel:+41775217328" class="service-cta service-cta--red">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
-                                    Appeler maintenant
-                                </a>
-                            </div>
-                            <div class="service-details">
-                                <div class="service-details-label">Ce qui est inclus</div>
-                                <ul class="service-list-items">
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Débouchage d'urgence à toute heure</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Curage préventif et curatif</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hydrocurage haute &amp; basse pression</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Élimination des dépôts et mauvaises odeurs</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Techniques : machine électromécanique, furet, hydrocurage</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Service 02 -->
-                    <article class="service-card service-card--reverse" id="service-02">
-                        <div class="service-card-inner">
-                            <div class="service-info">
-                                <div class="service-header">
-                                    <span class="service-number" aria-hidden="true">02</span>
-                                    <div class="service-badge">Diagnostic précis</div>
-                                </div>
-                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Inspection par Caméra</h3>
-                                <p class="service-desc">Examen non-destructif de vos tuyaux d'évacuation avec rapport détaillé pour des réparations ciblées et économiques.</p>
-                                <button class="service-cta service-cta--dark" data-scroll-to="contact">
-                                    Demander un devis
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-                            <div class="service-details">
-                                <div class="service-details-label">Ce qui est inclus</div>
-                                <ul class="service-list-items">
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Caméra endoscopique haute résolution</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Détection d'obstructions et fissures</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Rapport écrit fourni systématiquement</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Réparations ciblées, zéro casse inutile</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Planification des travaux à venir</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Service 03 -->
-                    <article class="service-card" id="service-03">
-                        <div class="service-card-inner">
-                            <div class="service-info">
-                                <div class="service-header">
-                                    <span class="service-number" aria-hidden="true">03</span>
-                                    <div class="service-badge">Écologique</div>
-                                </div>
-                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>Nettoyage Panneaux Solaires</h3>
-                                <p class="service-desc">Nettoyage de vos panneaux photovoltaïques à la perche télescopique, sans produits chimiques ni accès au toit. Une installation propre produit jusqu'à 10 % d'énergie en plus.</p>
-                                <button class="service-cta service-cta--dark" data-scroll-to="contact">
-                                    Demander un devis
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-                            <div class="service-details">
-                                <div class="service-details-label">Ce qui est inclus</div>
-                                <ul class="service-list-items">
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Perche télescopique — aucun accès au toit</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Eau déminéralisée, zéro produit chimique</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Respectueux de vos panneaux et de la nature</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Rendement optimisé jusqu'à +10 %</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Privés, immeubles, toitures industrielles</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Bilan avant/après sur demande</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Service 04 -->
-                    <article class="service-card service-card--reverse" id="service-04">
-                        <div class="service-card-inner">
-                            <div class="service-info">
-                                <div class="service-header">
-                                    <span class="service-number" aria-hidden="true">04</span>
-                                    <div class="service-badge">Particuliers</div>
-                                </div>
-                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Nettoyage Intérieur-Extérieur</h3>
-                                <p class="service-desc">Un service de nettoyage complet pour votre domicile — des pièces de vie aux espaces extérieurs — avec rigueur et discrétion.</p>
-                                <button class="service-cta service-cta--dark" data-scroll-to="contact">
-                                    Demander un devis
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-                            <div class="service-details">
-                                <div class="service-details-label">Ce qui est inclus</div>
-                                <ul class="service-list-items">
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sols, surfaces, vitres et sanitaires</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Cuisine : dégraissage en profondeur</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Terrasses, allées et façades</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Mobilier de jardin et piscine</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Intervention sur mesure selon vos besoins</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Service 05 -->
-                    <article class="service-card" id="service-05">
-                        <div class="service-card-inner">
-                            <div class="service-info">
-                                <div class="service-header">
-                                    <span class="service-number" aria-hidden="true">05</span>
-                                    <div class="service-badge">Immeubles</div>
-                                </div>
-                                <h3 class="service-title"><svg class="service-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Service de Conciergerie</h3>
-                                <p class="service-desc">Entretien régulier et fiable des espaces communs de votre immeuble — propreté garantie pour les résidents.</p>
-                                <button class="service-cta service-cta--dark" data-scroll-to="contact">
-                                    Demander un devis
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </button>
-                            </div>
-                            <div class="service-details">
-                                <div class="service-details-label">Ce qui est inclus</div>
-                                <ul class="service-list-items">
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Nettoyage des parties communes intérieures</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Espaces extérieurs et abords</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sols, vitres et dépoussiérage</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sortie et rentrée des poubelles</li>
-                                    <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Contrats d'entretien adaptables</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-            </section>
-
-            <!-- ABOUT -->
-            <section class="section about-section" id="about">
-                <div class="container">
-                    <div class="section-label reveal">
-                        <span class="label-text">Qui sommes-nous</span>
-                        <div class="label-line" aria-hidden="true"></div>
-                    </div>
-                    <div class="about-grid">
-                        <h2 class="about-heading reveal">
-                            Famille vaudoise.<br>
-                            <span class="about-heading--muted">Engagement local.</span>
-                        </h2>
-                        <p class="about-text reveal">
-                            Commissione Entretien est une entreprise familiale basée à Bavois, au cœur du canton de Vaud. Fondée par Lorenzo Commissione, elle intervient sur l'ensemble du canton pour répondre à tous vos besoins d'entretien.
+        <!-- ==================== DÉROULÉ D'UNE INTERVENTION ==================== -->
+        <section class="section section--tint" id="deroulement" aria-labelledby="process-title">
+            <div class="container">
+                <div class="pinned">
+                    <div class="pinned-head">
+                <p class="section-label reveal"><span>comment ça se passe</span></p>
+                        <h2 class="section-heading reveal" id="process-title">Du premier appel au rapport final.</h2>
+                        <p class="section-intro reveal">
+                            Une méthode identique sur chaque chantier, que ce soit un évier bouché un dimanche soir
+                            ou un contrat d'entretien annuel pour une régie.
                         </p>
                     </div>
 
-                    <div class="values-grid">
-                        <div class="value-card reveal">
-                            <div class="value-bar" aria-hidden="true"></div>
-                            <h4 class="value-title">Professionnalisme</h4>
-                            <p class="value-desc">Chaque intervention est menée avec méthode, savoir-faire et respect de votre propriété.</p>
-                        </div>
-                        <div class="value-card reveal">
-                            <div class="value-bar" aria-hidden="true"></div>
-                            <h4 class="value-title">Qualité</h4>
-                            <p class="value-desc">Nous n'acceptons que des résultats durables. Le travail bien fait, c'est notre signature.</p>
-                        </div>
-                        <div class="value-card reveal">
-                            <div class="value-bar" aria-hidden="true"></div>
-                            <h4 class="value-title">Efficacité</h4>
-                            <p class="value-desc">Réactivité maximale, délais tenus. Votre temps est précieux — nous le respectons.</p>
-                        </div>
-                        <div class="value-card reveal">
-                            <div class="value-bar" aria-hidden="true"></div>
-                            <h4 class="value-title">Fiabilité</h4>
-                            <p class="value-desc">Entreprise familiale vaudoise : vous savez toujours à qui vous avez affaire.</p>
-                        </div>
+                    <div class="pinned-body">
+
+                <div class="process">
+                    <div class="step reveal">
+                        <p class="step-num">01</p>
+                        <h3>Votre appel</h3>
+                        <p>Vous nous joignez au 077 521 73 28, à toute heure. Nous cernons le problème et
+                           la localisation avant de nous déplacer.</p>
+                    </div>
+                    <div class="step reveal" data-delay="1">
+                        <p class="step-num">02</p>
+                        <h3>Diagnostic sur place</h3>
+                        <p>Nous identifions la nature et la position exacte du blocage — au besoin à la caméra
+                           endoscopique, sans rien casser.</p>
+                    </div>
+                    <div class="step reveal" data-delay="2">
+                        <p class="step-num">03</p>
+                        <h3>Intervention</h3>
+                        <p>Machine électromécanique, furet ou hydrocurage haute pression : l'outil est choisi
+                           selon le diamètre et l'état de la conduite.</p>
+                    </div>
+                    <div class="step reveal" data-delay="3">
+                        <p class="step-num">04</p>
+                        <h3>Rapport &amp; suite</h3>
+                        <p>Pour une inspection, un rapport écrit vous est remis avec les réparations à prévoir.
+                           Aucun travaux inutile.</p>
+                    </div>
+                </div>
+                    </div>
+                </div>            </div>
+        </section>
+
+        <!-- ==================== RÉALISATIONS ==================== -->
+        <section class="section" id="realisations" aria-labelledby="realisations-title">
+            <div class="container">
+                <div class="pinned">
+                    <div class="pinned-head">
+                <p class="section-label reveal"><span>sur le terrain</span></p>
+                        <h2 class="section-heading reveal" id="realisations-title">Nos interventions dans le canton.</h2>
+                        <p class="section-intro reveal">Cliquez sur une photo pour l'agrandir.</p>
                     </div>
 
-                    <div class="about-footer reveal">
-                        <p class="about-footer-text">Canalisations &amp; Conciergerie — Une gestion totale de votre habitat.</p>
-                        <a href="tel:+41775217328" class="about-footer-phone">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
-                            077.521.73.28
+                    <div class="pinned-body">
+
+                <div class="works">
+                    <figure class="work reveal">
+                        <a class="zoom" href="assets/photos/chantier-canalisation-tranchee-vaud.jpg"
+                           data-caption="Pose et réfection de réseau de canalisation, canton de Vaud">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/chantier-canalisation-tranchee-vaud.jpg"
+                                     alt="Tranchée ouverte, pelleteuse et tuyaux lors d'une pose de canalisation dans le canton de Vaud"
+                                     width="1350" height="1800" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Pose et réfection de réseau de canalisation, canton de Vaud</figcaption>
+                    </figure>
+
+                    <figure class="work reveal" data-delay="1">
+                        <a class="zoom" href="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                           data-caption="Nettoyage haute pression de terrasse — avant et après">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                                     alt="Terrasse en dallage avant et après nettoyage haute pression"
+                                     width="1800" height="1012" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Nettoyage haute pression de terrasse — avant et après</figcaption>
+                    </figure>
+
+                    <figure class="work reveal" data-delay="2">
+                        <a class="zoom" href="assets/photos/debouchage-sanitaire-sous-evier.jpg"
+                           data-caption="Débouchage sanitaire sous évier à la machine électromécanique">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/debouchage-sanitaire-sous-evier.jpg"
+                                     alt="Débouchage sanitaire sous évier avec une machine électromécanique à arbre flexible"
+                                     width="1350" height="1800" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Débouchage sanitaire sous évier</figcaption>
+                    </figure>
+
+                    <figure class="work reveal">
+                        <a class="zoom" href="assets/photos/nettoyage-facade-maison-avant-apres.jpg"
+                           data-caption="Façade de villa — avant et après intervention">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/nettoyage-facade-maison-avant-apres.jpg"
+                                     alt="Façade de villa avant et après intervention de Commissione Entretien"
+                                     width="1012" height="1800" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Façade de villa — avant et après intervention</figcaption>
+                    </figure>
+
+                    <figure class="work reveal" data-delay="1">
+                        <a class="zoom" href="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
+                           data-caption="Nettoyage de panneaux photovoltaïques à la perche télescopique">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
+                                     alt="Panneaux photovoltaïques nettoyés à la perche télescopique sur une toiture vaudoise"
+                                     width="1800" height="1350" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Nettoyage de panneaux photovoltaïques à la perche</figcaption>
+                    </figure>
+
+                    <figure class="work reveal" data-delay="2">
+                        <a class="zoom" href="assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
+                           data-caption="Intervention d'hydrocurage sur un immeuble du canton de Vaud">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
+                                     alt="Véhicule et remorque d'hydrocurage Commissione Entretien devant un immeuble du canton de Vaud"
+                                     width="1350" height="1800" loading="lazy" decoding="async">
+                            </span>
+                        </a>
+                        <figcaption>Hydrocurage sur un immeuble du canton de Vaud</figcaption>
+                    </figure>
+                </div>
+                    </div>
+                </div>            </div>
+        </section>
+
+        <!-- ==================== À PROPOS ==================== -->
+        <section class="section section--tint" id="a-propos" aria-labelledby="about-title">
+            <div class="container">
+                <p class="section-label reveal"><span>qui sommes-nous</span></p>
+
+                <div class="about-grid">
+                    <div class="reveal" data-parallax="30">
+                        <a class="zoom" href="assets/photos/flotte-vehicules-commissione-entretien.jpg"
+                           data-caption="La flotte d'intervention Commissione Entretien, à Bavois">
+                            <span class="media reveal-media">
+                                <span class="zoom-hint">Agrandir</span>
+                                <img src="assets/photos/flotte-vehicules-commissione-entretien.jpg"
+                                     alt="Flotte de véhicules d'intervention Commissione Entretien à Bavois"
+                                     width="1800" height="1350" loading="lazy" decoding="async">
+                            </span>
                         </a>
                     </div>
-                </div>
-            </section>
-
-            <!-- CONTACT -->
-            <section class="section contact-section" id="contact">
-                <div class="container">
-                    <div class="section-label reveal">
-                        <span class="label-text">Contact</span>
-                        <div class="label-line" aria-hidden="true"></div>
+                    <div class="about-text reveal" data-delay="1">
+                        <h2 class="section-heading" id="about-title">Une entreprise familiale, ancrée à Bavois.</h2>
+                        <p>
+                            Commissione Entretien est une entreprise familiale basée à Bavois, au cœur du canton de Vaud.
+                            Fondée par Lorenzo Commissione, elle intervient sur l'ensemble du canton pour l'entretien
+                            des canalisations, le nettoyage et la conciergerie.
+                        </p>
+                        <p>
+                            Nos véhicules et notre matériel — remorque d'hydrocurage, caméra d'inspection, machines
+                            électromécaniques, perche télescopique — sont dimensionnés pour traiter aussi bien
+                            un évier bouché qu'un réseau d'immeuble complet.
+                        </p>
                     </div>
-                    <div class="contact-grid">
-                        <div class="contact-left">
-                            <h2 class="contact-heading reveal">
-                                Besoin d'une<br>intervention<br>
-                                <span class="contact-heading--red">rapide ?</span>
-                            </h2>
-                            <p class="contact-sub reveal">Disponible 24h/24 et 7j/7 pour toutes les urgences. Un appel suffit.</p>
-                            <a href="tel:+41775217328" class="contact-phone-btn" aria-label="Appeler le 077 521 73 28">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
-                                077.521.73.28
+                </div>
+
+                <div class="values">
+                    <div class="value reveal">
+                        <h3>Professionnalisme</h3>
+                        <p>Chaque intervention est menée avec méthode, savoir-faire et respect de votre propriété.</p>
+                    </div>
+                    <div class="value reveal" data-delay="1">
+                        <h3>Qualité</h3>
+                        <p>Un résultat durable plutôt qu'un dépannage temporaire. Le travail bien fait, c'est notre signature.</p>
+                    </div>
+                    <div class="value reveal" data-delay="2">
+                        <h3>Réactivité</h3>
+                        <p>Disponibilité 24h/24 pour les urgences, délais tenus pour les interventions planifiées.</p>
+                    </div>
+                    <div class="value reveal" data-delay="3">
+                        <h3>Proximité</h3>
+                        <p>Une entreprise vaudoise : vous savez toujours à qui vous avez affaire.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ZONE D'INTERVENTION ==================== -->
+        <section class="section section--tight section--edge" id="zone" aria-labelledby="zone-title">
+            <div class="container">
+                <div class="zone-grid">
+                    <div class="reveal">
+                        <p class="section-label"><span>zone d'intervention</span></p>
+                        <h2 class="section-heading" id="zone-title">Tout le canton de Vaud.</h2>
+                        <p class="section-intro">
+                            Basés à Bavois, nous nous déplaçons rapidement de Lausanne à Yverdon-les-Bains,
+                            de Nyon à Payerne, ainsi que dans l'ensemble des communes environnantes.
+                        </p>
+                    </div>
+                    <div class="reveal" data-delay="1">
+                        <ul class="zone-list">
+                            <li>Bavois</li>
+                            <li>Orbe</li>
+                            <li>Yverdon-les-Bains</li>
+                            <li>Chavornay</li>
+                            <li>La Sarraz</li>
+                            <li>Cossonay</li>
+                            <li>Échallens</li>
+                            <li>Lausanne</li>
+                            <li>Renens</li>
+                            <li>Prilly</li>
+                            <li>Morges</li>
+                            <li>Nyon</li>
+                            <li>Payerne</li>
+                            <li>Moudon</li>
+                            <li>Lucens</li>
+                            <li>Vallorbe</li>
+                            <li>Le Mont-sur-Lausanne</li>
+                            <li>Penthalaz</li>
+                            <li>Éclépens</li>
+                            <li>Vufflens-la-Ville</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== QUESTIONS FRÉQUENTES ==================== -->
+        <section class="section section--tint" id="questions" aria-labelledby="faq-title">
+            <div class="container container--narrow">
+                <div class="pinned">
+                    <div class="pinned-head">
+                <p class="section-label reveal"><span>questions fréquentes</span></p>
+                        <h2 class="section-heading reveal" id="faq-title">Ce qu'on nous demande le plus souvent.</h2>
+                    </div>
+
+                    <div class="pinned-body">
+
+                <div class="faq reveal">
+                    <details>
+                        <summary>Intervenez-vous la nuit et le week-end ?</summary>
+                        <div class="faq-answer">
+                            <p>Oui. Les urgences de canalisation sont prises en charge 24h/24 et 7j/7, week-ends et
+                               jours fériés compris, sur l'ensemble du canton de Vaud. Un seul numéro :
+                               <a href="tel:+41775217328">077 521 73 28</a>.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Dans quelles communes du canton de Vaud intervenez-vous ?</summary>
+                        <div class="faq-answer">
+                            <p>Nous sommes basés à Bavois et intervenons dans tout le canton : Orbe, Yverdon-les-Bains,
+                               Chavornay, La Sarraz, Cossonay, Échallens, Lausanne, Renens, Prilly, Morges, Nyon,
+                               Payerne, Moudon, Vallorbe et les communes environnantes.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Combien coûte une intervention ?</summary>
+                        <div class="faq-answer">
+                            <p>Le devis est gratuit et sans engagement. Le montant dépend de la nature du blocage,
+                               de sa localisation et de la technique nécessaire — machine électromécanique, furet
+                               ou hydrocurage haute pression. Nous annonçons le cadre tarifaire avant d'intervenir.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Faut-il creuser pour localiser un bouchon ?</summary>
+                        <div class="faq-answer">
+                            <p>Non. Notre <a href="debouchage-curage-canalisation/#inspection-camera">caméra endoscopique
+                               haute résolution</a> permet un examen non destructif de la conduite : fissures, racines,
+                               affaissements et obstructions sont localisés sans creuser à l'aveugle. Un rapport écrit
+                               vous est remis après l'inspection.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Faut-il accéder au toit pour nettoyer des panneaux solaires ?</summary>
+                        <div class="faq-answer">
+                            <p>Non. Nous travaillons exclusivement
+                               <a href="nettoyage-panneaux-solaires/">à la perche télescopique</a>, depuis le sol ou
+                               une plateforme stable, à l'eau déminéralisée et sans produit chimique. Aucun risque de
+                               casse de tuile ni de dommage à l'installation.</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Travaillez-vous avec les régies et les copropriétés ?</summary>
+                        <div class="faq-answer">
+                            <p>Oui. Nous assurons
+                               <a href="nettoyage-conciergerie/#conciergerie">l'entretien régulier des parties communes</a>
+                               pour les régies, gérances et copropriétés, avec des contrats d'entretien adaptables :
+                               la fréquence des passages est ajustée à la taille et aux besoins de l'immeuble.</p>
+                        </div>
+                    </details>
+                </div>
+                    </div>
+                </div>            </div>
+        </section>
+
+        <!-- ==================== CONTACT ==================== -->
+        <section class="section section--ink" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <p class="section-label reveal"><span>contact</span></p>
+
+                <div class="contact-grid">
+                    <div class="reveal">
+                        <h2 class="contact-heading" id="contact-title">Besoin d'une intervention rapide ?</h2>
+                        <p class="contact-sub">
+                            Disponible 24h/24 et 7j/7 pour toutes les urgences. Devis gratuit et sans engagement
+                            pour les interventions planifiées.
+                        </p>
+                        <div class="hero-ctas">
+                            <a href="tel:+41775217328" class="btn btn--accent">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
+                                Appeler maintenant
                             </a>
+                            <a href="contact/" class="btn btn--light">Toutes nos coordonnées</a>
                         </div>
-                        <div class="contact-right reveal">
-                            <div class="contact-card">
-                                <a href="tel:+41775217328" class="contact-row" aria-label="Appeler le 077 521 73 28">
-                                    <div class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="#c8102e"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg></div>
-                                    <div class="contact-row-info">
-                                        <span class="contact-row-label">Téléphone</span>
-                                        <span class="contact-row-value">077.521.73.28</span>
-                                    </div>
-                                    <svg class="contact-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                                <a href="mailto:commissione.entretien@hotmail.com" class="contact-row" aria-label="Envoyer un email">
-                                    <div class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                                    <div class="contact-row-info">
-                                        <span class="contact-row-label">Email</span>
-                                        <span class="contact-row-value">commissione.entretien@hotmail.com</span>
-                                    </div>
-                                    <svg class="contact-row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                                <div class="contact-row contact-row--static">
-                                    <div class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                                    <div class="contact-row-info">
-                                        <span class="contact-row-label">Adresse</span>
-                                        <span class="contact-row-value">Rue du Haut du Village 5, 1372 Bavois</span>
-                                    </div>
-                                </div>
-                                <div class="contact-row contact-row--static contact-row--last">
-                                    <div class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                                    <div class="contact-row-info">
-                                        <span class="contact-row-label">Disponibilité</span>
-                                        <span class="contact-row-value">24h/24 — 7j/7 pour les urgences</span>
-                                    </div>
-                                </div>
+                    </div>
+
+                    <div class="reveal" data-delay="1">
+                        <div class="contact-card">
+                            <a href="tel:+41775217328" class="contact-row">
+                                <span class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg></span>
+                                <span class="contact-row-info">
+                                    <span class="contact-row-label">Téléphone</span>
+                                    <span class="contact-row-value">077 521 73 28</span>
+                                </span>
+                            </a>
+                            <a href="mailto:commissione.entretien@hotmail.com" class="contact-row">
+                                <span class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                                <span class="contact-row-info">
+                                    <span class="contact-row-label">Email</span>
+                                    <span class="contact-row-value">commissione.entretien@hotmail.com</span>
+                                </span>
+                            </a>
+                            <div class="contact-row">
+                                <span class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                                <span class="contact-row-info">
+                                    <span class="contact-row-label">Adresse</span>
+                                    <address class="contact-row-value">Rue du Haut du Village 5, 1372 Bavois</address>
+                                </span>
                             </div>
-                            <div class="contact-zone">
-                                <div class="contact-zone-header">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c8102e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    <span>Zone d'intervention</span>
-                                </div>
-                                <p>Tout le <strong>canton de Vaud</strong> — de Lausanne à Yverdon, de Nyon à Payerne. Déplacements rapides depuis Bavois.</p>
+                            <div class="contact-row">
+                                <span class="contact-row-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                                <span class="contact-row-info">
+                                    <span class="contact-row-label">Disponibilité</span>
+                                    <span class="contact-row-value">24h/24 — 7j/7 pour les urgences</span>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- FOOTER -->
-            <footer class="footer" id="footer">
-                <div class="container footer-content">
-                    <p class="footer-tagline">
-                        <span class="footer-tagline-main reveal">Canalisations &amp; Conciergerie.</span>
-                        <span class="footer-tagline-sub reveal footer-tagline-sub--delay">Une gestion totale de votre habitat.</span>
-                    </p>
-                    <div class="footer-bottom">
-                        <div class="footer-info">
-                            <p class="footer-status">DISPONIBLE 24H/24 — 7J/7</p>
-                            <p class="footer-name">Commissione Entretien</p>
-                            <p class="footer-copy">2025 — Bavois, Canton de Vaud</p>
-                        </div>
-                        <nav class="footer-links" aria-label="Navigation pied de page">
-                            <a href="#services" class="footer-link" data-nav-link>Services</a>
-                            <a href="#about" class="footer-link" data-nav-link>À propos</a>
-                            <a href="#contact" class="footer-link" data-nav-link>Contact</a>
-                        </nav>
-                    </div>
-                    <p class="footer-credit">Site créé par <a href="https://wearebrothers.ch" target="_blank" rel="noopener noreferrer" class="footer-credit-link">WEAREBROTHERS</a></p>
-                </div>
-            </footer>
-
-        </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- MOBILE BOTTOM BAR -->
-    <div class="mobile-bar" role="complementary" aria-label="Actions rapides">
-        <a href="tel:+41775217328" class="mobile-bar-call" aria-label="Appeler maintenant">
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-tagline reveal">
+                <span>Canalisations &amp; conciergerie.</span>
+                <span>Une gestion totale de votre habitat.</span>
+            </p>
+
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h2>Commissione Entretien</h2>
+                    <p class="footer-status">Disponible 24h/24</p>
+                    <p class="footer-note">Entreprise familiale vaudoise basée à Bavois, active dans tout le canton de Vaud.</p>
+                </div>
+
+                <nav class="footer-col" aria-label="Prestations">
+                    <h2>Prestations</h2>
+                    <ul>
+                        <li><a href="debouchage-curage-canalisation/">Débouchage &amp; curage</a></li>
+                        <li><a href="debouchage-curage-canalisation/#inspection-camera">Inspection par caméra</a></li>
+                        <li><a href="nettoyage-panneaux-solaires/">Nettoyage panneaux solaires</a></li>
+                        <li><a href="nettoyage-conciergerie/">Nettoyage intérieur-extérieur</a></li>
+                        <li><a href="nettoyage-conciergerie/#conciergerie">Conciergerie d'immeubles</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer-col" aria-label="Zone d'intervention">
+                    <h2>Zone d'intervention</h2>
+                    <ul>
+                        <li><a href="#zone">Orbe &amp; Yverdon-les-Bains</a></li>
+                        <li><a href="#zone">Lausanne &amp; Morges</a></li>
+                        <li><a href="#zone">Nyon &amp; Payerne</a></li>
+                        <li><a href="#zone">Tout le canton de Vaud</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer-col">
+                    <h2>Contact</h2>
+                    <ul>
+                        <li><a href="contact/">Page contact</a></li>
+                        <li><a href="tel:+41775217328">077 521 73 28</a></li>
+                        <li><a href="mailto:commissione.entretien@hotmail.com">commissione.entretien@hotmail.com</a></li>
+                        <li><a href="https://maps.google.com/?q=Rue+du+Haut+du+Village+5,+1372+Bavois" target="_blank" rel="noopener">Rue du Haut du Village 5, 1372 Bavois</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Commissione Entretien — Bavois, canton de Vaud</p>
+                <p>Site créé par <a href="https://wearebrothers.ch" target="_blank" rel="noopener">WeAreBrothers</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BARRE MOBILE ==================== -->
+    <div class="mobile-bar">
+        <a href="tel:+41775217328" class="mobile-bar-call">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
             Appeler maintenant
         </a>
@@ -445,11 +853,6 @@
         </a>
     </div>
 
-    <!-- FLOATING CTA (desktop) -->
-    <a href="tel:+41775217328" class="floating-cta" id="floatingCta" aria-label="Appel urgence 24/7">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
-        Urgence 24/7
-    </a>
-
 </body>
+
 </html>
