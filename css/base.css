@@ -134,6 +134,18 @@ strong {
     padding-block: clamp(3rem, 1.8rem + 6vw, 5.5rem);
 }
 
+/* Sur téléphone, la formule ci-dessus produisait 134px de vide entre chaque
+   section — près d'un sixième d'écran, dix fois dans la page. */
+@media (max-width: 600px) {
+    .section {
+        padding-block: 3.2rem;
+    }
+
+    .section--tight {
+        padding-block: 2.6rem;
+    }
+}
+
 .section--ink {
     background: var(--ink);
     color: var(--paper);
@@ -195,6 +207,14 @@ strong {
     color: var(--grey-600);
     max-width: 56ch;
     margin-top: 1.4rem;
+}
+
+/* La mesure courte de 20ch met en valeur les titres sur grand écran ; sur
+   téléphone elle bride la colonne et provoque des coupures orphelines. */
+@media (max-width: 600px) {
+    .section-heading {
+        max-width: none;
+    }
 }
 
 .section--ink .section-intro {
