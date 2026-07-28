@@ -368,36 +368,43 @@
     font-size: 0.96rem;
 }
 
-/* Dix-huit prestations : en capsules, la liste formait un mur d'un écran et
-   demi à l'alignement irrégulier. En colonnes, elle tient en un coup d'œil. */
+/* Nuage de capsules : elles se rangent d'elles-mêmes, deux à trois par ligne
+   selon la longueur du libellé. Resserrées par rapport à la version d'origine,
+   et calées sur les capsules de communes pour garder un seul style. */
 .tags {
-    display: grid;
-    /* 200px : le seuil sous lequel un libellé passerait sur deux lignes. Sur
-       téléphone la liste reste donc en une colonne, parfaitement régulière. */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    column-gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     margin-top: 1.4rem;
-    border-top: 1px solid var(--grey-200);
 }
 
 .tags li {
-    position: relative;
-    padding: 0.6rem 0 0.6rem 0.9rem;
-    border-bottom: 1px solid var(--grey-200);
-    font-size: 0.9rem;
+    padding: 0.36rem 0.72rem;
+    background: var(--card);
+    border: 1px solid var(--grey-200);
+    border-radius: 100px;
+    font-size: 0.82rem;
     line-height: 1.4;
     color: var(--grey-600);
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 
-.tags li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 1.05em;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--accent);
+@media (min-width: 600px) {
+    .tags {
+        gap: 0.5rem;
+    }
+
+    .tags li {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.88rem;
+    }
+}
+
+@media (hover: hover) {
+    .tags li:hover {
+        border-color: var(--accent);
+        color: var(--ink);
+    }
 }
 
 /* --- Bande urgence — le pic de la page ------------------------------------- */
