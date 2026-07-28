@@ -28,14 +28,12 @@ export function initLightbox() {
         </button>
         <figure class="lightbox-figure">
             <img alt="">
-            <figcaption></figcaption>
         </figure>
         <p class="lightbox-count"></p>
     `;
     document.body.appendChild(box);
 
     const img = box.querySelector("img");
-    const caption = box.querySelector("figcaption");
     const count = box.querySelector(".lightbox-count");
     const closeBtn = box.querySelector(".lightbox-close");
     const prevBtn = box.querySelector(".lightbox-nav--prev");
@@ -52,8 +50,6 @@ export function initLightbox() {
         if (!source) return;
 
         img.src = source.currentSrc || source.src;
-        img.alt = source.alt || "";
-        caption.textContent = trigger.dataset.caption || source.alt || "";
         count.textContent = `${index + 1} / ${triggers.length}`;
     };
 

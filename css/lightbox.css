@@ -48,13 +48,6 @@
     transform: none;
 }
 
-.lightbox figcaption {
-    margin: 0;
-    max-width: 62ch;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.78);
-}
-
 .lightbox-close,
 .lightbox-nav {
     position: absolute;
