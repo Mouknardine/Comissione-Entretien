@@ -48,6 +48,13 @@
     }
 }
 
+/* Téléphone en paysage : le header rendrait 18 % de la hauteur inutilisable. */
+@media (max-width: 900px) and (max-height: 620px) {
+    :root {
+        --header-h: 56px;
+    }
+}
+
 html,
 body {
     background: var(--paper);
@@ -63,7 +70,14 @@ body {
     overflow-x: hidden;
 }
 
+/* Page figée derrière le menu ou la visionneuse. La position fixe est le seul
+   verrou que respecte iOS Safari ; `top` est posé en JS pour ne pas perdre la
+   position de défilement. */
 body.is-locked {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
     overflow: hidden;
 }
 

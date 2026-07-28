@@ -3,6 +3,8 @@
  * Navigation clavier (←, →, Échap), fermeture au clic sur le fond,
  * restitution du focus au déclencheur à la fermeture.
  */
+import { lockScroll, unlockScroll } from "./scroll-lock.js";
+
 export function initLightbox() {
     const triggers = [...document.querySelectorAll(".zoom")];
     if (!triggers.length) return;
@@ -59,14 +61,14 @@ export function initLightbox() {
         render();
         box.classList.add("is-open");
         box.setAttribute("aria-hidden", "false");
-        document.body.classList.add("is-locked");
+        lockScroll();
         closeBtn.focus();
     };
 
     const close = () => {
         box.classList.remove("is-open");
         box.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("is-locked");
+        unlockScroll();
         opener?.focus();
         opener = null;
     };
