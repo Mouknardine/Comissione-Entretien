@@ -318,9 +318,15 @@
     color: var(--grey-600);
 }
 
+/* La carte entière est le lien : « Découvrir le service » n'est plus qu'un
+   repère visuel, son soulignement suit donc le survol de la carte. */
 .service-card .link {
     margin-top: auto;
     padding-top: 1.5rem;
+}
+
+.service-card:hover .link::after {
+    transform: scaleX(1);
 }
 
 .service-card .link svg {
