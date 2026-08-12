@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Les animations d'apparition masquent du contenu (opacité 0). Cette classe
+         les active UNIQUEMENT si le JS tourne : sans elle, la page s'affiche
+         entièrement, y compris pour un crawler qui n'exécuterait rien. -->
+    <script>document.documentElement.className += " js-anim";</script>
+
+    <title>Page introuvable (404) | Commissione Entretien</title>
+    <meta name="description" content="Cette page n'existe pas ou a été déplacée. Retrouvez nos prestations de débouchage, nettoyage et conciergerie dans le canton de Vaud.">
+
+    <!-- Une page d'erreur ne doit jamais entrer dans l'index -->
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#c8102e">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Icônes -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Typographie -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+
+    <!-- Styles — chemins absolus : cette page est servie depuis n'importe quelle URL -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/page.css">
+
+    <!-- Scripts -->
+    <script type="module" src="/js/main.js"></script>
+</head>
+
+<body>
+    <a href="#contenu" class="skip-link">Aller au contenu</a>
+
+    <header class="header" data-header>
+        <a href="/" class="header-logo" aria-label="Commissione Entretien — accueil">
+            <svg class="logo-mark" width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="1.3" y="1.3" width="37.4" height="37.4" rx="9.5" stroke="currentColor" stroke-width="1.8"/><path d="M20.4 14.6a6.7 6.7 0 100 10.8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M24.6 14.2h6.6M24.6 20h5M24.6 25.8h6.6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <span class="header-logo-text">
+                <span class="logo-name">Commissione</span>
+                <span class="logo-sub">Entretien</span>
+            </span>
+        </a>
+
+        <nav class="header-nav" aria-label="Navigation principale">
+            <a href="/">Accueil</a>
+            <a href="/debouchage-curage-canalisation/">Canalisations</a>
+            <a href="/nettoyage-panneaux-solaires/">Panneaux solaires</a>
+            <a href="/nettoyage-conciergerie/">Nettoyage &amp; conciergerie</a>
+            <a href="/contact/">Contact</a>
+        </nav>
+
+        <div class="header-right">
+            <a href="tel:+41775217328" class="header-phone">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.38-.67.27-1.04C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
+                Urgence 24/7
+            </a>
+            <button class="header-menu-btn" data-menu-toggle aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-overlay">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="nav-overlay" id="nav-overlay" data-nav-overlay aria-hidden="true" aria-label="Navigation mobile">
+        <div class="nav-links">
+            <a href="/" class="nav-link">Accueil</a>
+            <a href="/debouchage-curage-canalisation/" class="nav-link">Canalisations</a>
+            <a href="/nettoyage-panneaux-solaires/" class="nav-link">Panneaux solaires</a>
+            <a href="/nettoyage-conciergerie/" class="nav-link">Nettoyage &amp; conciergerie</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-contact">
+            <a href="tel:+41775217328" class="nav-phone">077 521 73 28</a>
+            <a href="mailto:commissione.entretien@hotmail.com">commissione.entretien@hotmail.com</a>
+            <a href="https://maps.google.com/?q=Rue+du+Haut+du+Village+5,+1372+Bavois" target="_blank" rel="noopener">Rue du Haut du Village 5, 1372 Bavois</a>
+        </div>
+    </nav>
+
+    <main id="contenu" class="page-body">
+
+        <span class="header-sentinel" data-header-sentinel aria-hidden="true"></span>
+
+        <section class="container">
+            <p class="page-eyebrow reveal">Erreur 404</p>
+            <h1 class="reveal" data-delay="1">Cette page n'existe pas.</h1>
+
+            <div class="prose reveal" data-delay="2">
+                <p>
+                    Le lien est peut-être erroné, ou la page a été déplacée lors de la refonte du site.
+                    Rien de grave : voici où aller.
+                </p>
+            </div>
+
+            <div class="prose reveal" data-delay="3">
+                <h2>Nos prestations</h2>
+                <ul>
+                    <li><a href="/debouchage-curage-canalisation/">Débouchage, curage et inspection de canalisations</a></li>
+                    <li><a href="/nettoyage-panneaux-solaires/">Nettoyage de panneaux solaires</a></li>
+                    <li><a href="/nettoyage-conciergerie/">Nettoyage intérieur-extérieur et conciergerie</a></li>
+                    <li><a href="/contact/">Nous contacter</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cta-band" aria-labelledby="cta-404">
+            <div class="container">
+                <div class="cta-band-inner">
+                    <h2 id="cta-404" class="reveal">Une urgence en cours ?</h2>
+                    <div class="cta-band-actions reveal" data-delay="1">
+                        <a href="tel:+41775217328" class="btn btn--accent">077 521 73 28</a>
+                        <a href="/contact/" class="btn btn--ghost">Demander un devis gratuit</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-tagline reveal">
+                <span>Canalisations &amp; conciergerie.</span>
+                <span>Une gestion totale de votre habitat.</span>
+            </p>
+
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h2>Commissione Entretien</h2>
+                    <p class="footer-status">Disponible 24h/24</p>
+                    <p class="footer-note">Entreprise familiale vaudoise basée à Bavois, active dans tout le canton de Vaud.</p>
+                </div>
+
+                <nav class="footer-col" aria-label="Prestations">
+                    <h2>Prestations</h2>
+                    <ul>
+                        <li><a href="/debouchage-curage-canalisation/">Débouchage &amp; curage</a></li>
+                        <li><a href="/debouchage-curage-canalisation/#inspection-camera">Inspection par caméra</a></li>
+                        <li><a href="/nettoyage-panneaux-solaires/">Nettoyage panneaux solaires</a></li>
+                        <li><a href="/nettoyage-conciergerie/">Nettoyage intérieur-extérieur</a></li>
+                        <li><a href="/nettoyage-conciergerie/#conciergerie">Conciergerie d'immeubles</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer-col" aria-label="Zone d'intervention">
+                    <h2>Zone d'intervention</h2>
+                    <ul>
+                        <li><a href="/#zone">Orbe &amp; Yverdon-les-Bains</a></li>
+                        <li><a href="/#zone">Lausanne &amp; Morges</a></li>
+                        <li><a href="/#zone">Nyon &amp; Payerne</a></li>
+                        <li><a href="/#zone">Tout le canton de Vaud</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer-col">
+                    <h2>Contact</h2>
+                    <ul>
+                        <li><a href="/contact/">Page contact</a></li>
+                        <li><a href="tel:+41775217328">077 521 73 28</a></li>
+                        <li><a href="mailto:commissione.entretien@hotmail.com">commissione.entretien@hotmail.com</a></li>
+                        <li><a href="https://maps.google.com/?q=Rue+du+Haut+du+Village+5,+1372+Bavois" target="_blank" rel="noopener">Rue du Haut du Village 5, 1372 Bavois</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Commissione Entretien — Bavois, canton de Vaud</p>
+                <p>Site créé par <a href="https://wearebrothers.ch" target="_blank" rel="noopener">WeAreBrothers</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

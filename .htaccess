@@ -1,0 +1,89 @@
+# ============================================================================
+#  Commissione Entretien — configuration Apache (Infomaniak)
+#
+#  CE FICHIER DOIT RESTER DANS LE DÉPÔT.
+#  Le workflow de déploiement utilise `dangerous-clean-slate: true`, qui vide
+#  le dossier FTP avant chaque envoi. Tout fichier présent uniquement sur le
+#  serveur — .htaccess compris — serait effacé sans avertissement. Versionné
+#  ici, il est réécrit à chaque déploiement.
+#
+#  ⚠ Avant le premier déploiement : récupérer le .htaccess actuellement en
+#  ligne et reporter ici toute règle spécifique qui ne figurerait pas déjà.
+# ============================================================================
+
+# --- Page d'erreur personnalisée -------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Redirections canoniques ------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # HTTPS forcé. Infomaniak terminant le SSL en amont, %{HTTPS} n'est pas
+    # toujours renseigné : on teste aussi l'en-tête transmise par le proxy.
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # www → sans www, pour coller aux <link rel="canonical"> du site.
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# --- Compression ------------------------------------------------------------
+# Les images (JPG/WebP/PNG) sont déjà compressées : les réencoder ne gagne
+# rien et coûte du CPU. On ne cible que le texte.
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/xml
+    AddOutputFilterByType DEFLATE application/rss+xml image/svg+xml
+    AddOutputFilterByType DEFLATE application/manifest+json
+</IfModule>
+
+# --- Mise en cache navigateur ----------------------------------------------
+# Le HTML n'est jamais mis en cache longtemps (le contenu doit pouvoir changer),
+# les assets le sont durablement.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault                        "access plus 1 month"
+
+    ExpiresByType text/html               "access plus 0 seconds"
+    ExpiresByType application/xml         "access plus 0 seconds"
+    ExpiresByType text/xml                "access plus 0 seconds"
+
+    ExpiresByType text/css                "access plus 1 year"
+    ExpiresByType application/javascript  "access plus 1 year"
+
+    ExpiresByType image/webp              "access plus 1 year"
+    ExpiresByType image/jpeg              "access plus 1 year"
+    ExpiresByType image/png               "access plus 1 year"
+    ExpiresByType image/svg+xml           "access plus 1 year"
+    ExpiresByType image/x-icon            "access plus 1 year"
+    ExpiresByType font/woff2              "access plus 1 year"
+</IfModule>
+
+# --- Types MIME -------------------------------------------------------------
+# Garde-fou : un WebP servi en type inconnu n'est pas affiché par certains
+# navigateurs, et le <picture> retomberait silencieusement sur le JPG.
+<IfModule mod_mime.c>
+    AddType image/webp                    .webp
+    AddType application/manifest+json     .webmanifest
+    AddType image/svg+xml                 .svg
+</IfModule>
+
+# --- En-têtes de sécurité ---------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# --- Divers -----------------------------------------------------------------
+# Pas de listing de répertoire (un dossier sans index ne doit rien révéler).
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# Encodage par défaut des fichiers texte
+AddDefaultCharset UTF-8

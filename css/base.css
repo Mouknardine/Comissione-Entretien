@@ -359,31 +359,37 @@ strong {
 /* --- Reveal au scroll ---------------------------------------------------- */
 
 /* Discret par choix : le geste marqué du site est le rideau qui découvre les
-   photos, pas l'entrée des blocs de texte. */
-.reveal {
+   photos, pas l'entrée des blocs de texte.
+
+   IMPORTANT — tout ce qui masque du contenu est conditionné à `.js-anim`, une
+   classe posée sur <html> par un script inline en tête de page. Sans JS (script
+   bloqué, module en erreur, crawler qui n'exécute rien), aucune règle d'opacité
+   ne s'applique et la page reste intégralement lisible. L'animation est un
+   bonus, jamais un prérequis à l'affichage. */
+.js-anim .reveal {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
 }
 
-.reveal.is-visible {
+.js-anim .reveal.is-visible {
     opacity: 1;
     transform: none;
 }
 
-.reveal[data-delay="1"] {
+.js-anim .reveal[data-delay="1"] {
     transition-delay: 0.09s;
 }
 
-.reveal[data-delay="2"] {
+.js-anim .reveal[data-delay="2"] {
     transition-delay: 0.18s;
 }
 
-.reveal[data-delay="3"] {
+.js-anim .reveal[data-delay="3"] {
     transition-delay: 0.27s;
 }
 
-.reveal[data-delay="4"] {
+.js-anim .reveal[data-delay="4"] {
     transition-delay: 0.36s;
 }
 
@@ -401,30 +407,47 @@ strong {
     width: 76px;
     height: 3px;
     background: var(--accent);
-    transform: scaleX(0);
     transform-origin: left center;
+}
+
+/* Le trait n'est replié qu'en présence de JS, sinon il reste déployé. */
+.js-anim .section-heading::after {
+    transform: scaleX(0);
     transition: transform 0.85s var(--ease) 0.2s;
 }
 
-.section-heading.is-visible::after,
-.is-visible .section-heading::after {
+.js-anim .section-heading.is-visible::after,
+.js-anim .is-visible .section-heading::after {
     transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-    .reveal {
+    .js-anim .reveal {
         opacity: 1;
         transform: none;
     }
 
-    .section-heading::after {
+    .js-anim .section-heading::after {
         transform: scaleX(1);
         transition: none;
     }
 }
 
 /* --- Médias -------------------------------------------------------------- */
+
+/* Les photos sont servies en WebP via <picture>, avec repli JPG/PNG sur l'<img>.
+   `display: contents` fait disparaître la boîte du <picture> de la mise en page :
+   l'<img> reste l'enfant direct de son conteneur, exactement comme avant
+   l'ajout du <picture>.
+
+   Ce n'est pas cosmétique. Sans cette règle, le <picture> devient un élément
+   de flux à part entière — dans le hero, qui est en `display: flex`, il se
+   retrouve dimensionné à zéro (son unique enfant est en position absolue) et
+   l'image de fond ne s'affiche plus du tout. */
+picture {
+    display: contents;
+}
 
 /* Par défaut une photo n'est JAMAIS rognée : elle garde son ratio d'origine.
    Le recadrage est un choix explicite, via `.media--crop`. */
@@ -449,7 +472,7 @@ strong {
 
 /* La photo est masquée par un aplat rouge qui se retire quand le bloc entre
    dans l'écran, pendant que l'image se dézoome. */
-.reveal-media::before {
+.js-anim .reveal-media::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -460,26 +483,26 @@ strong {
     transition: transform 0.9s var(--ease-out);
 }
 
-.reveal-media img {
+.js-anim .reveal-media img {
     transform: translate3d(0, 0, 0) scale(1.14);
 }
 
-.reveal-media.is-visible::before {
+.js-anim .reveal-media.is-visible::before {
     transform: scaleX(0);
     transform-origin: right center;
 }
 
-.reveal-media.is-visible img {
+.js-anim .reveal-media.is-visible img {
     transform: translate3d(0, 0, 0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
 
-    .reveal-media::before {
+    .js-anim .reveal-media::before {
         display: none;
     }
 
-    .reveal-media img,
+    .js-anim .reveal-media img,
     .media img {
         transform: none;
         transition: none;

@@ -51,7 +51,12 @@ export function initLightbox() {
         const source = trigger.querySelector("img");
         if (!source) return;
 
-        img.src = source.currentSrc || source.src;
+        // Les vignettes passent par <picture>/srcset : `currentSrc` renverrait la
+        // variante réduite choisie pour la grille (800 px), floue une fois
+        // ouverte en plein écran. Le href du déclencheur pointe la photo pleine
+        // résolution : c'est lui qui fait foi.
+        img.src = trigger.getAttribute("href") || source.currentSrc || source.src;
+        img.alt = source.alt || "";
         count.textContent = `${index + 1} / ${triggers.length}`;
     };
 

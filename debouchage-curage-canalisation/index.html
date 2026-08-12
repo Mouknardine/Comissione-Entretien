@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Débouchage &amp; Curage Canalisation Vaud — Inspection Caméra | Commissione Entretien</title>
-    <meta name="description" content="Débouchage, curage haute pression et inspection par caméra de vos canalisations, 24h/24 dans le canton de Vaud. Intervention rapide depuis Bavois. Devis gratuit.">
+    <!-- Les animations d'apparition masquent du contenu (opacité 0). Cette classe
+         les active UNIQUEMENT si le JS tourne : sans elle, la page s'affiche
+         entièrement, y compris pour un crawler qui n'exécuterait rien. -->
+    <script>document.documentElement.className += " js-anim";</script>
+
+    <title>Débouchage Canalisation Vaud 24h/24 | Commissione Entretien</title>
+    <meta name="description" content="Débouchage d'urgence, curage haute pression et inspection par caméra de vos canalisations, 24h/24 dans le canton de Vaud. Devis gratuit depuis Bavois.">
     <link rel="canonical" href="https://commissione-entretien.ch/debouchage-curage-canalisation/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="#c8102e">
@@ -43,7 +48,9 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
     <!-- Image LCP -->
-    <link rel="preload" as="image" href="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp"
+          imagesrcset="../assets/photos/camion-hydrocureuse-immeuble-vaud-800.webp 800w, ../assets/photos/camion-hydrocureuse-immeuble-vaud-1200.webp 1200w"
+          imagesizes="(max-width: 940px) 100vw, 560px" fetchpriority="high">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/reset.css">
@@ -228,9 +235,12 @@
                     <a class="zoom" href="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
-                                 alt=""
-                                 width="1350" height="1800" fetchpriority="high" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/camion-hydrocureuse-immeuble-vaud-800.webp 800w, ../assets/photos/camion-hydrocureuse-immeuble-vaud-1200.webp 1200w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
+                                     alt="Fourgon et remorque de curage devant un immeuble, tuyau orange déroulé jusqu'à un appartement de l'étage"
+                                     width="1200" height="1600" decoding="async" fetchpriority="high">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -264,9 +274,12 @@
                     <a class="zoom" href="../assets/photos/debouchage-sanitaire-sous-evier.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/debouchage-sanitaire-sous-evier.jpg"
-                                 alt=""
-                                 width="1350" height="1800" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/debouchage-sanitaire-sous-evier-800.webp 800w, ../assets/photos/debouchage-sanitaire-sous-evier-1350.webp 1350w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/debouchage-sanitaire-sous-evier.jpg"
+                                     alt="Câble d'une machine à arbre flexible engagé dans une évacuation ouverte sous un évier, siphon démonté"
+                                     width="1350" height="1800" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -324,9 +337,12 @@
                     <a class="zoom" href="../assets/photos/camion-remorque-hydrocurage-bavois.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/camion-remorque-hydrocurage-bavois.jpg"
-                                 alt=""
-                                 width="1800" height="1350" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/camion-remorque-hydrocurage-bavois-800.webp 800w, ../assets/photos/camion-remorque-hydrocurage-bavois-1600.webp 1600w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/camion-remorque-hydrocurage-bavois.jpg"
+                                     alt="Remorque de curage attelée au fourgon, avec ses deux enrouleurs de tuyaux haute pression"
+                                     width="1600" height="1200" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -360,9 +376,12 @@
                     <a class="zoom" href="../assets/photos/chantier-canalisation-tranchee-vaud.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/chantier-canalisation-tranchee-vaud.jpg"
-                                 alt=""
-                                 width="1350" height="1800" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/chantier-canalisation-tranchee-vaud-800.webp 800w, ../assets/photos/chantier-canalisation-tranchee-vaud-1200.webp 1200w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/chantier-canalisation-tranchee-vaud.jpg"
+                                     alt="Tranchée ouverte en plein champ, mini-pelle et raccords de canalisation en PVC orange prêts à poser"
+                                     width="1200" height="1600" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>

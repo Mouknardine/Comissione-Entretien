@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Contact — Commissione Entretien, Bavois (Canton de Vaud)</title>
-    <meta name="description" content="Contactez Commissione Entretien à Bavois : 077 521 73 28, disponible 24h/24 pour les urgences de canalisation. Adresse, horaires et zone d'intervention dans tout le canton de Vaud.">
+    <!-- Les animations d'apparition masquent du contenu (opacité 0). Cette classe
+         les active UNIQUEMENT si le JS tourne : sans elle, la page s'affiche
+         entièrement, y compris pour un crawler qui n'exécuterait rien. -->
+    <script>document.documentElement.className += " js-anim";</script>
+
+    <title>Contact &amp; Devis Gratuit — Commissione Entretien, Bavois</title>
+    <meta name="description" content="Une urgence, un devis ou une question ? Joignez Commissione Entretien à Bavois, 24h/24, pour tout le canton de Vaud. Réponse rapide, devis gratuit.">
     <link rel="canonical" href="https://commissione-entretien.ch/contact/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="#c8102e">
@@ -42,6 +47,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+
+    <!-- Image LCP -->
+    <link rel="preload" as="image" type="image/webp"
+          imagesrcset="../assets/photos/flotte-vehicules-commissione-entretien-800.webp 800w, ../assets/photos/flotte-vehicules-commissione-entretien-1600.webp 1600w"
+          imagesizes="100vw" fetchpriority="high">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/reset.css">
@@ -171,9 +181,12 @@
 
         <!-- ==================== OUVERTURE ==================== -->
         <section class="contact-hero" aria-labelledby="contact-title">
-            <img src="../assets/photos/flotte-vehicules-commissione-entretien.jpg"
-                 alt=""
-                 class="contact-hero-bg" width="1800" height="1350" fetchpriority="high" decoding="async">
+            <picture>
+                <source type="image/webp" srcset="../assets/photos/flotte-vehicules-commissione-entretien-800.webp 800w, ../assets/photos/flotte-vehicules-commissione-entretien-1600.webp 1600w" sizes="100vw">
+                <img src="../assets/photos/flotte-vehicules-commissione-entretien.jpg"
+                     alt="Les trois véhicules de Commissione Entretien alignés, dont deux fourgons marqués"
+                     width="1600" height="1200" decoding="async" fetchpriority="high" class="contact-hero-bg">
+            </picture>
             <div class="contact-hero-scrim" aria-hidden="true"></div>
             <div class="hero-rule" aria-hidden="true"></div>
 

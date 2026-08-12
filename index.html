@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Débouchage, Nettoyage &amp; Conciergerie Vaud | Commissione Entretien</title>
-    <meta name="description" content="Débouchage, curage et inspection caméra de canalisations, nettoyage de panneaux solaires, façades, terrasses et conciergerie d'immeubles dans tout le canton de Vaud. 24h/24 depuis Bavois. Devis gratuit.">
+    <!-- Les animations d'apparition masquent du contenu (opacité 0). Cette classe
+         les active UNIQUEMENT si le JS tourne : sans elle, la page s'affiche
+         entièrement, y compris pour un crawler qui n'exécuterait rien. -->
+    <script>document.documentElement.className += " js-anim";</script>
+
+    <title>Débouchage &amp; Nettoyage Vaud 24h/24 | Commissione Entretien</title>
+    <meta name="description" content="Débouchage, curage, nettoyage et conciergerie dans tout le canton de Vaud. Entreprise familiale à Bavois, intervention 24h/24. Devis gratuit.">
     <link rel="canonical" href="https://commissione-entretien.ch/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="#c8102e">
@@ -50,7 +55,9 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
     <!-- Image LCP -->
-    <link rel="preload" as="image" href="assets/paysage-vaud-bavois.png" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp"
+          imagesrcset="assets/paysage-vaud-bavois-800.webp 800w, assets/paysage-vaud-bavois-1080.webp 1080w"
+          imagesizes="100vw" fetchpriority="high">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/reset.css">
@@ -231,14 +238,12 @@
 
         <!-- ==================== HERO ==================== -->
         <section class="hero" aria-labelledby="hero-title">
-            <img
-                src="assets/paysage-vaud-bavois.png"
-                alt=""
-                class="hero-bg"
-                width="1080"
-                height="624"
-                fetchpriority="high"
-                decoding="async">
+            <picture>
+                <source type="image/webp" srcset="assets/paysage-vaud-bavois-800.webp 800w, assets/paysage-vaud-bavois-1080.webp 1080w" sizes="100vw">
+                <img src="assets/paysage-vaud-bavois.png"
+                     alt="Plaine vaudoise au printemps : champs de blé et de colza, hameau et crête du Jura à l'horizon"
+                     width="1080" height="624" decoding="async" fetchpriority="high" class="hero-bg">
+            </picture>
             <div class="hero-scrim" aria-hidden="true"></div>
             <div class="hero-rule" aria-hidden="true"></div>
 
@@ -294,9 +299,12 @@
                     <a href="debouchage-curage-canalisation/" class="service-card reveal">
                         <p class="service-badge">24h/24 — 7j/7</p>
                         <div class="media media--crop reveal-media">
-                            <img src="assets/photos/camion-remorque-hydrocurage-bavois.jpg"
-                                 alt=""
-                                 width="1800" height="1350" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="assets/photos/camion-remorque-hydrocurage-bavois-800.webp 800w, assets/photos/camion-remorque-hydrocurage-bavois-1600.webp 1600w" sizes="(max-width: 700px) 100vw, (max-width: 1040px) 50vw, 400px">
+                                <img src="assets/photos/camion-remorque-hydrocurage-bavois.jpg"
+                                     alt="Fourgon Commissione Entretien attelé à sa remorque de curage, sur une place de village"
+                                     width="1600" height="1200" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-body">
                             <h3 class="service-title">Canalisations</h3>
@@ -320,9 +328,12 @@
                     <a href="nettoyage-panneaux-solaires/" class="service-card reveal" data-delay="1">
                         <p class="service-badge service-badge--neutral">Sans accès au toit</p>
                         <div class="media media--crop reveal-media">
-                            <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
-                                 alt=""
-                                 width="1800" height="1350" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="assets/photos/nettoyage-panneaux-solaires-perche-800.webp 800w, assets/photos/nettoyage-panneaux-solaires-perche-1600.webp 1600w" sizes="(max-width: 700px) 100vw, (max-width: 1040px) 50vw, 400px">
+                                <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
+                                     alt="Panneaux solaires nettoyés à la brosse sur perche télescopique, depuis le sol"
+                                     width="1800" height="1350" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-body">
                             <h3 class="service-title">Panneaux solaires</h3>
@@ -345,9 +356,12 @@
                     <a href="nettoyage-conciergerie/" class="service-card reveal" data-delay="2">
                         <p class="service-badge service-badge--neutral">Privés &amp; régies</p>
                         <div class="media media--crop reveal-media">
-                            <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
-                                 alt=""
-                                 width="1800" height="1012" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="assets/photos/nettoyage-terrasse-dallage-avant-apres-800.webp 800w, assets/photos/nettoyage-terrasse-dallage-avant-apres-1600.webp 1600w" sizes="(max-width: 700px) 100vw, (max-width: 1040px) 50vw, 400px">
+                                <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                                     alt="Terrasse dallée avant et après nettoyage haute pression"
+                                     width="1600" height="899" loading="lazy" decoding="async">
+                            </picture>
                         </div>
                         <div class="service-body">
                             <h3 class="service-title">Nettoyage &amp; conciergerie</h3>
@@ -483,9 +497,12 @@
                         <a class="zoom" href="assets/photos/chantier-canalisation-tranchee-vaud.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/chantier-canalisation-tranchee-vaud.jpg"
-                                     alt=""
-                                     width="1350" height="1800" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/chantier-canalisation-tranchee-vaud-800.webp 800w, assets/photos/chantier-canalisation-tranchee-vaud-1200.webp 1200w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/chantier-canalisation-tranchee-vaud.jpg"
+                                         alt="Tranchée ouverte en plein champ, mini-pelle et raccords de canalisation en PVC orange prêts à poser"
+                                         width="1200" height="1600" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -494,9 +511,12 @@
                         <a class="zoom" href="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
-                                     alt=""
-                                     width="1800" height="1012" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/nettoyage-terrasse-dallage-avant-apres-800.webp 800w, assets/photos/nettoyage-terrasse-dallage-avant-apres-1600.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                                         alt="Terrasse dallée encrassée de mousse à gauche, nettoyée à droite après passage haute pression"
+                                         width="1600" height="899" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -505,9 +525,12 @@
                         <a class="zoom" href="assets/photos/debouchage-sanitaire-sous-evier.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/debouchage-sanitaire-sous-evier.jpg"
-                                     alt=""
-                                     width="1350" height="1800" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/debouchage-sanitaire-sous-evier-800.webp 800w, assets/photos/debouchage-sanitaire-sous-evier-1350.webp 1350w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/debouchage-sanitaire-sous-evier.jpg"
+                                         alt="Câble d'une machine à arbre flexible engagé dans une évacuation ouverte sous un évier, siphon démonté"
+                                         width="1350" height="1800" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -516,9 +539,12 @@
                         <a class="zoom" href="assets/photos/nettoyage-facade-maison-avant-apres.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/nettoyage-facade-maison-avant-apres.jpg"
-                                     alt=""
-                                     width="1012" height="1800" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/nettoyage-facade-maison-avant-apres-800.webp 800w, assets/photos/nettoyage-facade-maison-avant-apres-1012.webp 1012w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/nettoyage-facade-maison-avant-apres.jpg"
+                                         alt="Façade de villa avant nettoyage en haut, crépi grisé, et après nettoyage en bas, crépi redevenu blanc"
+                                         width="1012" height="1800" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -527,9 +553,12 @@
                         <a class="zoom" href="assets/photos/nettoyage-panneaux-solaires-perche.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
-                                     alt=""
-                                     width="1800" height="1350" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/nettoyage-panneaux-solaires-perche-800.webp 800w, assets/photos/nettoyage-panneaux-solaires-perche-1600.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/nettoyage-panneaux-solaires-perche.jpg"
+                                         alt="Panneaux solaires noirs sur toiture en tuiles, nettoyés à la brosse sur perche télescopique"
+                                         width="1800" height="1350" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -538,9 +567,12 @@
                         <a class="zoom" href="assets/photos/camion-hydrocureuse-immeuble-vaud.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
-                                     alt=""
-                                     width="1350" height="1800" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/camion-hydrocureuse-immeuble-vaud-800.webp 800w, assets/photos/camion-hydrocureuse-immeuble-vaud-1200.webp 1200w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
+                                         alt="Fourgon et remorque de curage devant un immeuble, tuyau orange déroulé jusqu'à un appartement de l'étage"
+                                         width="1200" height="1600" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </figure>
@@ -559,9 +591,12 @@
                         <a class="zoom" href="assets/photos/flotte-vehicules-commissione-entretien.jpg">
                             <span class="media reveal-media">
                                 <span class="zoom-hint">Agrandir</span>
-                                <img src="assets/photos/flotte-vehicules-commissione-entretien.jpg"
-                                     alt=""
-                                     width="1800" height="1350" loading="lazy" decoding="async">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/photos/flotte-vehicules-commissione-entretien-800.webp 800w, assets/photos/flotte-vehicules-commissione-entretien-1600.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 400px">
+                                    <img src="assets/photos/flotte-vehicules-commissione-entretien.jpg"
+                                         alt="Les trois véhicules de Commissione Entretien alignés, dont deux fourgons marqués"
+                                         width="1600" height="1200" loading="lazy" decoding="async">
+                                </picture>
                             </span>
                         </a>
                     </div>

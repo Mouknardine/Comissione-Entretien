@@ -17,4 +17,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Vide le dossier distant avant chaque envoi. Nécessaire ici pour
+          # purger les fichiers de l'ancien site (style.css, script.js…), mais
+          # cela implique que TOUT doit vivre dans le dépôt : un fichier présent
+          # seulement sur le FTP est détruit. Le .htaccess est versionné à la
+          # racine pour cette raison — ne pas l'en retirer.
           dangerous-clean-slate: true

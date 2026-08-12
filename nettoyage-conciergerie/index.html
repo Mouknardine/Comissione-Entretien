@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Nettoyage Intérieur-Extérieur &amp; Conciergerie Vaud | Commissione Entretien</title>
-    <meta name="description" content="Nettoyage de façades, terrasses, intérieurs et service de conciergerie pour immeubles dans le canton de Vaud. Entreprise familiale basée à Bavois. Devis gratuit.">
+    <!-- Les animations d'apparition masquent du contenu (opacité 0). Cette classe
+         les active UNIQUEMENT si le JS tourne : sans elle, la page s'affiche
+         entièrement, y compris pour un crawler qui n'exécuterait rien. -->
+    <script>document.documentElement.className += " js-anim";</script>
+
+    <title>Nettoyage &amp; Conciergerie Vaud | Commissione Entretien</title>
+    <meta name="description" content="Nettoyage de terrasses, façades et intérieurs, conciergerie d'immeubles dans le canton de Vaud. Entreprise familiale à Bavois. Devis gratuit.">
     <link rel="canonical" href="https://commissione-entretien.ch/nettoyage-conciergerie/">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="theme-color" content="#c8102e">
@@ -43,7 +48,9 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
     <!-- Image LCP -->
-    <link rel="preload" as="image" href="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp"
+          imagesrcset="../assets/photos/camion-hydrocureuse-immeuble-vaud-800.webp 800w, ../assets/photos/camion-hydrocureuse-immeuble-vaud-1200.webp 1200w"
+          imagesizes="(max-width: 940px) 100vw, 560px" fetchpriority="high">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../css/reset.css">
@@ -229,9 +236,12 @@
                     <a class="zoom" href="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
-                                 alt=""
-                                 width="1350" height="1800" fetchpriority="high" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/camion-hydrocureuse-immeuble-vaud-800.webp 800w, ../assets/photos/camion-hydrocureuse-immeuble-vaud-1200.webp 1200w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/camion-hydrocureuse-immeuble-vaud.jpg"
+                                     alt="Fourgon et remorque Commissione Entretien stationnés devant un immeuble de trois étages"
+                                     width="1200" height="1600" decoding="async" fetchpriority="high">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -258,9 +268,12 @@
                     <a class="zoom" href="../assets/photos/nettoyage-facade-maison-avant-apres.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/nettoyage-facade-maison-avant-apres.jpg"
-                                 alt=""
-                                 width="1012" height="1800" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/nettoyage-facade-maison-avant-apres-800.webp 800w, ../assets/photos/nettoyage-facade-maison-avant-apres-1012.webp 1012w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/nettoyage-facade-maison-avant-apres.jpg"
+                                     alt="Façade de villa avant nettoyage en haut, crépi grisé, et après nettoyage en bas, crépi redevenu blanc"
+                                     width="1012" height="1800" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -312,9 +325,12 @@
                     <a class="zoom" href="../assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
-                                 alt=""
-                                 width="1800" height="1012" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/nettoyage-terrasse-dallage-avant-apres-800.webp 800w, ../assets/photos/nettoyage-terrasse-dallage-avant-apres-1600.webp 1600w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/nettoyage-terrasse-dallage-avant-apres.jpg"
+                                     alt="Terrasse dallée encrassée de mousse à gauche, nettoyée à droite après passage haute pression"
+                                     width="1600" height="899" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>
@@ -348,9 +364,12 @@
                     <a class="zoom" href="../assets/photos/flotte-vehicules-commissione-entretien.jpg">
                         <span class="media reveal-media">
                             <span class="zoom-hint">Agrandir</span>
-                            <img src="../assets/photos/flotte-vehicules-commissione-entretien.jpg"
-                                 alt=""
-                                 width="1800" height="1350" loading="lazy" decoding="async">
+                            <picture>
+                                <source type="image/webp" srcset="../assets/photos/flotte-vehicules-commissione-entretien-800.webp 800w, ../assets/photos/flotte-vehicules-commissione-entretien-1600.webp 1600w" sizes="(max-width: 940px) 100vw, 560px">
+                                <img src="../assets/photos/flotte-vehicules-commissione-entretien.jpg"
+                                     alt="Les trois véhicules de Commissione Entretien alignés, dont deux fourgons marqués"
+                                     width="1600" height="1200" loading="lazy" decoding="async">
+                            </picture>
                         </span>
                     </a>
                 </figure>
