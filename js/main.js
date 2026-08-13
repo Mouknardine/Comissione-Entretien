@@ -4,6 +4,7 @@ import { initScrollReveal } from "./scroll-reveal.js";
 import { initParallax } from "./parallax.js";
 import { initMediaFallback } from "./media.js";
 import { initLightbox } from "./lightbox.js";
+import { initMobileBar } from "./mobile-bar.js";
 
 const start = () => {
     initNav();
@@ -12,6 +13,7 @@ const start = () => {
     initParallax();
     initMediaFallback();
     initLightbox();
+    initMobileBar();
 };
 
 if (document.readyState === "loading") {

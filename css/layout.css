@@ -715,6 +715,34 @@
     color: var(--ink);
 }
 
+/* Le haut de page porte déjà son propre bouton d'appel et son bouton
+   secondaire. Y superposer la barre fixe fait trois actions concurrentes sur
+   le premier écran : elle reste donc en retrait tant que ce bloc est visible,
+   et glisse en place une fois qu'on l'a dépassé.
+
+   Deux garde-fous, parce qu'un bouton d'appel ne doit jamais dépendre de
+   l'exécution d'un script :
+     — tout est conditionné à `.js-anim`, donc sans JS la barre s'affiche en
+       permanence, exactement comme avant ;
+     — le masquage n'agit qu'une fois la classe `is-armed` posée, et elle ne
+       l'est qu'au premier retour de l'observateur. Si celui-ci ne répond
+       jamais, rien ne masque la barre. */
+.js-anim .mobile-bar {
+    transition: transform 0.32s var(--ease), opacity 0.24s var(--ease);
+}
+
+.js-anim .mobile-bar.is-armed:not(.is-shown) {
+    transform: translateY(115%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-anim .mobile-bar {
+        transition: none;
+    }
+}
+
 /* Réserve la hauteur réelle de la barre, encoche du bas comprise : sans le
    safe-area, les 34px de la zone d'accueil iPhone masquaient le dernier
    élément de chaque page. */
