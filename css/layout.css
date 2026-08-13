@@ -715,10 +715,12 @@
     color: var(--ink);
 }
 
-/* Le haut de page porte déjà son propre bouton d'appel et son bouton
-   secondaire. Y superposer la barre fixe fait trois actions concurrentes sur
-   le premier écran : elle reste donc en retrait tant que ce bloc est visible,
-   et glisse en place une fois qu'on l'a dépassé.
+/* Accueil uniquement : le hero occupe tout le premier écran et porte déjà son
+   bouton d'appel et son bouton secondaire. Y superposer la barre fixe fait
+   trois actions concurrentes. Elle reste donc en retrait tant que l'image est
+   visible, et glisse en place dès qu'on l'a dépassée.
+
+   Les autres pages n'ont pas de `.hero` : la barre y reste permanente.
 
    Deux garde-fous, parce qu'un bouton d'appel ne doit jamais dépendre de
    l'exécution d'un script :
